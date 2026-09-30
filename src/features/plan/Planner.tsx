@@ -14,6 +14,7 @@ import { FieldContextPanel } from "@/features/field/FieldContextPanel";
 import { FieldSearch } from "@/features/field/FieldSearch";
 import { SimulationLoader } from "@/features/simulator/SimulationLoader";
 import { useI18n } from "@/i18n/client";
+import { cropLabel } from "@/i18n/crops";
 import { api, ApiError } from "@/lib/api";
 import { useField } from "@/lib/fieldStore";
 import { longDate, todayIso } from "@/lib/format";
@@ -172,7 +173,7 @@ export function Planner({ initial }: { initial?: RecommendResponse }) {
                 <option value="">{t("plan.previousCropNone")}</option>
                 {CROPS.map((c) => (
                   <option key={c.id} value={c.id}>
-                    {c.name} ({c.localName})
+                    {cropLabel(t, c.id, c.name)}{lang === "en" ? ` (${c.localName})` : ""}
                   </option>
                 ))}
               </Select>
@@ -254,7 +255,11 @@ export function Planner({ initial }: { initial?: RecommendResponse }) {
 
               <RankingList ranking={result.ranking} selectedId={selected} onSelect={setSelected} />
 
-              {result.advisory ? <AdvisoryPanel advisory={result.advisory} ranking={result.ranking} /> : <Notice tone="neutral">{t("common.aiUnavailable")}</Notice>}
+              {result.advisory ? (
+                <AdvisoryPanel advisory={result.advisory} ranking={result.ranking} />
+              ) : result.warnings.length === 0 ? (
+                <Notice tone="neutral">{t("common.aiUnavailable")}</Notice>
+              ) : null}
 
               {selected && resultProfile ? (
                 <section aria-label={t("sim.title")} className="border-t border-line pt-10">

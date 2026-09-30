@@ -4,11 +4,12 @@ import { Leaf, RefreshCcw, TestTubeDiagonal } from "lucide-react";
 import type { AdvisoryBrief } from "@/contracts/ai";
 import type { RankedCropDto } from "@/contracts/api";
 import { useI18n } from "@/i18n/client";
+import { cropLabel } from "@/i18n/crops";
 
 /** Gemini's explanation of the ranking and the regenerative plan, grounded in model numbers. */
 export function AdvisoryPanel({ advisory, ranking }: { advisory: AdvisoryBrief; ranking: RankedCropDto[] }) {
   const { t } = useI18n();
-  const nameOf = (id: string) => ranking.find((r) => r.crop.id === id)?.crop.name ?? id;
+  const nameOf = (id: string) => cropLabel(t, id, ranking.find((r) => r.crop.id === id)?.crop.name ?? id);
 
   return (
     <section aria-labelledby="advice-title" className="space-y-8">

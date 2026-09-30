@@ -6,6 +6,7 @@ import type { SimulateResponse } from "@/contracts/api";
 import type { SimulationResult } from "@/contracts/simulation";
 import { Pill, TONE_BG, TONE_TEXT } from "@/components/ui/Tone";
 import { useI18n } from "@/i18n/client";
+import { cropLabel } from "@/i18n/crops";
 import { cn } from "@/lib/cn";
 import { inr, num, shortDate } from "@/lib/format";
 import { EVENT_ICON, eventTone } from "./eventStyle";
@@ -45,7 +46,7 @@ export function SeasonView({ simulation, analysis, renderVisual }: SeasonViewPro
       <header className="flex flex-wrap items-end justify-between gap-3">
         <div>
           <h3 className="display text-2xl font-semibold">
-            {simulation.crop.name} <span className="font-normal text-ink-soft">({simulation.crop.localName})</span>
+            {cropLabel(t, simulation.crop.id, simulation.crop.name)}{" "}<span className="font-normal text-ink-soft">({lang === "en" ? simulation.crop.localName : simulation.crop.name})</span>
           </h3>
           <p className="text-sm text-ink-soft">
             {simulation.location.name} · {shortDate(simulation.sowingDate, lang)} → {shortDate(simulation.harvestDate, lang)} ·{" "}

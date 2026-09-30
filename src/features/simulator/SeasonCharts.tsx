@@ -69,30 +69,30 @@ export function SeasonCharts({ simulation, day }: { simulation: SimulationResult
       </div>
       <div className="h-64" role="tabpanel">
         <ResponsiveContainer width="100%" height="100%">
-          <ComposedChart data={data} margin={{ top: 8, right: 8, bottom: 0, left: -12 }}>
+          <ComposedChart data={data} margin={{ top: 8, right: 8, bottom: 0, left: -12 }} barGap={0} barCategoryGap={0}>
             <CartesianGrid stroke="var(--color-line)" vertical={false} />
             <XAxis dataKey="label" tick={AXIS} interval="preserveStartEnd" minTickGap={40} tickLine={false} axisLine={false} />
             {tab === "water" ? (
               <>
                 <YAxis yAxisId="mm" tick={AXIS} tickLine={false} axisLine={false} width={40} />
                 <YAxis yAxisId="pct" orientation="right" domain={[0, 100]} tick={AXIS} tickLine={false} axisLine={false} width={34} />
-                <Bar yAxisId="mm" dataKey="rain" name={`${t("sim.rain")} (mm)`} fill="var(--color-water)" opacity={0.7} />
-                <Bar yAxisId="mm" dataKey="irrigation" name={`${t("sim.waterUsed")} (mm)`} fill="var(--color-water)" opacity={0.35} />
-                <Line yAxisId="pct" dataKey="moisture" name={`${t("sim.soilMoisture")} (%)`} stroke="var(--color-soil)" dot={false} strokeWidth={2} />
+                <Bar yAxisId="mm" stackId="water" dataKey="rain" name={`${t("sim.rain")} (mm)`} fill="var(--color-water)" opacity={0.45} isAnimationActive={false} />
+                <Bar yAxisId="mm" stackId="water" dataKey="irrigation" name={`${t("sim.waterUsed")} (mm)`} fill="var(--color-water)" isAnimationActive={false} />
+                <Line yAxisId="pct" dataKey="moisture" name={`${t("sim.soilMoisture")} (%)`} stroke="var(--color-soil)" dot={false} strokeWidth={2} isAnimationActive={false} />
               </>
             ) : null}
             {tab === "growth" ? (
               <>
                 <YAxis yAxisId="pct" domain={[0, 100]} tick={AXIS} tickLine={false} axisLine={false} width={40} />
                 <YAxis yAxisId="kg" orientation="right" tick={AXIS} tickLine={false} axisLine={false} width={48} />
-                <Area yAxisId="pct" dataKey="canopy" name={`${t("sim.canopy")} (%)`} stroke="var(--color-leaf)" fill="var(--color-leaf-soft)" />
-                <Line yAxisId="kg" dataKey="biomass" name={`${t("sim.biomass")} (kg/ha)`} stroke="var(--color-leaf-deep)" dot={false} strokeWidth={2} />
+                <Area yAxisId="pct" dataKey="canopy" name={`${t("sim.canopy")} (%)`} stroke="var(--color-leaf)" fill="var(--color-leaf-soft)" isAnimationActive={false} />
+                <Line yAxisId="kg" dataKey="biomass" name={`${t("sim.biomass")} (kg/ha)`} stroke="var(--color-leaf-deep)" dot={false} strokeWidth={2} isAnimationActive={false} />
               </>
             ) : null}
             {tab === "temperature" ? (
               <>
                 <YAxis yAxisId="c" tick={AXIS} tickLine={false} axisLine={false} width={40} unit="°" />
-                <Area yAxisId="c" dataKey="tRange" name="°C" stroke="var(--color-sun)" fill="var(--color-sun-soft)" />
+                <Area yAxisId="c" dataKey="tRange" name="°C" stroke="var(--color-sun)" fill="var(--color-sun-soft)" isAnimationActive={false} />
               </>
             ) : null}
             <Tooltip contentStyle={{ borderRadius: 8, borderColor: "var(--color-line)", fontSize: 13 }} />

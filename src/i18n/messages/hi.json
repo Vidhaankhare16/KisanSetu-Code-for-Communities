@@ -49,6 +49,7 @@
     "ribbonLegendCanopy": "फसल का फैलाव",
     "ribbonLegendRain": "बारिश",
     "ribbonLegendIrrigation": "सिंचाई",
+    "ribbonLegendRisk": "मौसम या कीट का खतरा",
     "howTitle": "योजना कैसे बनती है",
     "steps": {
       "one": { "title": "अपना खेत चुनें", "body": "गाँव खोजें या GPS लगाएं। हम मिट्टी, सैटेलाइट से ज़मीन की हरियाली और 16 दिन का मौसम अनुमान पढ़ते हैं।" },
@@ -125,6 +126,29 @@
     "emptyTitle": "अपने खेत से शुरू करें",
     "emptyBody": "अपना गाँव खोजें या अपनी लोकेशन दें। बाकी सब वैकल्पिक है।",
     "otherCrops": "जाँची गई दूसरी फसलें"
+  },
+  "cropNames": {
+    "rice": "धान",
+    "wheat": "गेहूं",
+    "maize": "मक्का",
+    "bajra": "बाजरा",
+    "jowar": "ज्वार",
+    "ragi": "रागी (मंडुआ)",
+    "chickpea": "चना",
+    "lentil": "मसूर",
+    "pigeonpea": "अरहर (तूर)",
+    "moong": "मूंग",
+    "urad": "उड़द",
+    "groundnut": "मूंगफली",
+    "soybean": "सोयाबीन",
+    "mustard": "सरसों",
+    "sunflower": "सूरजमुखी",
+    "sesame": "तिल",
+    "cotton": "कपास",
+    "barley": "जौ",
+    "potato": "आलू",
+    "onion": "प्याज",
+    "tomato": "टमाटर"
   },
   "soilTexture": {
     "sand": "रेतीली",

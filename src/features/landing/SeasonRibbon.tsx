@@ -89,19 +89,6 @@ export function SeasonRibbon({ simulation, caption }: { simulation: SimulationRe
           ) : null}
         </svg>
 
-        {/* Stage names sit on the crop band, positioned in HTML so text never stretches. */}
-        <div className="pointer-events-none absolute inset-x-0 top-[26%] hidden sm:block">
-          {stages.map((s) => (
-            <span
-              key={s.key}
-              className="absolute -translate-x-0 px-2 text-xs font-medium text-white/95 [text-shadow:0_1px_2px_rgb(0_0_0/0.35)]"
-              style={{ left: `${(s.startDay / n) * 100}%`, maxWidth: `${((s.endDay - s.startDay) / n) * 100}%` }}
-            >
-              {s.label}
-            </span>
-          ))}
-        </div>
-
         {markers.map((e) => (
           <span
             key={`${e.type}-${e.day}`}
@@ -129,7 +116,21 @@ export function SeasonRibbon({ simulation, caption }: { simulation: SimulationRe
         ) : null}
       </div>
 
-      <div className="relative mt-2 h-5 text-xs text-ink-soft" aria-hidden>
+      {/* Growth stages as a strip under the chart, so labels never sit on the artwork. */}
+      <div className="mt-1.5 flex h-6 overflow-hidden rounded text-[11px] text-ink" aria-hidden>
+        {stages.map((s) => (
+          <span
+            key={s.key}
+            className={`truncate px-1.5 leading-6 ${STAGE_BG[s.key]}`}
+            style={{ width: `${((s.endDay - s.startDay + 1) / n) * 100}%` }}
+            title={s.label}
+          >
+            {s.label}
+          </span>
+        ))}
+      </div>
+
+      <div className="relative mt-1.5 h-5 text-xs text-ink-soft" aria-hidden>
         {months.map((m) => (
           <span key={m.index} className="absolute" style={{ left: `${(m.index / n) * 100}%` }}>
             {shortDate(m.date, lang).replace(/^\d+\s*/, "")}
@@ -137,16 +138,21 @@ export function SeasonRibbon({ simulation, caption }: { simulation: SimulationRe
         ))}
       </div>
 
-      <figcaption className="mt-3 flex flex-wrap items-center gap-x-5 gap-y-2 text-sm text-ink-soft">
-        <span className="text-ink">{caption}</span>
-        <Legend swatch="bg-water" label={t("landing.ribbonLegendRain")} />
-        <Legend swatch="bg-[repeating-linear-gradient(45deg,var(--color-water)_0_2px,var(--color-water-soft)_2px_5px)]" label={t("landing.ribbonLegendIrrigation")} />
-        <Legend swatch="bg-leaf" label={t("landing.ribbonLegendCanopy")} />
-        <Legend swatch="bg-soil-soft ring-1 ring-water" label={t("landing.ribbonLegendMoisture")} />
+      <figcaption className="mt-3 text-sm text-ink-soft">
+        <span className="block text-ink">{caption}</span>
+        <span className="mt-2 flex flex-wrap items-center gap-x-5 gap-y-2">
+          <Legend swatch="bg-water" label={t("landing.ribbonLegendRain")} />
+          <Legend swatch="bg-[repeating-linear-gradient(45deg,var(--color-water)_0_2px,var(--color-water-soft)_2px_5px)]" label={t("landing.ribbonLegendIrrigation")} />
+          <Legend swatch="bg-leaf" label={t("landing.ribbonLegendCanopy")} />
+          <Legend swatch="bg-soil-soft ring-1 ring-water" label={t("landing.ribbonLegendMoisture")} />
+          <Legend swatch="rounded-full bg-soil" label={t("landing.ribbonLegendRisk")} />
+        </span>
       </figcaption>
     </figure>
   );
 }
+
+const STAGE_BG = { initial: "bg-leaf-soft", development: "bg-leaf/35", mid: "bg-leaf/60", late: "bg-sun/55" } as const;
 
 function Legend({ swatch, label }: { swatch: string; label: string }) {
   return (

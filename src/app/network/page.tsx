@@ -3,8 +3,9 @@ import Link from "next/link";
 import type { CropCategory } from "@/contracts/simulation";
 import { CROPS } from "@/domain/crops/catalog";
 import { modelCards, NATIONAL_MODEL_VERSION } from "@/domain/crops/registry";
-import { CATEGORY_COLOR, OutlookMap } from "@/features/network/OutlookMap";
+import { cropColor, OutlookMap } from "@/features/network/OutlookMap";
 import { getLang, getMessages } from "@/i18n/server";
+import { cropLabel } from "@/i18n/crops";
 import { createTranslator } from "@/i18n/translate";
 import { inr, longDate, pct } from "@/lib/format";
 import { getNetworkSummary } from "@/server/services/network";
@@ -23,7 +24,7 @@ export default async function NetworkPage() {
   const { outlook, stats, recentDiagnoses } = await getNetworkSummary();
 
   const categoryOf = Object.fromEntries(CROPS.map((c) => [c.id, c.category])) as Record<string, CropCategory>;
-  const nameOf = Object.fromEntries(CROPS.map((c) => [c.id, c.name]));
+  const nameOf = Object.fromEntries(CROPS.map((c) => [c.id, cropLabel(t, c.id, c.name)]));
   const districts = [...outlook.districts].sort((a, b) => a.state.localeCompare(b.state) || a.district.localeCompare(b.district));
 
   const leaders = new Map<string, number>();
@@ -49,7 +50,7 @@ export default async function NetworkPage() {
             <ul className="mt-4 flex flex-wrap gap-x-4 gap-y-2 text-sm">
               {leaderList.map(([cropId, count]) => (
                 <li key={cropId} className="flex items-center gap-2">
-                  <span className="size-3 rounded-full" style={{ background: CATEGORY_COLOR[categoryOf[cropId] ?? "cereal"] }} aria-hidden />
+                  <span className="size-3 rounded-full" style={{ background: cropColor(cropId, categoryOf[cropId]) }} aria-hidden />
                   {nameOf[cropId]} <span className="text-ink-faint tabular">{count}</span>
                 </li>
               ))}
@@ -141,7 +142,7 @@ export default async function NetworkPage() {
           {modelCards().map((m) => (
             <li key={m.id} className="flex items-baseline justify-between gap-3 border-b border-line py-2 text-sm">
               <span>
-                <span className="font-medium">{m.parameters.name}</span>
+                <span className="font-medium">{cropLabel(t, m.parameters.id, m.parameters.name)}</span>
                 <span className="block text-xs text-ink-faint tabular">
                   Kc {m.parameters.kc.mid} · Ky {m.parameters.ky} · {m.parameters.durationDays} {t("common.days")}
                 </span>

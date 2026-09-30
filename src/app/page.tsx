@@ -5,6 +5,7 @@ import { SCHEMES } from "@/domain/schemes/catalog";
 import { HeroFieldSearch } from "@/features/landing/HeroFieldSearch";
 import { SeasonRibbon } from "@/features/landing/SeasonRibbon";
 import { getLang, getMessages } from "@/i18n/server";
+import { cropLabel } from "@/i18n/crops";
 import { createTranslator, type MessageKey } from "@/i18n/translate";
 import { LANGS } from "@/contracts/farm";
 import { shortDate } from "@/lib/format";
@@ -29,7 +30,7 @@ export default async function HomePage() {
     <>
       <section className="mx-auto grid max-w-7xl gap-10 px-4 pt-10 pb-16 sm:px-6 lg:grid-cols-[minmax(0,5fr)_minmax(0,6fr)] lg:items-center lg:gap-14 lg:pt-16">
         <div>
-          <h1 className="display max-w-[16ch] text-[2.6rem] font-semibold text-ink sm:text-6xl">{t("landing.title")}</h1>
+          <h1 className="display max-w-[17ch] text-[2.6rem] font-semibold text-balance text-ink sm:text-6xl">{t("landing.title")}</h1>
           <p className="mt-6 max-w-[60ch] text-lg text-ink-soft">{t("landing.lead")}</p>
           <div className="mt-8">
             <p className="mb-3 font-medium text-ink">{t("field.whereIsField")}</p>
@@ -39,7 +40,7 @@ export default async function HomePage() {
         <SeasonRibbon
           simulation={sample}
           caption={t("landing.ribbonCaption", {
-            crop: sample.crop.name,
+            crop: cropLabel(t, sample.crop.id, sample.crop.name),
             date: shortDate(sample.sowingDate, lang),
             place: sample.location.name,
           })}

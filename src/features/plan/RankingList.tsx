@@ -5,6 +5,7 @@ import type { RankedCropDto } from "@/contracts/api";
 import { RangeBar } from "@/components/ui/RangeBar";
 import { Pill } from "@/components/ui/Tone";
 import { useI18n } from "@/i18n/client";
+import { cropLabel } from "@/i18n/crops";
 import { cn } from "@/lib/cn";
 import { inr, inrShort, shortDate } from "@/lib/format";
 
@@ -63,7 +64,7 @@ export function RankingList({
                   <span className="display w-6 pt-0.5 text-lg font-semibold text-ink-faint tabular">{r.rank}</span>
                   <span>
                     <span className="block text-lg font-semibold">
-                      {r.crop.name} <span className="text-sm font-normal text-ink-soft">{r.crop.localName}</span>
+                      {cropLabel(t, r.crop.id, r.crop.name)} <span className="text-sm font-normal text-ink-soft">{lang === "en" ? r.crop.localName : r.crop.name}</span>
                     </span>
                     <span className="mt-1 flex flex-wrap items-center gap-2 text-xs text-ink-soft">
                       <Pill tone={VERDICT_TONE[r.outcome.verdict]}>{t(`plan.verdict.${r.outcome.verdict}`)}</Pill>

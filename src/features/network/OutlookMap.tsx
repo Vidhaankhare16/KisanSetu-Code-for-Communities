@@ -11,7 +11,7 @@ const LAT = [6, 37] as const;
 const W = 620;
 const H = 640;
 
-export const CATEGORY_COLOR: Record<CropCategory, string> = {
+const CATEGORY_COLOR: Record<CropCategory, string> = {
   cereal: "var(--color-leaf-deep)",
   millet: "var(--color-leaf)",
   pulse: "var(--color-soil)",
@@ -20,6 +20,22 @@ export const CATEGORY_COLOR: Record<CropCategory, string> = {
   vegetable: "var(--color-alert)",
   fodder: "var(--color-ink-faint)",
 };
+
+/** Distinct shades within each crop family, so the most common winners stay tellable apart. */
+const CROP_COLOR: Record<string, string> = {
+  mustard: "#d99a0b",
+  sunflower: "#c2570c",
+  groundnut: "#a16207",
+  chickpea: "#8a5a36",
+  lentil: "#c08a5a",
+  wheat: "#1e7a4c",
+  barley: "#0f5534",
+  jowar: "#5b8c3a",
+};
+
+export function cropColor(cropId: string, category: CropCategory | undefined): string {
+  return CROP_COLOR[cropId] ?? CATEGORY_COLOR[category ?? "cereal"];
+}
 
 const project = (lat: number, lon: number) => ({
   x: ((lon - LON[0]) / (LON[1] - LON[0])) * W,
@@ -69,7 +85,7 @@ export function OutlookMap({ districts, categoryOf, nameOf }: { districts: Outlo
               cx={x}
               cy={y}
               r={selected ? 11 : 8}
-              fill={CATEGORY_COLOR[categoryOf[top.cropId] ?? "cereal"]}
+              fill={cropColor(top.cropId, categoryOf[top.cropId])}
               stroke="var(--color-surface)"
               strokeWidth={2.5}
               tabIndex={0}

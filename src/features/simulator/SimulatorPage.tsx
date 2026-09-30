@@ -10,6 +10,7 @@ import { Segmented } from "@/components/ui/Segmented";
 import { CROPS } from "@/domain/crops/catalog";
 import { FieldSearch } from "@/features/field/FieldSearch";
 import { useI18n } from "@/i18n/client";
+import { cropLabel } from "@/i18n/crops";
 import { useField } from "@/lib/fieldStore";
 import { todayIso } from "@/lib/format";
 import { SeasonView } from "./SeasonView";
@@ -27,7 +28,7 @@ interface Run {
 
 /** Any crop, any field, any sowing date — or an instant pre-computed sample season. */
 export function SimulatorPage({ samples }: { samples: SimulationResult[] }) {
-  const { t } = useI18n();
+  const { t, lang } = useI18n();
   const { place, setPlace } = useField();
   const [cropId, setCropId] = useState("mustard");
   const [sowingDate, setSowingDate] = useState(todayIso());
@@ -73,7 +74,7 @@ export function SimulatorPage({ samples }: { samples: SimulationResult[] }) {
           <Select id="sim-crop" value={cropId} onChange={(e) => setCropId(e.target.value)}>
             {CROPS.map((c) => (
               <option key={c.id} value={c.id}>
-                {c.name} ({c.localName})
+                {cropLabel(t, c.id, c.name)} ({lang === "en" ? c.localName : c.name})
               </option>
             ))}
           </Select>
@@ -107,7 +108,7 @@ export function SimulatorPage({ samples }: { samples: SimulationResult[] }) {
         <div className="mt-6 flex flex-wrap gap-2">
           {samples.map((s) => (
             <Button key={s.id} variant="secondary" size="sm" onClick={() => setSample(s)} aria-pressed={sample?.id === s.id}>
-              {s.crop.name}, {s.location.name}
+              {cropLabel(t, s.crop.id, s.crop.name)}, {s.location.name}
             </Button>
           ))}
         </div>
