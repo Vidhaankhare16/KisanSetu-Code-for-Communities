@@ -2,6 +2,11 @@
  * ISRIC SoilGrids 2.0 — global 250 m soil property maps predicted from ~240k soil
  * profiles and remote-sensing covariates. Gives texture, pH, organic carbon and nitrogen
  * for any field in India, used when the farmer has no Soil Health Card.
+ *
+ * Fair use: the public endpoint allows roughly 5 requests per minute per client, so results
+ * are cached for a week per ~1 km cell and callers fall back to the state's dominant texture
+ * when a lookup is slow or refused. A state deployment should mirror the SoilGrids layers
+ * (e.g. in Earth Engine or Cloud Storage) for unthrottled access.
  */
 import "server-only";
 import { z } from "zod";

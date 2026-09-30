@@ -1,26 +1,110 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+/*
+ * KisanSetu design tokens.
+ * Colour is data: each hue means one quantity everywhere — in charts, badges and copy.
+ *   leaf  → crop growth & health      water → rain, irrigation, soil moisture
+ *   sun   → heat, sunshine, caution    soil  → soil & land
+ *   alert → loss, critical risk        ink   → text (deep indigo, never pure black)
+ */
+@theme {
+  --color-mist: #f2f5f0;
+  --color-surface: #ffffff;
+  --color-ink: #15223d;
+  --color-ink-soft: #4d5a70;
+  --color-ink-faint: #8791a3;
+  --color-line: #d8dfd5;
+  --color-line-strong: #b9c4b5;
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+  --color-leaf: #1e7a4c;
+  --color-leaf-deep: #0f5534;
+  --color-leaf-soft: #dcefe2;
+  --color-water: #2574b8;
+  --color-water-soft: #dcebf7;
+  --color-sun: #d99a0b;
+  --color-sun-soft: #fbefd0;
+  --color-soil: #8a5a36;
+  --color-soil-soft: #f1e5da;
+  --color-alert: #b8403a;
+  --color-alert-soft: #f7e0de;
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+  --font-sans: var(--font-anek-latin), var(--font-anek-devanagari), var(--font-anek-bangla), var(--font-anek-tamil),
+    var(--font-anek-telugu), var(--font-anek-kannada), var(--font-anek-malayalam), var(--font-anek-gujarati),
+    var(--font-anek-gurmukhi), var(--font-anek-odia), system-ui, sans-serif;
+
+  --radius-control: 0.5rem;
+  --radius-panel: 0.875rem;
+
+  --animate-rise: rise 700ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
+  @keyframes rise {
+    from {
+      opacity: 0;
+      transform: translateY(12px);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@layer base {
+  html {
+    color-scheme: light;
+    -webkit-text-size-adjust: 100%;
+  }
+  body {
+    background: var(--color-mist);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    font-feature-settings: "kern";
+    line-height: 1.55;
+  }
+  /* Display type uses the Anek width axis instead of a second typeface. */
+  .display {
+    font-variation-settings: "wdth" 118;
+    letter-spacing: -0.015em;
+    line-height: 1.02;
+  }
+  .condensed {
+    font-variation-settings: "wdth" 82;
+  }
+  :focus-visible {
+    outline: 3px solid var(--color-water);
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+  ::selection {
+    background: var(--color-leaf-soft);
+  }
+}
+
+@utility tabular {
+  font-variant-numeric: tabular-nums;
+}
+
+/* The landing season ribbon draws itself once, left to right — the page's single orchestrated motion. */
+.reveal-x {
+  transform-box: fill-box;
+  transform-origin: left center;
+  animation: reveal-x 2.4s cubic-bezier(0.3, 0.7, 0.2, 1) 0.2s both;
+}
+@keyframes reveal-x {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 1ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 1ms !important;
+    scroll-behavior: auto !important;
+  }
 }

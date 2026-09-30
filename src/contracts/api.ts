@@ -97,6 +97,7 @@ export const SimulateRequestSchema = FarmProfileSchema.extend({
   narrate: z.boolean().default(true),
 });
 export type SimulateRequest = z.infer<typeof SimulateRequestSchema>;
+export type SimulateInput = z.input<typeof SimulateRequestSchema>;
 
 const RegenerativeSchema = z.object({
   score: z.number(),
@@ -160,11 +161,14 @@ export type SimulateResponse = z.infer<typeof SimulateResponseSchema>;
 
 export const RecommendRequestSchema = FarmProfileSchema.extend({
   priority: FarmerPrioritySchema.default("balanced"),
+  /** The farmer can sell perishable vegetables (nearby mandi or cold storage). */
+  includeVegetables: z.boolean().default(false),
   lang: LangSchema.default("en"),
   /** Ask Gemini to explain the ranking and write a regenerative plan. */
   advise: z.boolean().default(true),
 });
 export type RecommendRequest = z.infer<typeof RecommendRequestSchema>;
+export type RecommendInput = z.input<typeof RecommendRequestSchema>;
 
 export const RankedCropSchema = z.object({
   rank: z.number().int(),
@@ -242,6 +246,7 @@ export const ChatRequestSchema = z
   })
   .refine((r) => r.audio || r.messages.some((m) => m.role === "user"), "Send a question as text or audio");
 export type ChatRequest = z.infer<typeof ChatRequestSchema>;
+export type ChatInput = z.input<typeof ChatRequestSchema>;
 
 export const ChatResponseSchema = z.object({
   reply: z.string(),

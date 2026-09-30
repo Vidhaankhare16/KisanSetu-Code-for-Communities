@@ -67,12 +67,6 @@ const OILSEED_NOTES: [string, string, string, string] = [
   "Flowers open and seeds fill with oil; protect from stress and pests.",
   "Seeds harden and oil content peaks; harvest on time.",
 ];
-const VEG_STAGES: [string, string, string, string] = [
-  "Establishment",
-  "Vegetative growth",
-  "Flowering & fruit/bulb set",
-  "Harvest period",
-];
 const VEG_NOTES: [string, string, string, string] = [
   "Transplants or sprouts establish; frequent light irrigation.",
   "Canopy expands quickly; feed and protect foliage.",
@@ -590,7 +584,7 @@ export const CROPS: readonly CropModel[] = [
     ky: 0.95,
     maxHeightCm: 180,
     harvestIndex: 0.3,
-    potentialYieldKgHa: 2200,
+    potentialYieldKgHa: 1700,
     price: { perQuintalInr: 8343, basis: KMS_2026 },
     priceVolatility: 0.15,
     costPerAcreInr: 15000,
@@ -730,7 +724,7 @@ export const CROPS: readonly CropModel[] = [
     harvestIndex: 0.75,
     potentialYieldKgHa: 30000,
     price: { perQuintalInr: 1300, basis: MANDI },
-    priceVolatility: 0.4,
+    priceVolatility: 0.45,
     costPerAcreInr: 65000,
     byproductPerAcreInr: 0,
     phRange: [5.0, 7.5],
@@ -763,7 +757,7 @@ export const CROPS: readonly CropModel[] = [
     harvestIndex: 0.7,
     potentialYieldKgHa: 30000,
     price: { perQuintalInr: 1800, basis: MANDI },
-    priceVolatility: 0.4,
+    priceVolatility: 0.55,
     costPerAcreInr: 55000,
     byproductPerAcreInr: 0,
     phRange: [6.0, 7.5],
@@ -797,7 +791,7 @@ export const CROPS: readonly CropModel[] = [
     harvestIndex: 0.6,
     potentialYieldKgHa: 35000,
     price: { perQuintalInr: 1500, basis: MANDI },
-    priceVolatility: 0.4,
+    priceVolatility: 0.55,
     costPerAcreInr: 70000,
     byproductPerAcreInr: 0,
     phRange: [6.0, 7.5],

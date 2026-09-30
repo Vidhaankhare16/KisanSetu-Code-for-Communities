@@ -1,0 +1,2066 @@
+{
+ "season": "rabi",
+ "sowingDate": "2026-11-01",
+ "generatedAt": "2026-09-30T18:49:03.482Z",
+ "method": "KisanSetu crop model over a 10-year NASA POWER weather ensemble plus the live 16-day forecast",
+ "districts": [
+  {
+   "district": "Agartala",
+   "state": "Tripura",
+   "lat": 23.8361,
+   "lon": 91.2794,
+   "water": "limited",
+   "soil": {
+    "texture": "loam",
+    "source": "regional_default"
+   },
+   "top": [
+    {
+     "cropId": "mustard",
+     "score": 89,
+     "verdict": "recommended",
+     "yieldQuintalPerAcre": 7.3,
+     "profitP10": 23916,
+     "profitP50": 33217,
+     "irrigationMm": 182,
+     "probDrySpell": 0.3,
+     "probHeatStress": 0.1,
+     "regenerativeScore": 63
+    },
+    {
+     "cropId": "wheat",
+     "score": 87,
+     "verdict": "recommended",
+     "yieldQuintalPerAcre": 18.3,
+     "profitP10": 26060,
+     "profitP50": 33673,
+     "irrigationMm": 209,
+     "probDrySpell": 0.4,
+     "probHeatStress": 0.5,
+     "regenerativeScore": 48
+    },
+    {
+     "cropId": "sunflower",
+     "score": 83,
+     "verdict": "recommended",
+     "yieldQuintalPerAcre": 6.4,
+     "profitP10": 23954,
+     "profitP50": 34810,
+     "irrigationMm": 280,
+     "probDrySpell": 0.2,
+     "probHeatStress": 0,
+     "regenerativeScore": 57
+    }
+   ]
+  },
+  {
+   "district": "Akola",
+   "state": "Maharashtra",
+   "lat": 20.7096,
+   "lon": 76.9981,
+   "water": "limited",
+   "soil": {
+    "texture": "clay",
+    "source": "regional_default"
+   },
+   "top": [
+    {
+     "cropId": "sunflower",
+     "score": 84,
+     "verdict": "recommended",
+     "yieldQuintalPerAcre": 6.8,
+     "profitP10": 24995,
+     "profitP50": 36195,
+     "irrigationMm": 393,
+     "probDrySpell": 0.5,
+     "probHeatStress": 0.1,
+     "regenerativeScore": 57
+    },
+    {
+     "cropId": "chickpea",
+     "score": 79,
+     "verdict": "recommended",
+     "yieldQuintalPerAcre": 7,
+     "profitP10": 16623,
+     "profitP50": 25522,
+     "irrigationMm": 253,
+     "probDrySpell": 0.6,
+     "probHeatStress": 0.4,
+     "regenerativeScore": 77
+    },
+    {
+     "cropId": "lentil",
+     "score": 74,
+     "verdict": "recommended",
+     "yieldQuintalPerAcre": 5.3,
+     "profitP10": 15950,
+     "profitP50": 23805,
+     "irrigationMm": 273,
+     "probDrySpell": 1,
+     "probHeatStress": 0.4,
+     "regenerativeScore": 74
+    }
+   ]
+  },
+  {
+   "district": "Anand",
+   "state": "Gujarat",
+   "lat": 22.5525,
+   "lon": 72.9552,
+   "water": "limited",
+   "soil": {
+    "texture": "clay_loam",
+    "source": "regional_default"
+   },
+   "top": [
+    {
+     "cropId": "sunflower",
+     "score": 81,
+     "verdict": "recommended",
+     "yieldQuintalPerAcre": 5.9,
+     "profitP10": 12435,
+     "profitP50": 25562,
+     "irrigationMm": 372,
+     "probDrySpell": 1,
+     "probHeatStress": 0,
+     "regenerativeScore": 52
+    },
+    {
+     "cropId": "chickpea",
+     "score": 76,
+     "verdict": "recommended",
+     "yieldQuintalPerAcre": 6.2,
+     "profitP10": 5569,
+     "profitP50": 17251,
+     "irrigationMm": 280,
+     "probDrySpell": 1,
+     "probHeatStress": 0.6,
+     "regenerativeScore": 72
+    },
+    {
+     "cropId": "lentil",
+     "score": 72,
+     "verdict": "recommended",
+     "yieldQuintalPerAcre": 4.1,
+     "profitP10": 1760,
+     "profitP50": 15294,
+     "irrigationMm": 256,
+     "probDrySpell": 1,
+     "probHeatStress": 0.6,
+     "regenerativeScore": 75
+    }
+   ]
+  },
+  {
+   "district": "Anantapur",
+   "state": "Andhra Pradesh",
+   "lat": 14.6778,
+   "lon": 77.6081,
+   "water": "limited",
+   "soil": {
+    "texture": "sandy_clay_loam",
+    "source": "regional_default"
+   },
+   "top": [
+    {
+     "cropId": "sunflower",
+     "score": 84,
+     "verdict": "recommended",
+     "yieldQuintalPerAcre": 6.5,
+     "profitP10": 24038,
+     "profitP50": 34344,
+     "irrigationMm": 283,
+     "probDrySpell": 0.7,
+     "probHeatStress": 0,
+     "regenerativeScore": 57
+    },
+    {
+     "cropId": "chickpea",
+     "score": 73,
+     "verdict": "recommended",
+     "yieldQuintalPerAcre": 6.5,
+     "profitP10": 10282,
+     "profitP50": 21496,
+     "irrigationMm": 174,
+     "probDrySpell": 0.9,
+     "probHeatStress": 0.5,
+     "regenerativeScore": 80
+    },
+    {
+     "cropId": "jowar",
+     "score": 64,
+     "verdict": "recommended",
+     "yieldQuintalPerAcre": 10.9,
+     "profitP10": 16529,
+     "profitP50": 27121,
+     "irrigationMm": 413,
+     "probDrySpell": 1,
+     "probHeatStress": 0.2,
+     "regenerativeScore": 59
+    }
+   ]
+  },
+  {
+   "district": "Bardhaman",
+   "state": "West Bengal",
+   "lat": 23.2557,
+   "lon": 87.8569,
+   "water": "limited",
+   "soil": {
+    "texture": "silt_loam",
+    "source": "regional_default"
+   },
+   "top": [
+    {
+     "cropId": "mustard",
+     "score": 93,
+     "verdict": "recommended",
+     "yieldQuintalPerAcre": 7.3,
+     "profitP10": 23680,
+     "profitP50": 32993,
+     "irrigationMm": 195,
+     "probDrySpell": 0.1,
+     "probHeatStress": 0.2,
+     "regenerativeScore": 62
+    },
+    {
+     "cropId": "chickpea",
+     "score": 86,
+     "verdict": "recommended",
+     "yieldQuintalPerAcre": 7.1,
+     "profitP10": 18826,
+     "profitP50": 27392,
+     "irrigationMm": 217,
+     "probDrySpell": 0.6,
+     "probHeatStress": 0,
+     "regenerativeScore": 77
+    },
+    {
+     "cropId": "lentil",
+     "score": 86,
+     "verdict": "recommended",
+     "yieldQuintalPerAcre": 5.6,
+     "profitP10": 18958,
+     "profitP50": 26922,
+     "irrigationMm": 203,
+     "probDrySpell": 0.7,
+     "probHeatStress": 0,
+     "regenerativeScore": 78
+    }
+   ]
+  },
+  {
+   "district": "Bathinda",
+   "state": "Punjab",
+   "lat": 30.2075,
+   "lon": 74.9389,
+   "water": "assured",
+   "soil": {
+    "texture": "loam",
+    "source": "regional_default"
+   },
+   "top": [
+    {
+     "cropId": "mustard",
+     "score": 93,
+     "verdict": "recommended",
+     "yieldQuintalPerAcre": 7.2,
+     "profitP10": 20222,
+     "profitP50": 29739,
+     "irrigationMm": 383,
+     "probDrySpell": 0,
+     "probHeatStress": 0.3,
+     "regenerativeScore": 53
+    },
+    {
+     "cropId": "chickpea",
+     "score": 84,
+     "verdict": "recommended",
+     "yieldQuintalPerAcre": 7.1,
+     "profitP10": 14398,
+     "profitP50": 23939,
+     "irrigationMm": 416,
+     "probDrySpell": 0,
+     "probHeatStress": 0,
+     "regenerativeScore": 63
+    },
+    {
+     "cropId": "lentil",
+     "score": 81,
+     "verdict": "recommended",
+     "yieldQuintalPerAcre": 5.7,
+     "profitP10": 15919,
+     "profitP50": 24148,
+     "irrigationMm": 470,
+     "probDrySpell": 0,
+     "probHeatStress": 0,
+     "regenerativeScore": 70
+    }
+   ]
+  },
+  {
+   "district": "Bhawanipatna",
+   "state": "Odisha",
+   "lat": 19.9072,
+   "lon": 83.167,
+   "water": "limited",
+   "soil": {
+    "texture": "sandy_clay_loam",
+    "source": "regional_default"
+   },
+   "top": [
+    {
+     "cropId": "mustard",
+     "score": 92,
+     "verdict": "recommended",
+     "yieldQuintalPerAcre": 7.1,
+     "profitP10": 22229,
+     "profitP50": 31749,
+     "irrigationMm": 208,
+     "probDrySpell": 0.2,
+     "probHeatStress": 0.7,
+     "regenerativeScore": 65
+    },
+    {
+     "cropId": "sunflower",
+     "score": 84,
+     "verdict": "recommended",
+     "yieldQuintalPerAcre": 6.3,
+     "profitP10": 22742,
+     "profitP50": 33937,
+     "irrigationMm": 298,
+     "probDrySpell": 0.9,
+     "probHeatStress": 0,
+     "regenerativeScore": 57
+    },
+    {
+     "cropId": "chickpea",
+     "score": 83,
+     "verdict": "recommended",
+     "yieldQuintalPerAcre": 7,
+     "profitP10": 16524,
+     "profitP50": 26264,
+     "irrigationMm": 225,
+     "probDrySpell": 0.9,
+     "probHeatStress": 0,
+     "regenerativeScore": 80
+    }
+   ]
+  },
+  {
+   "district": "Bikaner",
+   "state": "Rajasthan",
+   "lat": 28.0176,
+   "lon": 73.315,
+   "water": "limited",
+   "soil": {
+    "texture": "loamy_sand",
+    "source": "regional_default"
+   },
+   "top": [
+    {
+     "cropId": "lentil",
+     "score": 80,
+     "verdict": "recommended",
+     "yieldQuintalPerAcre": 2.9,
+     "profitP10": 3024,
+     "profitP50": 7251,
+     "irrigationMm": 208,
+     "probDrySpell": 1,
+     "probHeatStress": 0,
+     "regenerativeScore": 78
+    },
+    {
+     "cropId": "chickpea",
+     "score": 78,
+     "verdict": "recommended",
+     "yieldQuintalPerAcre": 4,
+     "profitP10": 2429,
+     "profitP50": 8089,
+     "irrigationMm": 224,
+     "probDrySpell": 1,
+     "probHeatStress": 0,
+     "regenerativeScore": 77
+    },
+    {
+     "cropId": "mustard",
+     "score": 77,
+     "verdict": "recommended",
+     "yieldQuintalPerAcre": 5.3,
+     "profitP10": 10006,
+     "profitP50": 17521,
+     "irrigationMm": 352,
+     "probDrySpell": 1,
+     "probHeatStress": 0.1,
+     "regenerativeScore": 54
+    }
+   ]
+  },
+  {
+   "district": "Coimbatore",
+   "state": "Tamil Nadu",
+   "lat": 11.0056,
+   "lon": 76.9661,
+   "water": "limited",
+   "soil": {
+    "texture": "sandy_clay_loam",
+    "source": "regional_default"
+   },
+   "top": [
+    {
+     "cropId": "sunflower",
+     "score": 88,
+     "verdict": "recommended",
+     "yieldQuintalPerAcre": 6.9,
+     "profitP10": 27183,
+     "profitP50": 39317,
+     "irrigationMm": 207,
+     "probDrySpell": 0.3,
+     "probHeatStress": 0,
+     "regenerativeScore": 62
+    },
+    {
+     "cropId": "chickpea",
+     "score": 77,
+     "verdict": "recommended",
+     "yieldQuintalPerAcre": 6.9,
+     "profitP10": 19190,
+     "profitP50": 27880,
+     "irrigationMm": 78,
+     "probDrySpell": 0.8,
+     "probHeatStress": 0.1,
+     "regenerativeScore": 84
+    },
+    {
+     "cropId": "lentil",
+     "score": 74,
+     "verdict": "recommended",
+     "yieldQuintalPerAcre": 5.5,
+     "profitP10": 19650,
+     "profitP50": 28214,
+     "irrigationMm": 135,
+     "probDrySpell": 0.6,
+     "probHeatStress": 0.1,
+     "regenerativeScore": 81
+    }
+   ]
+  },
+  {
+   "district": "Cuttack",
+   "state": "Odisha",
+   "lat": 20.465,
+   "lon": 85.8793,
+   "water": "limited",
+   "soil": {
+    "texture": "sandy_clay_loam",
+    "source": "regional_default"
+   },
+   "top": [
+    {
+     "cropId": "mustard",
+     "score": 87,
+     "verdict": "recommended",
+     "yieldQuintalPerAcre": 7.2,
+     "profitP10": 22171,
+     "profitP50": 32701,
+     "irrigationMm": 143,
+     "probDrySpell": 0.5,
+     "probHeatStress": 0.2,
+     "regenerativeScore": 58
+    },
+    {
+     "cropId": "sunflower",
+     "score": 82,
+     "verdict": "recommended",
+     "yieldQuintalPerAcre": 6.5,
+     "profitP10": 24372,
+     "profitP50": 37120,
+     "irrigationMm": 304,
+     "probDrySpell": 0.4,
+     "probHeatStress": 0,
+     "regenerativeScore": 56
+    },
+    {
+     "cropId": "chickpea",
+     "score": 81,
+     "verdict": "recommended",
+     "yieldQuintalPerAcre": 7.1,
+     "profitP10": 18217,
+     "profitP50": 26911,
+     "irrigationMm": 167,
+     "probDrySpell": 0.6,
+     "probHeatStress": 0,
+     "regenerativeScore": 76
+    }
+   ]
+  },
+  {
+   "district": "Dharwad",
+   "state": "Karnataka",
+   "lat": 15.4601,
+   "lon": 75.0078,
+   "water": "limited",
+   "soil": {
+    "texture": "clay_loam",
+    "source": "soilgrids"
+   },
+   "top": [
+    {
+     "cropId": "sunflower",
+     "score": 84,
+     "verdict": "recommended",
+     "yieldQuintalPerAcre": 6.5,
+     "profitP10": 24545,
+     "profitP50": 35329,
+     "irrigationMm": 347,
+     "probDrySpell": 0.8,
+     "probHeatStress": 0,
+     "regenerativeScore": 59
+    },
+    {
+     "cropId": "chickpea",
+     "score": 73,
+     "verdict": "recommended",
+     "yieldQuintalPerAcre": 6.7,
+     "profitP10": 12841,
+     "profitP50": 21409,
+     "irrigationMm": 252,
+     "probDrySpell": 0.9,
+     "probHeatStress": 0.5,
+     "regenerativeScore": 79
+    },
+    {
+     "cropId": "lentil",
+     "score": 68,
+     "verdict": "recommended",
+     "yieldQuintalPerAcre": 4.8,
+     "profitP10": 8721,
+     "profitP50": 19439,
+     "irrigationMm": 234,
+     "probDrySpell": 1,
+     "probHeatStress": 0.4,
+     "regenerativeScore": 76
+    }
+   ]
+  },
+  {
+   "district": "Gorakhpur",
+   "state": "Uttar Pradesh",
+   "lat": 26.7663,
+   "lon": 83.3689,
+   "water": "assured",
+   "soil": {
+    "texture": "silt_loam",
+    "source": "regional_default"
+   },
+   "top": [
+    {
+     "cropId": "chickpea",
+     "score": 93,
+     "verdict": "recommended",
+     "yieldQuintalPerAcre": 7.3,
+     "profitP10": 17446,
+     "profitP50": 25889,
+     "irrigationMm": 341,
+     "probDrySpell": 0,
+     "probHeatStress": 0,
+     "regenerativeScore": 76
+    },
+    {
+     "cropId": "lentil",
+     "score": 92,
+     "verdict": "recommended",
+     "yieldQuintalPerAcre": 5.7,
+     "profitP10": 17293,
+     "profitP50": 25894,
+     "irrigationMm": 361,
+     "probDrySpell": 0.1,
+     "probHeatStress": 0,
+     "regenerativeScore": 78
+    },
+    {
+     "cropId": "mustard",
+     "score": 90,
+     "verdict": "recommended",
+     "yieldQuintalPerAcre": 7.3,
+     "profitP10": 20004,
+     "profitP50": 29939,
+     "irrigationMm": 385,
+     "probDrySpell": 0,
+     "probHeatStress": 0.1,
+     "regenerativeScore": 49
+    }
+   ]
+  },
+  {
+   "district": "Guntur",
+   "state": "Andhra Pradesh",
+   "lat": 16.2997,
+   "lon": 80.4573,
+   "water": "limited",
+   "soil": {
+    "texture": "sandy_clay_loam",
+    "source": "regional_default"
+   },
+   "top": [
+    {
+     "cropId": "sunflower",
+     "score": 89,
+     "verdict": "recommended",
+     "yieldQuintalPerAcre": 6.7,
+     "profitP10": 27108,
+     "profitP50": 38195,
+     "irrigationMm": 212,
+     "probDrySpell": 0.6,
+     "probHeatStress": 0,
+     "regenerativeScore": 66
+    },
+    {
+     "cropId": "jowar",
+     "score": 76,
+     "verdict": "recommended",
+     "yieldQuintalPerAcre": 12.5,
+     "profitP10": 25793,
+     "profitP50": 36334,
+     "irrigationMm": 304,
+     "probDrySpell": 0.9,
+     "probHeatStress": 0.5,
+     "regenerativeScore": 65
+    },
+    {
+     "cropId": "chickpea",
+     "score": 76,
+     "verdict": "recommended",
+     "yieldQuintalPerAcre": 7,
+     "profitP10": 16465,
+     "profitP50": 26663,
+     "irrigationMm": 179,
+     "probDrySpell": 0.5,
+     "probHeatStress": 0.4,
+     "regenerativeScore": 80
+    }
+   ]
+  },
+  {
+   "district": "Hisar",
+   "state": "Haryana",
+   "lat": 29.1539,
+   "lon": 75.7229,
+   "water": "assured",
+   "soil": {
+    "texture": "loam",
+    "source": "soilgrids"
+   },
+   "top": [
+    {
+     "cropId": "chickpea",
+     "score": 89,
+     "verdict": "recommended",
+     "yieldQuintalPerAcre": 7.3,
+     "profitP10": 13742,
+     "profitP50": 22967,
+     "irrigationMm": 504,
+     "probDrySpell": 0,
+     "probHeatStress": 0,
+     "regenerativeScore": 62
+    },
+    {
+     "cropId": "mustard",
+     "score": 89,
+     "verdict": "recommended",
+     "yieldQuintalPerAcre": 7.3,
+     "profitP10": 17881,
+     "profitP50": 27536,
+     "irrigationMm": 530,
+     "probDrySpell": 0,
+     "probHeatStress": 0.3,
+     "regenerativeScore": 46
+    },
+    {
+     "cropId": "lentil",
+     "score": 88,
+     "verdict": "recommended",
+     "yieldQuintalPerAcre": 5.7,
+     "profitP10": 15076,
+     "profitP50": 23289,
+     "irrigationMm": 530,
+     "probDrySpell": 0,
+     "probHeatStress": 0,
+     "regenerativeScore": 64
+    }
+   ]
+  },
+  {
+   "district": "Indore",
+   "state": "Madhya Pradesh",
+   "lat": 22.7179,
+   "lon": 75.8333,
+   "water": "limited",
+   "soil": {
+    "texture": "clay",
+    "source": "regional_default"
+   },
+   "top": [
+    {
+     "cropId": "chickpea",
+     "score": 82,
+     "verdict": "recommended",
+     "yieldQuintalPerAcre": 6.8,
+     "profitP10": 16726,
+     "profitP50": 24786,
+     "irrigationMm": 259,
+     "probDrySpell": 0.9,
+     "probHeatStress": 0.1,
+     "regenerativeScore": 78
+    },
+    {
+     "cropId": "mustard",
+     "score": 82,
+     "verdict": "recommended",
+     "yieldQuintalPerAcre": 6.6,
+     "profitP10": 15113,
+     "profitP50": 26071,
+     "irrigationMm": 195,
+     "probDrySpell": 0.5,
+     "probHeatStress": 0.9,
+     "regenerativeScore": 62
+    },
+    {
+     "cropId": "sunflower",
+     "score": 82,
+     "verdict": "recommended",
+     "yieldQuintalPerAcre": 6.6,
+     "profitP10": 22537,
+     "profitP50": 33726,
+     "irrigationMm": 407,
+     "probDrySpell": 0.5,
+     "probHeatStress": 0.1,
+     "regenerativeScore": 53
+    }
+   ]
+  },
+  {
+   "district": "Jabalpur",
+   "state": "Madhya Pradesh",
+   "lat": 23.167,
+   "lon": 79.9501,
+   "water": "limited",
+   "soil": {
+    "texture": "clay",
+    "source": "regional_default"
+   },
+   "top": [
+    {
+     "cropId": "mustard",
+     "score": 90,
+     "verdict": "recommended",
+     "yieldQuintalPerAcre": 7,
+     "profitP10": 19858,
+     "profitP50": 28451,
+     "irrigationMm": 196,
+     "probDrySpell": 0.2,
+     "probHeatStress": 0.7,
+     "regenerativeScore": 53
+    },
+    {
+     "cropId": "chickpea",
+     "score": 89,
+     "verdict": "recommended",
+     "yieldQuintalPerAcre": 7,
+     "profitP10": 17469,
+     "profitP50": 25737,
+     "irrigationMm": 259,
+     "probDrySpell": 0.9,
+     "probHeatStress": 0,
+     "regenerativeScore": 77
+    },
+    {
+     "cropId": "lentil",
+     "score": 84,
+     "verdict": "recommended",
+     "yieldQuintalPerAcre": 5.2,
+     "profitP10": 16325,
+     "profitP50": 24380,
+     "irrigationMm": 275,
+     "probDrySpell": 0.9,
+     "probHeatStress": 0,
+     "regenerativeScore": 74
+    }
+   ]
+  },
+  {
+   "district": "Jaipur",
+   "state": "Rajasthan",
+   "lat": 26.9196,
+   "lon": 75.7878,
+   "water": "limited",
+   "soil": {
+    "texture": "loamy_sand",
+    "source": "regional_default"
+   },
+   "top": [
+    {
+     "cropId": "mustard",
+     "score": 80,
+     "verdict": "recommended",
+     "yieldQuintalPerAcre": 7.1,
+     "profitP10": 20421,
+     "profitP50": 30354,
+     "irrigationMm": 346,
+     "probDrySpell": 0.4,
+     "probHeatStress": 0.3,
+     "regenerativeScore": 54
+    },
+    {
+     "cropId": "chickpea",
+     "score": 78,
+     "verdict": "recommended",
+     "yieldQuintalPerAcre": 5.5,
+     "profitP10": 9663,
+     "profitP50": 17393,
+     "irrigationMm": 182,
+     "probDrySpell": 1,
+     "probHeatStress": 0,
+     "regenerativeScore": 79
+    },
+    {
+     "cropId": "lentil",
+     "score": 78,
+     "verdict": "recommended",
+     "yieldQuintalPerAcre": 3.9,
+     "profitP10": 9889,
+     "profitP50": 15864,
+     "irrigationMm": 169,
+     "probDrySpell": 1,
+     "probHeatStress": 0,
+     "regenerativeScore": 80
+    }
+   ]
+  },
+  {
+   "district": "Jammu",
+   "state": "Jammu and Kashmir",
+   "lat": 32.7353,
+   "lon": 74.8617,
+   "water": "limited",
+   "soil": {
+    "texture": "loam",
+    "source": "regional_default"
+   },
+   "top": [
+    {
+     "cropId": "mustard",
+     "score": 94,
+     "verdict": "recommended",
+     "yieldQuintalPerAcre": 7.3,
+     "profitP10": 24046,
+     "profitP50": 34300,
+     "irrigationMm": 0,
+     "probDrySpell": 0.1,
+     "probHeatStress": 0,
+     "regenerativeScore": 63
+    },
+    {
+     "cropId": "chickpea",
+     "score": 79,
+     "verdict": "recommended",
+     "yieldQuintalPerAcre": 7,
+     "profitP10": 17681,
+     "profitP50": 27302,
+     "irrigationMm": 112,
+     "probDrySpell": 0.2,
+     "probHeatStress": 0,
+     "regenerativeScore": 82
+    },
+    {
+     "cropId": "lentil",
+     "score": 78,
+     "verdict": "recommended",
+     "yieldQuintalPerAcre": 5.4,
+     "profitP10": 18938,
+     "profitP50": 27030,
+     "irrigationMm": 142,
+     "probDrySpell": 0.5,
+     "probHeatStress": 0,
+     "regenerativeScore": 83
+    }
+   ]
+  },
+  {
+   "district": "Jhansi",
+   "state": "Uttar Pradesh",
+   "lat": 25.4589,
+   "lon": 78.5799,
+   "water": "assured",
+   "soil": {
+    "texture": "silt_loam",
+    "source": "regional_default"
+   },
+   "top": [
+    {
+     "cropId": "chickpea",
+     "score": 92,
+     "verdict": "recommended",
+     "yieldQuintalPerAcre": 7.3,
+     "profitP10": 15593,
+     "profitP50": 25136,
+     "irrigationMm": 387,
+     "probDrySpell": 0,
+     "probHeatStress": 0,
+     "regenerativeScore": 71
+    },
+    {
+     "cropId": "mustard",
+     "score": 90,
+     "verdict": "recommended",
+     "yieldQuintalPerAcre": 7.3,
+     "profitP10": 19010,
+     "profitP50": 28463,
+     "irrigationMm": 414,
+     "probDrySpell": 0.1,
+     "probHeatStress": 0.6,
+     "regenerativeScore": 42
+    },
+    {
+     "cropId": "lentil",
+     "score": 89,
+     "verdict": "recommended",
+     "yieldQuintalPerAcre": 5.7,
+     "profitP10": 16523,
+     "profitP50": 24868,
+     "irrigationMm": 433,
+     "probDrySpell": 0,
+     "probHeatStress": 0,
+     "regenerativeScore": 67
+    }
+   ]
+  },
+  {
+   "district": "Karnal",
+   "state": "Haryana",
+   "lat": 29.692,
+   "lon": 76.9845,
+   "water": "assured",
+   "soil": {
+    "texture": "sandy_loam",
+    "source": "regional_default"
+   },
+   "top": [
+    {
+     "cropId": "mustard",
+     "score": 94,
+     "verdict": "recommended",
+     "yieldQuintalPerAcre": 7.3,
+     "profitP10": 18942,
+     "profitP50": 29881,
+     "irrigationMm": 355,
+     "probDrySpell": 0,
+     "probHeatStress": 0.2,
+     "regenerativeScore": 64
+    },
+    {
+     "cropId": "chickpea",
+     "score": 87,
+     "verdict": "recommended",
+     "yieldQuintalPerAcre": 6.9,
+     "profitP10": 14208,
+     "profitP50": 22862,
+     "irrigationMm": 363,
+     "probDrySpell": 0.1,
+     "probHeatStress": 0,
+     "regenerativeScore": 70
+    },
+    {
+     "cropId": "lentil",
+     "score": 85,
+     "verdict": "recommended",
+     "yieldQuintalPerAcre": 5.7,
+     "profitP10": 14998,
+     "profitP50": 24362,
+     "irrigationMm": 411,
+     "probDrySpell": 0.1,
+     "probHeatStress": 0,
+     "regenerativeScore": 68
+    }
+   ]
+  },
+  {
+   "district": "Kota",
+   "state": "Rajasthan",
+   "lat": 25.1825,
+   "lon": 75.8391,
+   "water": "limited",
+   "soil": {
+    "texture": "loamy_sand",
+    "source": "regional_default"
+   },
+   "top": [
+    {
+     "cropId": "mustard",
+     "score": 87,
+     "verdict": "recommended",
+     "yieldQuintalPerAcre": 7.1,
+     "profitP10": 20467,
+     "profitP50": 29941,
+     "irrigationMm": 245,
+     "probDrySpell": 0.5,
+     "probHeatStress": 0.7,
+     "regenerativeScore": 60
+    },
+    {
+     "cropId": "chickpea",
+     "score": 80,
+     "verdict": "recommended",
+     "yieldQuintalPerAcre": 5.9,
+     "profitP10": 11022,
+     "profitP50": 19684,
+     "irrigationMm": 185,
+     "probDrySpell": 1,
+     "probHeatStress": 0,
+     "regenerativeScore": 79
+    },
+    {
+     "cropId": "lentil",
+     "score": 79,
+     "verdict": "recommended",
+     "yieldQuintalPerAcre": 4.1,
+     "profitP10": 10136,
+     "profitP50": 17546,
+     "irrigationMm": 171,
+     "probDrySpell": 1,
+     "probHeatStress": 0,
+     "regenerativeScore": 79
+    }
+   ]
+  },
+  {
+   "district": "Latur",
+   "state": "Maharashtra",
+   "lat": 18.3972,
+   "lon": 76.5678,
+   "water": "limited",
+   "soil": {
+    "texture": "clay_loam",
+    "source": "soilgrids"
+   },
+   "top": [
+    {
+     "cropId": "sunflower",
+     "score": 83,
+     "verdict": "recommended",
+     "yieldQuintalPerAcre": 6.6,
+     "profitP10": 23346,
+     "profitP50": 34508,
+     "irrigationMm": 352,
+     "probDrySpell": 0.7,
+     "probHeatStress": 0,
+     "regenerativeScore": 55
+    },
+    {
+     "cropId": "chickpea",
+     "score": 74,
+     "verdict": "recommended",
+     "yieldQuintalPerAcre": 6.8,
+     "profitP10": 12962,
+     "profitP50": 23843,
+     "irrigationMm": 261,
+     "probDrySpell": 1,
+     "probHeatStress": 0.6,
+     "regenerativeScore": 75
+    },
+    {
+     "cropId": "lentil",
+     "score": 71,
+     "verdict": "recommended",
+     "yieldQuintalPerAcre": 4.7,
+     "profitP10": 10535,
+     "profitP50": 20045,
+     "irrigationMm": 237,
+     "probDrySpell": 1,
+     "probHeatStress": 0.4,
+     "regenerativeScore": 77
+    }
+   ]
+  },
+  {
+   "district": "Lucknow",
+   "state": "Uttar Pradesh",
+   "lat": 26.8393,
+   "lon": 80.9231,
+   "water": "assured",
+   "soil": {
+    "texture": "clay_loam",
+    "source": "soilgrids"
+   },
+   "top": [
+    {
+     "cropId": "mustard",
+     "score": 93,
+     "verdict": "recommended",
+     "yieldQuintalPerAcre": 7.3,
+     "profitP10": 17995,
+     "profitP50": 29332,
+     "irrigationMm": 420,
+     "probDrySpell": 0,
+     "probHeatStress": 0.3,
+     "regenerativeScore": 55
+    },
+    {
+     "cropId": "chickpea",
+     "score": 89,
+     "verdict": "recommended",
+     "yieldQuintalPerAcre": 7.3,
+     "profitP10": 14463,
+     "profitP50": 24351,
+     "irrigationMm": 436,
+     "probDrySpell": 0.1,
+     "probHeatStress": 0,
+     "regenerativeScore": 67
+    },
+    {
+     "cropId": "lentil",
+     "score": 87,
+     "verdict": "recommended",
+     "yieldQuintalPerAcre": 5.7,
+     "profitP10": 15404,
+     "profitP50": 24164,
+     "irrigationMm": 476,
+     "probDrySpell": 0.2,
+     "probHeatStress": 0,
+     "regenerativeScore": 62
+    }
+   ]
+  },
+  {
+   "district": "Ludhiana",
+   "state": "Punjab",
+   "lat": 30.912,
+   "lon": 75.8538,
+   "water": "assured",
+   "soil": {
+    "texture": "loam",
+    "source": "regional_default"
+   },
+   "top": [
+    {
+     "cropId": "mustard",
+     "score": 88,
+     "verdict": "recommended",
+     "yieldQuintalPerAcre": 7.2,
+     "profitP10": 18879,
+     "profitP50": 30109,
+     "irrigationMm": 361,
+     "probDrySpell": 0,
+     "probHeatStress": 0.2,
+     "regenerativeScore": 62
+    },
+    {
+     "cropId": "lentil",
+     "score": 80,
+     "verdict": "recommended",
+     "yieldQuintalPerAcre": 5.7,
+     "profitP10": 16258,
+     "profitP50": 24488,
+     "irrigationMm": 407,
+     "probDrySpell": 0,
+     "probHeatStress": 0,
+     "regenerativeScore": 70
+    },
+    {
+     "cropId": "chickpea",
+     "score": 76,
+     "verdict": "recommended",
+     "yieldQuintalPerAcre": 7,
+     "profitP10": 13964,
+     "profitP50": 22653,
+     "irrigationMm": 402,
+     "probDrySpell": 0.1,
+     "probHeatStress": 0,
+     "regenerativeScore": 68
+    }
+   ]
+  },
+  {
+   "district": "Mandi",
+   "state": "Himachal Pradesh",
+   "lat": 31.7119,
+   "lon": 76.9327,
+   "water": "limited",
+   "soil": {
+    "texture": "loam",
+    "source": "regional_default"
+   },
+   "top": [
+    {
+     "cropId": "barley",
+     "score": 71,
+     "verdict": "recommended",
+     "yieldQuintalPerAcre": 12,
+     "profitP10": 2618,
+     "profitP50": 13461,
+     "irrigationMm": 170,
+     "probDrySpell": 0.1,
+     "probHeatStress": 0.4,
+     "regenerativeScore": 57
+    },
+    {
+     "cropId": "mustard",
+     "score": 68,
+     "verdict": "caution",
+     "yieldQuintalPerAcre": 6.2,
+     "profitP10": -1599,
+     "profitP50": 20477,
+     "irrigationMm": 173,
+     "probDrySpell": 0.3,
+     "probHeatStress": 0.1,
+     "regenerativeScore": 63
+    },
+    {
+     "cropId": "wheat",
+     "score": 61,
+     "verdict": "caution",
+     "yieldQuintalPerAcre": 12.5,
+     "profitP10": -5013,
+     "profitP50": 17522,
+     "irrigationMm": 199,
+     "probDrySpell": 0.1,
+     "probHeatStress": 0.5,
+     "regenerativeScore": 50
+    }
+   ]
+  },
+  {
+   "district": "Mandya",
+   "state": "Karnataka",
+   "lat": 12.5223,
+   "lon": 76.8975,
+   "water": "limited",
+   "soil": {
+    "texture": "sandy_clay_loam",
+    "source": "regional_default"
+   },
+   "top": [
+    {
+     "cropId": "sunflower",
+     "score": 85,
+     "verdict": "recommended",
+     "yieldQuintalPerAcre": 6.5,
+     "profitP10": 24996,
+     "profitP50": 36408,
+     "irrigationMm": 285,
+     "probDrySpell": 0.8,
+     "probHeatStress": 0,
+     "regenerativeScore": 62
+    },
+    {
+     "cropId": "chickpea",
+     "score": 74,
+     "verdict": "recommended",
+     "yieldQuintalPerAcre": 6.7,
+     "profitP10": 14800,
+     "profitP50": 22302,
+     "irrigationMm": 174,
+     "probDrySpell": 1,
+     "probHeatStress": 0.5,
+     "regenerativeScore": 80
+    },
+    {
+     "cropId": "lentil",
+     "score": 66,
+     "verdict": "recommended",
+     "yieldQuintalPerAcre": 4.7,
+     "profitP10": 10054,
+     "profitP50": 19653,
+     "irrigationMm": 193,
+     "probDrySpell": 1,
+     "probHeatStress": 0.5,
+     "regenerativeScore": 78
+    }
+   ]
+  },
+  {
+   "district": "Meerut",
+   "state": "Uttar Pradesh",
+   "lat": 28.98,
+   "lon": 77.7064,
+   "water": "assured",
+   "soil": {
+    "texture": "loam",
+    "source": "soilgrids"
+   },
+   "top": [
+    {
+     "cropId": "mustard",
+     "score": 92,
+     "verdict": "recommended",
+     "yieldQuintalPerAcre": 7.3,
+     "profitP10": 18578,
+     "profitP50": 29192,
+     "irrigationMm": 365,
+     "probDrySpell": 0,
+     "probHeatStress": 0.2,
+     "regenerativeScore": 54
+    },
+    {
+     "cropId": "chickpea",
+     "score": 84,
+     "verdict": "recommended",
+     "yieldQuintalPerAcre": 7.2,
+     "profitP10": 13507,
+     "profitP50": 22225,
+     "irrigationMm": 395,
+     "probDrySpell": 0.1,
+     "probHeatStress": 0,
+     "regenerativeScore": 69
+    },
+    {
+     "cropId": "lentil",
+     "score": 82,
+     "verdict": "recommended",
+     "yieldQuintalPerAcre": 5.7,
+     "profitP10": 15782,
+     "profitP50": 24317,
+     "irrigationMm": 442,
+     "probDrySpell": 0,
+     "probHeatStress": 0,
+     "regenerativeScore": 70
+    }
+   ]
+  },
+  {
+   "district": "Nagaon",
+   "state": "Assam",
+   "lat": 26.35,
+   "lon": 92.6667,
+   "water": "limited",
+   "soil": {
+    "texture": "silt_loam",
+    "source": "regional_default"
+   },
+   "top": [
+    {
+     "cropId": "mustard",
+     "score": 87,
+     "verdict": "recommended",
+     "yieldQuintalPerAcre": 7.3,
+     "profitP10": 23641,
+     "profitP50": 32910,
+     "irrigationMm": 202,
+     "probDrySpell": 0,
+     "probHeatStress": 0,
+     "regenerativeScore": 62
+    },
+    {
+     "cropId": "wheat",
+     "score": 86,
+     "verdict": "recommended",
+     "yieldQuintalPerAcre": 19.4,
+     "profitP10": 28705,
+     "profitP50": 33952,
+     "irrigationMm": 231,
+     "probDrySpell": 0,
+     "probHeatStress": 0.3,
+     "regenerativeScore": 46
+    },
+    {
+     "cropId": "chickpea",
+     "score": 83,
+     "verdict": "recommended",
+     "yieldQuintalPerAcre": 7.2,
+     "profitP10": 19299,
+     "profitP50": 27719,
+     "irrigationMm": 172,
+     "probDrySpell": 0.5,
+     "probHeatStress": 0,
+     "regenerativeScore": 82
+    }
+   ]
+  },
+  {
+   "district": "Nashik",
+   "state": "Maharashtra",
+   "lat": 19.9973,
+   "lon": 73.791,
+   "water": "limited",
+   "soil": {
+    "texture": "clay",
+    "source": "regional_default"
+   },
+   "top": [
+    {
+     "cropId": "sunflower",
+     "score": 86,
+     "verdict": "recommended",
+     "yieldQuintalPerAcre": 6.7,
+     "profitP10": 24670,
+     "profitP50": 36126,
+     "irrigationMm": 336,
+     "probDrySpell": 0.6,
+     "probHeatStress": 0,
+     "regenerativeScore": 58
+    },
+    {
+     "cropId": "chickpea",
+     "score": 76,
+     "verdict": "recommended",
+     "yieldQuintalPerAcre": 7,
+     "profitP10": 16721,
+     "profitP50": 25747,
+     "irrigationMm": 251,
+     "probDrySpell": 0.8,
+     "probHeatStress": 0.4,
+     "regenerativeScore": 73
+    },
+    {
+     "cropId": "lentil",
+     "score": 71,
+     "verdict": "recommended",
+     "yieldQuintalPerAcre": 5.2,
+     "profitP10": 14202,
+     "profitP50": 22967,
+     "irrigationMm": 266,
+     "probDrySpell": 1,
+     "probHeatStress": 0.3,
+     "regenerativeScore": 75
+    }
+   ]
+  },
+  {
+   "district": "Nizamabad",
+   "state": "Telangana",
+   "lat": 18.6715,
+   "lon": 78.0988,
+   "water": "limited",
+   "soil": {
+    "texture": "clay_loam",
+    "source": "soilgrids"
+   },
+   "top": [
+    {
+     "cropId": "sunflower",
+     "score": 85,
+     "verdict": "recommended",
+     "yieldQuintalPerAcre": 6.5,
+     "profitP10": 23295,
+     "profitP50": 33948,
+     "irrigationMm": 346,
+     "probDrySpell": 0.8,
+     "probHeatStress": 0,
+     "regenerativeScore": 60
+    },
+    {
+     "cropId": "chickpea",
+     "score": 74,
+     "verdict": "recommended",
+     "yieldQuintalPerAcre": 6.8,
+     "profitP10": 12755,
+     "profitP50": 22482,
+     "irrigationMm": 261,
+     "probDrySpell": 1,
+     "probHeatStress": 0.5,
+     "regenerativeScore": 75
+    },
+    {
+     "cropId": "lentil",
+     "score": 71,
+     "verdict": "recommended",
+     "yieldQuintalPerAcre": 4.9,
+     "profitP10": 10825,
+     "profitP50": 20340,
+     "irrigationMm": 240,
+     "probDrySpell": 1,
+     "probHeatStress": 0.4,
+     "regenerativeScore": 76
+    }
+   ]
+  },
+  {
+   "district": "Palakkad",
+   "state": "Kerala",
+   "lat": 10.7732,
+   "lon": 76.6537,
+   "water": "limited",
+   "soil": {
+    "texture": "sandy_clay_loam",
+    "source": "regional_default"
+   },
+   "top": [
+    {
+     "cropId": "sunflower",
+     "score": 89,
+     "verdict": "recommended",
+     "yieldQuintalPerAcre": 6.8,
+     "profitP10": 27618,
+     "profitP50": 39073,
+     "irrigationMm": 208,
+     "probDrySpell": 0.5,
+     "probHeatStress": 0,
+     "regenerativeScore": 67
+    },
+    {
+     "cropId": "chickpea",
+     "score": 77,
+     "verdict": "recommended",
+     "yieldQuintalPerAcre": 6.9,
+     "profitP10": 19079,
+     "profitP50": 28155,
+     "irrigationMm": 81,
+     "probDrySpell": 0.8,
+     "probHeatStress": 0.1,
+     "regenerativeScore": 84
+    },
+    {
+     "cropId": "lentil",
+     "score": 73,
+     "verdict": "recommended",
+     "yieldQuintalPerAcre": 5.4,
+     "profitP10": 19519,
+     "profitP50": 27584,
+     "irrigationMm": 135,
+     "probDrySpell": 0.8,
+     "probHeatStress": 0.1,
+     "regenerativeScore": 81
+    }
+   ]
+  },
+  {
+   "district": "Palanpur",
+   "state": "Gujarat",
+   "lat": 24.1713,
+   "lon": 72.4383,
+   "water": "limited",
+   "soil": {
+    "texture": "clay_loam",
+    "source": "regional_default"
+   },
+   "top": [
+    {
+     "cropId": "chickpea",
+     "score": 83,
+     "verdict": "recommended",
+     "yieldQuintalPerAcre": 5.6,
+     "profitP10": 8685,
+     "profitP50": 16052,
+     "irrigationMm": 287,
+     "probDrySpell": 1,
+     "probHeatStress": 0.2,
+     "regenerativeScore": 74
+    },
+    {
+     "cropId": "lentil",
+     "score": 82,
+     "verdict": "recommended",
+     "yieldQuintalPerAcre": 4,
+     "profitP10": 7286,
+     "profitP50": 13973,
+     "irrigationMm": 261,
+     "probDrySpell": 1,
+     "probHeatStress": 0.4,
+     "regenerativeScore": 75
+    },
+    {
+     "cropId": "sunflower",
+     "score": 81,
+     "verdict": "recommended",
+     "yieldQuintalPerAcre": 5.2,
+     "profitP10": 10347,
+     "profitP50": 22617,
+     "irrigationMm": 373,
+     "probDrySpell": 1,
+     "probHeatStress": 0,
+     "regenerativeScore": 54
+    }
+   ]
+  },
+  {
+   "district": "Patna",
+   "state": "Bihar",
+   "lat": 25.5941,
+   "lon": 85.1356,
+   "water": "limited",
+   "soil": {
+    "texture": "silt_loam",
+    "source": "regional_default"
+   },
+   "top": [
+    {
+     "cropId": "mustard",
+     "score": 93,
+     "verdict": "recommended",
+     "yieldQuintalPerAcre": 7.1,
+     "profitP10": 19805,
+     "profitP50": 29467,
+     "irrigationMm": 222,
+     "probDrySpell": 0.7,
+     "probHeatStress": 0.4,
+     "regenerativeScore": 62
+    },
+    {
+     "cropId": "chickpea",
+     "score": 85,
+     "verdict": "recommended",
+     "yieldQuintalPerAcre": 6.7,
+     "profitP10": 14492,
+     "profitP50": 24861,
+     "irrigationMm": 282,
+     "probDrySpell": 0.8,
+     "probHeatStress": 0,
+     "regenerativeScore": 77
+    },
+    {
+     "cropId": "lentil",
+     "score": 82,
+     "verdict": "recommended",
+     "yieldQuintalPerAcre": 5.4,
+     "profitP10": 13514,
+     "profitP50": 23358,
+     "irrigationMm": 300,
+     "probDrySpell": 1,
+     "probHeatStress": 0,
+     "regenerativeScore": 78
+    }
+   ]
+  },
+  {
+   "district": "Purnia",
+   "state": "Bihar",
+   "lat": 25.7789,
+   "lon": 87.4742,
+   "water": "limited",
+   "soil": {
+    "texture": "loam",
+    "source": "soilgrids"
+   },
+   "top": [
+    {
+     "cropId": "mustard",
+     "score": 94,
+     "verdict": "recommended",
+     "yieldQuintalPerAcre": 7.3,
+     "profitP10": 23779,
+     "profitP50": 33072,
+     "irrigationMm": 187,
+     "probDrySpell": 0.1,
+     "probHeatStress": 0.1,
+     "regenerativeScore": 62
+    },
+    {
+     "cropId": "chickpea",
+     "score": 86,
+     "verdict": "recommended",
+     "yieldQuintalPerAcre": 7.1,
+     "profitP10": 18638,
+     "profitP50": 27181,
+     "irrigationMm": 217,
+     "probDrySpell": 0.6,
+     "probHeatStress": 0,
+     "regenerativeScore": 77
+    },
+    {
+     "cropId": "lentil",
+     "score": 85,
+     "verdict": "recommended",
+     "yieldQuintalPerAcre": 5.3,
+     "profitP10": 18231,
+     "profitP50": 26119,
+     "irrigationMm": 193,
+     "probDrySpell": 0.9,
+     "probHeatStress": 0,
+     "regenerativeScore": 78
+    }
+   ]
+  },
+  {
+   "district": "Raichur",
+   "state": "Karnataka",
+   "lat": 16.2055,
+   "lon": 77.3557,
+   "water": "limited",
+   "soil": {
+    "texture": "sandy_clay_loam",
+    "source": "regional_default"
+   },
+   "top": [
+    {
+     "cropId": "sunflower",
+     "score": 84,
+     "verdict": "recommended",
+     "yieldQuintalPerAcre": 6.4,
+     "profitP10": 21355,
+     "profitP50": 34386,
+     "irrigationMm": 284,
+     "probDrySpell": 1,
+     "probHeatStress": 0,
+     "regenerativeScore": 58
+    },
+    {
+     "cropId": "jowar",
+     "score": 70,
+     "verdict": "recommended",
+     "yieldQuintalPerAcre": 11.1,
+     "profitP10": 18812,
+     "profitP50": 30268,
+     "irrigationMm": 411,
+     "probDrySpell": 1,
+     "probHeatStress": 0.3,
+     "regenerativeScore": 59
+    },
+    {
+     "cropId": "chickpea",
+     "score": 62,
+     "verdict": "recommended",
+     "yieldQuintalPerAcre": 4.9,
+     "profitP10": 5257,
+     "profitP50": 13501,
+     "irrigationMm": 205,
+     "probDrySpell": 1,
+     "probHeatStress": 0.9,
+     "regenerativeScore": 77
+    }
+   ]
+  },
+  {
+   "district": "Raipur",
+   "state": "Chhattisgarh",
+   "lat": 21.2333,
+   "lon": 81.6333,
+   "water": "limited",
+   "soil": {
+    "texture": "sandy_clay_loam",
+    "source": "regional_default"
+   },
+   "top": [
+    {
+     "cropId": "mustard",
+     "score": 88,
+     "verdict": "recommended",
+     "yieldQuintalPerAcre": 7.2,
+     "profitP10": 22258,
+     "profitP50": 31571,
+     "irrigationMm": 275,
+     "probDrySpell": 0.2,
+     "probHeatStress": 0.3,
+     "regenerativeScore": 58
+    },
+    {
+     "cropId": "chickpea",
+     "score": 85,
+     "verdict": "recommended",
+     "yieldQuintalPerAcre": 6.7,
+     "profitP10": 15531,
+     "profitP50": 24988,
+     "irrigationMm": 225,
+     "probDrySpell": 0.9,
+     "probHeatStress": 0,
+     "regenerativeScore": 84
+    },
+    {
+     "cropId": "lentil",
+     "score": 81,
+     "verdict": "recommended",
+     "yieldQuintalPerAcre": 4.8,
+     "profitP10": 13640,
+     "profitP50": 22229,
+     "irrigationMm": 203,
+     "probDrySpell": 1,
+     "probHeatStress": 0,
+     "regenerativeScore": 77
+    }
+   ]
+  },
+  {
+   "district": "Rajkot",
+   "state": "Gujarat",
+   "lat": 22.2916,
+   "lon": 70.7932,
+   "water": "limited",
+   "soil": {
+    "texture": "clay_loam",
+    "source": "regional_default"
+   },
+   "top": [
+    {
+     "cropId": "sunflower",
+     "score": 81,
+     "verdict": "recommended",
+     "yieldQuintalPerAcre": 5.4,
+     "profitP10": 15206,
+     "profitP50": 24117,
+     "irrigationMm": 356,
+     "probDrySpell": 1,
+     "probHeatStress": 0,
+     "regenerativeScore": 54
+    },
+    {
+     "cropId": "chickpea",
+     "score": 75,
+     "verdict": "recommended",
+     "yieldQuintalPerAcre": 5.5,
+     "profitP10": 7224,
+     "profitP50": 16180,
+     "irrigationMm": 271,
+     "probDrySpell": 1,
+     "probHeatStress": 0.5,
+     "regenerativeScore": 73
+    },
+    {
+     "cropId": "lentil",
+     "score": 72,
+     "verdict": "recommended",
+     "yieldQuintalPerAcre": 3.6,
+     "profitP10": 3584,
+     "profitP50": 14227,
+     "irrigationMm": 239,
+     "probDrySpell": 1,
+     "probHeatStress": 0.7,
+     "regenerativeScore": 76
+    }
+   ]
+  },
+  {
+   "district": "Ranchi",
+   "state": "Jharkhand",
+   "lat": 23.3432,
+   "lon": 85.3094,
+   "water": "limited",
+   "soil": {
+    "texture": "sandy_clay_loam",
+    "source": "regional_default"
+   },
+   "top": [
+    {
+     "cropId": "mustard",
+     "score": 86,
+     "verdict": "recommended",
+     "yieldQuintalPerAcre": 7.2,
+     "profitP10": 20997,
+     "profitP50": 31057,
+     "irrigationMm": 274,
+     "probDrySpell": 0.6,
+     "probHeatStress": 0.3,
+     "regenerativeScore": 58
+    },
+    {
+     "cropId": "chickpea",
+     "score": 81,
+     "verdict": "recommended",
+     "yieldQuintalPerAcre": 6.3,
+     "profitP10": 13291,
+     "profitP50": 22269,
+     "irrigationMm": 224,
+     "probDrySpell": 0.8,
+     "probHeatStress": 0,
+     "regenerativeScore": 77
+    },
+    {
+     "cropId": "lentil",
+     "score": 81,
+     "verdict": "recommended",
+     "yieldQuintalPerAcre": 4.6,
+     "profitP10": 11978,
+     "profitP50": 20317,
+     "irrigationMm": 202,
+     "probDrySpell": 0.9,
+     "probHeatStress": 0,
+     "regenerativeScore": 78
+    }
+   ]
+  },
+  {
+   "district": "Rudrapur",
+   "state": "Uttarakhand",
+   "lat": 28.98,
+   "lon": 79.4,
+   "water": "limited",
+   "soil": {
+    "texture": "loam",
+    "source": "regional_default"
+   },
+   "top": [
+    {
+     "cropId": "mustard",
+     "score": 94,
+     "verdict": "recommended",
+     "yieldQuintalPerAcre": 7.2,
+     "profitP10": 21720,
+     "profitP50": 32363,
+     "irrigationMm": 188,
+     "probDrySpell": 0.5,
+     "probHeatStress": 0,
+     "regenerativeScore": 72
+    },
+    {
+     "cropId": "chickpea",
+     "score": 85,
+     "verdict": "recommended",
+     "yieldQuintalPerAcre": 6.8,
+     "profitP10": 17125,
+     "profitP50": 25583,
+     "irrigationMm": 217,
+     "probDrySpell": 0.8,
+     "probHeatStress": 0,
+     "regenerativeScore": 77
+    },
+    {
+     "cropId": "lentil",
+     "score": 82,
+     "verdict": "recommended",
+     "yieldQuintalPerAcre": 5.4,
+     "profitP10": 16985,
+     "profitP50": 25417,
+     "irrigationMm": 268,
+     "probDrySpell": 0.9,
+     "probHeatStress": 0,
+     "regenerativeScore": 83
+    }
+   ]
+  },
+  {
+   "district": "Sagar",
+   "state": "Madhya Pradesh",
+   "lat": 23.8388,
+   "lon": 78.7387,
+   "water": "limited",
+   "soil": {
+    "texture": "clay",
+    "source": "soilgrids"
+   },
+   "top": [
+    {
+     "cropId": "mustard",
+     "score": 92,
+     "verdict": "recommended",
+     "yieldQuintalPerAcre": 6.9,
+     "profitP10": 20937,
+     "profitP50": 30177,
+     "irrigationMm": 197,
+     "probDrySpell": 0.6,
+     "probHeatStress": 0.4,
+     "regenerativeScore": 62
+    },
+    {
+     "cropId": "chickpea",
+     "score": 86,
+     "verdict": "recommended",
+     "yieldQuintalPerAcre": 6.8,
+     "profitP10": 16790,
+     "profitP50": 25058,
+     "irrigationMm": 228,
+     "probDrySpell": 1,
+     "probHeatStress": 0.1,
+     "regenerativeScore": 77
+    },
+    {
+     "cropId": "lentil",
+     "score": 82,
+     "verdict": "recommended",
+     "yieldQuintalPerAcre": 5.3,
+     "profitP10": 16938,
+     "profitP50": 24819,
+     "irrigationMm": 284,
+     "probDrySpell": 1,
+     "probHeatStress": 0,
+     "regenerativeScore": 73
+    }
+   ]
+  },
+  {
+   "district": "Thanjavur",
+   "state": "Tamil Nadu",
+   "lat": 10.7852,
+   "lon": 79.1391,
+   "water": "limited",
+   "soil": {
+    "texture": "clay_loam",
+    "source": "soilgrids"
+   },
+   "top": [
+    {
+     "cropId": "sunflower",
+     "score": 91,
+     "verdict": "recommended",
+     "yieldQuintalPerAcre": 6.9,
+     "profitP10": 29844,
+     "profitP50": 41489,
+     "irrigationMm": 87,
+     "probDrySpell": 0.2,
+     "probHeatStress": 0,
+     "regenerativeScore": 72
+    },
+    {
+     "cropId": "jowar",
+     "score": 78,
+     "verdict": "recommended",
+     "yieldQuintalPerAcre": 13.2,
+     "profitP10": 29617,
+     "profitP50": 40301,
+     "irrigationMm": 202,
+     "probDrySpell": 0.6,
+     "probHeatStress": 0,
+     "regenerativeScore": 71
+    },
+    {
+     "cropId": "maize",
+     "score": 75,
+     "verdict": "recommended",
+     "yieldQuintalPerAcre": 23.2,
+     "profitP10": 26554,
+     "profitP50": 37948,
+     "irrigationMm": 145,
+     "probDrySpell": 0.8,
+     "probHeatStress": 0.2,
+     "regenerativeScore": 58
+    }
+   ]
+  },
+  {
+   "district": "Warangal",
+   "state": "Telangana",
+   "lat": 18,
+   "lon": 79.5833,
+   "water": "limited",
+   "soil": {
+    "texture": "sandy_clay_loam",
+    "source": "regional_default"
+   },
+   "top": [
+    {
+     "cropId": "sunflower",
+     "score": 84,
+     "verdict": "recommended",
+     "yieldQuintalPerAcre": 6.6,
+     "profitP10": 24667,
+     "profitP50": 36083,
+     "irrigationMm": 302,
+     "probDrySpell": 0.8,
+     "probHeatStress": 0,
+     "regenerativeScore": 57
+    },
+    {
+     "cropId": "chickpea",
+     "score": 77,
+     "verdict": "recommended",
+     "yieldQuintalPerAcre": 6.9,
+     "profitP10": 16393,
+     "profitP50": 24878,
+     "irrigationMm": 221,
+     "probDrySpell": 0.9,
+     "probHeatStress": 0.1,
+     "regenerativeScore": 77
+    },
+    {
+     "cropId": "lentil",
+     "score": 73,
+     "verdict": "recommended",
+     "yieldQuintalPerAcre": 4.7,
+     "profitP10": 13461,
+     "profitP50": 20820,
+     "irrigationMm": 196,
+     "probDrySpell": 0.9,
+     "probHeatStress": 0.2,
+     "regenerativeScore": 79
+    }
+   ]
+  }
+ ]
+}

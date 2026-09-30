@@ -28,9 +28,20 @@ export interface RankedCrop {
   result: EnsembleResult;
 }
 
-export function candidateCrops(sowingDate: string, pool: readonly CropModel[] = CROPS): CropModel[] {
-  return pool.filter((crop) =>
-    crop.sowingWindows.some((w) => distanceToWindow(sowingDate, w.from, w.to) <= SOWING_TOLERANCE_DAYS),
+export interface CandidateOptions {
+  /**
+   * Vegetables are market-limited (perishable, need a nearby mandi or cold storage, and prices
+   * crash when many farmers plant them), so they are only offered when the farmer opts in.
+   */
+  includeVegetables?: boolean;
+  pool?: readonly CropModel[];
+}
+
+export function candidateCrops(sowingDate: string, { includeVegetables = false, pool = CROPS }: CandidateOptions = {}): CropModel[] {
+  return pool.filter(
+    (crop) =>
+      (includeVegetables || crop.category !== "vegetable") &&
+      crop.sowingWindows.some((w) => distanceToWindow(sowingDate, w.from, w.to) <= SOWING_TOLERANCE_DAYS),
   );
 }
 

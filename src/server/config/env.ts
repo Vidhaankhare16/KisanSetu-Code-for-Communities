@@ -26,6 +26,8 @@ const EnvSchema = z.object({
   DATA_BACKEND: z.enum(["memory", "firestore"]).default("memory"),
   /** Number of historical years in the weather ensemble. */
   ENSEMBLE_YEARS: z.coerce.number().int().min(3).max(20).default(10),
+  /** How long a request waits for SoilGrids before using the regional soil default. */
+  SOIL_DEADLINE_MS: z.coerce.number().int().min(500).default(6000),
   /** Requests per minute per client IP on the public API. */
   RATE_LIMIT_PER_MINUTE: z.coerce.number().int().min(1).default(60),
   /** Contact string sent to open-data providers that ask for one (OSM Nominatim). */

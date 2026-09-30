@@ -12,11 +12,16 @@ const base = {
 };
 
 describe("candidate crops", () => {
-  it("offers rabi crops for a November sowing and excludes kharif crops", () => {
+  it("offers rabi field crops for a November sowing and excludes kharif crops", () => {
     const ids = candidateCrops("2026-11-01").map((c) => c.id);
-    expect(ids).toEqual(expect.arrayContaining(["wheat", "mustard", "chickpea", "lentil", "potato"]));
+    expect(ids).toEqual(expect.arrayContaining(["wheat", "mustard", "chickpea", "lentil"]));
     expect(ids).not.toContain("rice");
     expect(ids).not.toContain("cotton");
+  });
+
+  it("offers market-limited vegetables only when the farmer opts in", () => {
+    expect(candidateCrops("2026-11-01").map((c) => c.id)).not.toContain("potato");
+    expect(candidateCrops("2026-11-01", { includeVegetables: true }).map((c) => c.id)).toContain("potato");
   });
 
   it("offers kharif crops for a July sowing", () => {

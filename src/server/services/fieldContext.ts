@@ -6,6 +6,7 @@ import "server-only";
 import type { Place, SoilTexture } from "@/contracts/farm";
 import type { SimDataSource } from "@/contracts/simulation";
 import { findState } from "@/domain/geo/india";
+import { env } from "@/server/config/env";
 import { toIsoDate } from "@/domain/time";
 import { getForecast, type Forecast } from "@/server/providers/openMeteo";
 import { getVegetation, type VegetationCondition } from "@/server/providers/modis";
@@ -31,17 +32,17 @@ export interface FieldContextOptions {
 }
 
 /**
- * SoilGrids can take 20 s+ on a cold query. We wait this long, then fall back; the lookup
- * keeps running and fills the cache, so the next request for this area gets real soil data.
+ * SoilGrids can take 20 s+ on a cold query. Interactive requests wait SOIL_DEADLINE_MS, then
+ * fall back; the lookup keeps running and fills the cache, so the next request for this area
+ * gets real soil data. Batch jobs raise the deadline.
  */
-const SOIL_DEADLINE_MS = 6000;
 const VEGETATION_DEADLINE_MS = 12000;
 
 export async function getFieldContext(place: Place, opts: FieldContextOptions = {}): Promise<FieldContext> {
   const today = opts.today ?? toIsoDate(new Date());
   const [forecast, soil, vegetation] = await Promise.allSettled([
     getForecast(place.lat, place.lon),
-    opts.texture ? Promise.resolve(null) : withDeadline(getSoilProfile(place.lat, place.lon), SOIL_DEADLINE_MS),
+    opts.texture ? Promise.resolve(null) : withDeadline(getSoilProfile(place.lat, place.lon), env().SOIL_DEADLINE_MS),
     withDeadline(getVegetation(place.lat, place.lon, today), VEGETATION_DEADLINE_MS),
   ]);
 

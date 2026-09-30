@@ -5,7 +5,7 @@
 import "server-only";
 import type { RankedCropDto, RecommendRequest, RecommendResponse } from "@/contracts/api";
 import type { SimulationResult } from "@/contracts/simulation";
-import { rankCrops, type RankedCrop } from "@/domain/agro/recommend";
+import { candidateCrops, rankCrops, type RankedCrop } from "@/domain/agro/recommend";
 import { stableHash } from "@/domain/hash";
 import { adviseOnRanking } from "@/server/ai/advisor";
 import { narrateSimulation } from "@/server/ai/narrator";
@@ -24,7 +24,7 @@ export async function recommendCrops(req: RecommendRequest): Promise<RecommendRe
   const id = `rec_${stableHash(req)}`;
   return cache.getOrLoad(id, async () => {
     const { context, base } = await prepareRun(req);
-    const ranking = rankCrops(base, req.priority);
+    const ranking = rankCrops(base, req.priority, candidateCrops(req.sowingDate, { includeVegetables: req.includeVegetables }));
     if (ranking.length === 0) {
       throw new AppError("bad_request", "No crop in the catalogue is normally sown around this date. Try another date.");
     }
