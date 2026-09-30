@@ -23,4 +23,6 @@ export interface WeatherScenario {
   /** Historical year the climatology portion was taken from (absent for pure forecasts). */
   year?: number;
   days: DailyWeather[];
+  /** Soil moisture at sowing for this member (fraction of available water); overrides the field default. */
+  initialMoistureFraction?: number;
 }

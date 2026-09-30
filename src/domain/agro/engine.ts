@@ -104,12 +104,16 @@ export function dailyThermalTime(crop: CropModel, tMax: number, tMin: number): n
 }
 
 /**
- * Thermal time to maturity. Calibrated so the crop matures in its nominal duration when the
- * daily mean sits a quarter of the way into its optimal band (typical of the main season).
+ * Share of the optimal temperature band at which a crop completes its nominal duration.
+ * Back-calculated from typical sowing→harvest dates (wheat in Lucknow, mustard in Jaipur,
+ * kharif rice in eastern UP), which all land between 0.4 and 0.5.
  */
+const REFERENCE_BAND_POSITION = 0.45;
+
+/** Thermal time (°C·day above base) needed to reach maturity. */
 export function thermalTimeToMaturity(crop: CropModel): number {
   const { base, optLow, optHigh } = crop.temperature;
-  const reference = optLow + 0.25 * (optHigh - optLow);
+  const reference = optLow + REFERENCE_BAND_POSITION * (optHigh - optLow);
   return crop.durationDays * (reference - base);
 }
 
@@ -214,7 +218,7 @@ export function simulateSeason(
   const potentialBiomass = crop.potentialYieldKgHa / crop.harvestIndex;
   const [fIni, fDev] = crop.stageFractions;
 
-  const initialFraction = clamp01(field.initialMoistureFraction);
+  const initialFraction = clamp01(scenario.initialMoistureFraction ?? field.initialMoistureFraction);
   let rootDepth = MIN_ROOT_DEPTH_M;
   let taw = awcPerMetre * rootDepth;
   let depletion = taw * (1 - initialFraction);

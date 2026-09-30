@@ -96,9 +96,21 @@ export function riskScore(
   return Math.round(Math.min(100, score + 40 * probImmature));
 }
 
-export function verdictFor(profitP50: number, risk: number, yieldRatio: number, matured: boolean): Verdict {
+export interface VerdictInput {
+  profitP10: number;
+  profitP50: number;
+  risk: number;
+  yieldRatio: number;
+  matured: boolean;
+}
+
+/**
+ * Recommended only when the crop matures, pays in a typical year, still breaks even in a
+ * bad year (P10), and its overall risk is moderate.
+ */
+export function verdictFor({ profitP10, profitP50, risk, yieldRatio, matured }: VerdictInput): Verdict {
   if (!matured || profitP50 <= 0 || yieldRatio < 0.35) return "not_recommended";
-  if (risk < 45 && yieldRatio >= 0.5) return "recommended";
+  if (risk < 45 && yieldRatio >= 0.5 && profitP10 >= 0) return "recommended";
   return "caution";
 }
 
@@ -177,7 +189,13 @@ export function runEnsemble(req: EnsembleRequest): EnsembleResult {
       priceBasis: crop.price.basis,
       riskScore: risk,
       regenerativeScore: regenerative.score,
-      verdict: verdictFor(profitP50, risk, yieldRatio, run.matured),
+      verdict: verdictFor({
+        profitP10: percentile(profitSamples, 10),
+        profitP50,
+        risk,
+        yieldRatio,
+        matured: run.matured,
+      }),
     },
     dataSources: [...req.dataSources],
     ensemble,

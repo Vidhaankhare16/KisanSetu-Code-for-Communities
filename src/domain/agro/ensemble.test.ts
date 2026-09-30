@@ -87,11 +87,13 @@ describe("risk and verdict", () => {
     expect(riskScore(risky)).toBeGreaterThan(60);
   });
 
-  it("derives verdicts from profit, risk and yield ratio", () => {
-    expect(verdictFor(30000, 20, 0.8, true)).toBe("recommended");
-    expect(verdictFor(30000, 60, 0.8, true)).toBe("caution");
-    expect(verdictFor(-100, 10, 0.9, true)).toBe("not_recommended");
-    expect(verdictFor(30000, 10, 0.9, false)).toBe("not_recommended");
+  it("derives verdicts from profit, bad-year profit, risk and yield ratio", () => {
+    const good = { profitP10: 10000, profitP50: 30000, risk: 20, yieldRatio: 0.8, matured: true };
+    expect(verdictFor(good)).toBe("recommended");
+    expect(verdictFor({ ...good, risk: 60 })).toBe("caution");
+    expect(verdictFor({ ...good, profitP10: -5000 })).toBe("caution");
+    expect(verdictFor({ ...good, profitP50: -100 })).toBe("not_recommended");
+    expect(verdictFor({ ...good, matured: false })).toBe("not_recommended");
   });
 });
 
