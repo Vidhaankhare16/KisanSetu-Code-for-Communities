@@ -33,8 +33,14 @@ export function KisanMitra() {
   const endRef = useRef<HTMLDivElement>(null);
   const audioRef = useRef<HTMLAudioElement | null>(null);
 
-  useEffect(() => endRef.current?.scrollIntoView({ block: "end", behavior: "smooth" }), [turns, busy]);
-  useEffect(() => () => recorderRef.current?.cancel(), []);
+  // Block bodies on purpose: newer browsers return a Promise from scrollIntoView, and an effect
+  // must return nothing or a cleanup function.
+  useEffect(() => {
+    endRef.current?.scrollIntoView({ block: "end", behavior: "smooth" });
+  }, [turns, busy]);
+  useEffect(() => {
+    return () => recorderRef.current?.cancel();
+  }, []);
 
   async function ask(input: { text?: string; audio?: { base64: string; mimeType: "audio/wav" } }) {
     const history = turns.map(({ role, text }) => ({ role, text }));

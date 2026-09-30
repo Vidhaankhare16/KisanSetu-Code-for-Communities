@@ -40,7 +40,9 @@ let cached: Env | undefined;
 
 export function env(): Env {
   if (!cached) {
-    const parsed = EnvSchema.safeParse(process.env);
+    // A variable set to "" (e.g. `GEMINI_API_KEY=` copied from .env.example) means "not set".
+    const raw = Object.fromEntries(Object.entries(process.env).filter(([, v]) => v !== undefined && v.trim() !== ""));
+    const parsed = EnvSchema.safeParse(raw);
     if (!parsed.success) {
       throw new Error(`Invalid environment configuration: ${z.prettifyError(parsed.error)}`);
     }

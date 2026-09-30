@@ -39,6 +39,22 @@ test("scheme checker explains eligibility", async ({ page }) => {
   await expect(page.getByText("Landholding farmer family.")).toBeVisible();
 });
 
+test("state dashboard renders the district outlook and model registry", async ({ page }) => {
+  await page.goto("/network");
+  await expect(page.getByRole("heading", { name: "Rabi outlook by district" })).toBeVisible();
+  await expect(page.getByRole("cell", { name: /Ludhiana/ })).toBeVisible();
+  await expect(page.getByRole("heading", { name: "Shared crop models" })).toBeVisible();
+});
+
+test("every page renders in Hindi", async ({ page, context, baseURL }) => {
+  await context.addCookies([{ name: "ks_lang", value: "hi", url: baseURL! }]);
+  for (const path of ["/", "/plan", "/simulate", "/doctor", "/mitra", "/schemes", "/network", "/developers"]) {
+    const res = await page.goto(path);
+    expect(res?.status(), path).toBe(200);
+    await expect(page.locator("html")).toHaveAttribute("lang", "hi");
+  }
+});
+
 test("public API publishes its OpenAPI contract and model registry", async ({ request }) => {
   const spec = await request.get("/api/v1/openapi.json");
   expect(spec.ok()).toBe(true);

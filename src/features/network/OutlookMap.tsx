@@ -5,37 +5,12 @@ import type { CropCategory } from "@/contracts/simulation";
 import type { OutlookDistrict } from "@/contracts/network";
 import { useI18n } from "@/i18n/client";
 import { inr } from "@/lib/format";
+import { cropColor } from "./cropColors";
 
 const LON = [67, 98] as const;
 const LAT = [6, 37] as const;
 const W = 620;
 const H = 640;
-
-const CATEGORY_COLOR: Record<CropCategory, string> = {
-  cereal: "var(--color-leaf-deep)",
-  millet: "var(--color-leaf)",
-  pulse: "var(--color-soil)",
-  oilseed: "var(--color-sun)",
-  cash: "var(--color-water)",
-  vegetable: "var(--color-alert)",
-  fodder: "var(--color-ink-faint)",
-};
-
-/** Distinct shades within each crop family, so the most common winners stay tellable apart. */
-const CROP_COLOR: Record<string, string> = {
-  mustard: "#d99a0b",
-  sunflower: "#c2570c",
-  groundnut: "#a16207",
-  chickpea: "#8a5a36",
-  lentil: "#c08a5a",
-  wheat: "#1e7a4c",
-  barley: "#0f5534",
-  jowar: "#5b8c3a",
-};
-
-export function cropColor(cropId: string, category: CropCategory | undefined): string {
-  return CROP_COLOR[cropId] ?? CATEGORY_COLOR[category ?? "cereal"];
-}
 
 const project = (lat: number, lon: number) => ({
   x: ((lon - LON[0]) / (LON[1] - LON[0])) * W,

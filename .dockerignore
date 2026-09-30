@@ -1,0 +1,13 @@
+.git
+.next
+node_modules
+coverage
+screenshots
+test-results
+playwright-report
+simulator-source
+.env*
+!.env.example
+*.log
+Dockerfile
+.dockerignore

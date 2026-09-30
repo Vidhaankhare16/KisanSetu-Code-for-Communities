@@ -45,3 +45,8 @@ next-env.d.ts
 
 # local AI Studio source drop (integrated into src/features/simulator)
 /simulator-source/
+
+# test artefacts
+/test-results/
+/playwright-report/
+/screenshots/
