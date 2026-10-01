@@ -75,8 +75,10 @@ export function FieldSearch({ onPick, size = "md", autoFocus, className }: Field
   const tall = size === "lg" ? "h-14 text-lg" : "h-11 text-[15px]";
 
   return (
-    <div className={cn("relative", className)}>
-      <div className="flex flex-col gap-2 sm:flex-row">
+    // Laid out by the space it is given (a container query), not the screen: narrow form columns
+    // stack the search and the location button; wide ones put them side by side.
+    <div className={cn("@container relative", className)}>
+      <div className="flex flex-col gap-2 @md:flex-row">
         <div className="relative flex-1">
           <Search className="pointer-events-none absolute top-1/2 left-3 size-5 -translate-y-1/2 text-ink-faint" aria-hidden />
           <input
@@ -114,8 +116,9 @@ export function FieldSearch({ onPick, size = "md", autoFocus, className }: Field
           type="button"
           onClick={locate}
           className={cn(
-            "inline-flex items-center justify-center gap-2 rounded-control border border-line-strong bg-surface px-4 font-medium text-ink hover:border-ink-soft",
-            tall,
+            "inline-flex items-center justify-center gap-2 rounded-control border border-line-strong bg-surface px-4 py-1.5 text-center leading-tight font-medium text-ink hover:border-ink-soft",
+            // Grows instead of overflowing when a long label (e.g. Tamil) wraps.
+            size === "lg" ? "min-h-14 text-lg" : "min-h-11 text-[15px]",
           )}
         >
           <LocateFixed className="size-5 text-water" aria-hidden />
@@ -131,7 +134,7 @@ export function FieldSearch({ onPick, size = "md", autoFocus, className }: Field
         <ul
           id={listId}
           role="listbox"
-          className="absolute z-30 mt-[-1.25rem] w-full overflow-hidden rounded-control border border-line bg-surface shadow-lg sm:w-[calc(100%-11rem)]"
+          className="absolute z-30 mt-[-1.25rem] w-full overflow-hidden rounded-control border border-line bg-surface shadow-lg @md:w-[calc(100%-11rem)]"
         >
           {visibleResults.map((p, i) => (
             <li
