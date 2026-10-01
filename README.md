@@ -129,11 +129,14 @@ limitations: [docs/MODEL.md](docs/MODEL.md).
 
 ```bash
 npm install
-cp .env.example .env.local        # optional: add GEMINI_API_KEY for the AI features
+cp .env.example .env.local        # optional: GEMINI_API_KEY, or Vertex AI (below), for the AI features
 npm run dev                       # http://localhost:3000
 ```
 
 Everything except the Gemini features works with zero configuration (in-memory storage, open data).
+To use Gemini on Vertex AI locally (billed to a GCP project, no API key), sign in once with
+`gcloud auth application-default login` and set `GOOGLE_GENAI_USE_VERTEXAI=true`,
+`GOOGLE_CLOUD_PROJECT` and `GOOGLE_CLOUD_LOCATION=global` in `.env.local`.
 
 ```bash
 npm run check          # format check + type-check + lint + unit tests
