@@ -28,9 +28,9 @@
   --color-alert: #b8403a;
   --color-alert-soft: #f7e0de;
 
-  --font-sans: var(--font-anek-latin), var(--font-anek-devanagari), var(--font-anek-bangla), var(--font-anek-tamil),
-    var(--font-anek-telugu), var(--font-anek-kannada), var(--font-anek-malayalam), var(--font-anek-gujarati),
-    var(--font-anek-gurmukhi), var(--font-anek-odia), system-ui, sans-serif;
+  --font-sans:
+    var(--font-anek-latin), var(--font-anek-devanagari), var(--font-anek-bangla), var(--font-anek-tamil), var(--font-anek-telugu), var(--font-anek-kannada),
+    var(--font-anek-malayalam), var(--font-anek-gujarati), var(--font-anek-gurmukhi), var(--font-anek-odia), system-ui, sans-serif;
 
   --radius-control: 0.5rem;
   --radius-panel: 0.875rem;
@@ -81,6 +81,29 @@
 
 @utility tabular {
   font-variant-numeric: tabular-nums;
+}
+
+/* Crops in the simulator sway gently in the breeze, pivoting at ground level. */
+.plant-sway {
+  transform-box: fill-box;
+  transform-origin: 50% 100%;
+  animation: plant-sway 4.6s ease-in-out infinite;
+}
+g:nth-child(3n) > .plant-sway {
+  animation-duration: 5.4s;
+  animation-delay: -1.2s;
+}
+g:nth-child(3n + 1) > .plant-sway {
+  animation-delay: -2.5s;
+}
+@keyframes plant-sway {
+  0%,
+  100% {
+    transform: rotate(-1.4deg);
+  }
+  50% {
+    transform: rotate(1.6deg);
+  }
 }
 
 /* The landing season ribbon draws itself once, left to right — the page's single orchestrated motion. */
