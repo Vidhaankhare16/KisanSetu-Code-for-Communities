@@ -24,6 +24,8 @@ const EnvSchema = z.object({
   GEMINI_TTS_MODEL: z.string().default("gemini-3.8-flash-tts"),
   /** `firestore` persists shared network data; `memory` keeps it in-process. */
   DATA_BACKEND: z.enum(["memory", "firestore"]).default("memory"),
+  /** Firestore database ID, so KisanSetu can keep its own database in a shared project. */
+  FIRESTORE_DATABASE: z.string().default("(default)"),
   /** Number of historical years in the weather ensemble. */
   ENSEMBLE_YEARS: z.coerce.number().int().min(3).max(20).default(10),
   /** How long a request waits for SoilGrids before using the regional soil default. */

@@ -16,8 +16,8 @@ export class FirestoreNetworkRepository implements NetworkRepository {
   readonly backend = "firestore" as const;
   private readonly db: Firestore;
 
-  constructor(projectId?: string) {
-    this.db = new Firestore({ projectId, ignoreUndefinedProperties: true });
+  constructor(projectId?: string, databaseId = "(default)") {
+    this.db = new Firestore({ projectId, databaseId, ignoreUndefinedProperties: true });
   }
 
   async saveAdvisory(record: AdvisoryRecord): Promise<void> {

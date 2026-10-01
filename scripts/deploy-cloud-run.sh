@@ -1,26 +1,30 @@
 #!/usr/bin/env bash
 # Deploys KisanSetu to Google Cloud Run with Vertex AI (Gemini) and Firestore.
 #
-#   PROJECT_ID=my-project REGION=asia-south1 ./scripts/deploy-cloud-run.sh
+#   PROJECT_ID=my-project ./scripts/deploy-cloud-run.sh
+#   PROJECT_ID=my-project REGION=us-central1 SERVICE=kisan-setu FIRESTORE_DATABASE=kisansetu ./scripts/deploy-cloud-run.sh
 #
 # Prerequisites: gcloud CLI logged in, billing enabled on the project.
 set -euo pipefail
 
 PROJECT_ID="${PROJECT_ID:?Set PROJECT_ID}"
-REGION="${REGION:-asia-south1}"          # Mumbai: lowest latency for Indian users
+REGION="${REGION:-asia-south1}"                # Mumbai: lowest latency for Indian users
 SERVICE="${SERVICE:-kisansetu}"
+FIRESTORE_DATABASE="${FIRESTORE_DATABASE:-(default)}"
+MIN_INSTANCES="${MIN_INSTANCES:-0}"            # 1 removes cold starts, at the cost of an always-on instance
 SA_NAME="${SERVICE}-run"
 SA_EMAIL="${SA_NAME}@${PROJECT_ID}.iam.gserviceaccount.com"
 
-gcloud config set project "$PROJECT_ID" >/dev/null
+# Scope the project to this script rather than changing the user's gcloud defaults.
+export CLOUDSDK_CORE_PROJECT="$PROJECT_ID"
 
 echo "› Enabling APIs"
 gcloud services enable run.googleapis.com cloudbuild.googleapis.com artifactregistry.googleapis.com \
   aiplatform.googleapis.com firestore.googleapis.com
 
-echo "› Firestore (Native mode) database"
-gcloud firestore databases describe --database="(default)" >/dev/null 2>&1 ||
-  gcloud firestore databases create --location="$REGION" --type=firestore-native
+echo "› Firestore (Native mode) database: $FIRESTORE_DATABASE"
+gcloud firestore databases describe --database="$FIRESTORE_DATABASE" >/dev/null 2>&1 ||
+  gcloud firestore databases create --database="$FIRESTORE_DATABASE" --location="$REGION" --type=firestore-native
 
 echo "› Least-privilege service account"
 gcloud iam service-accounts describe "$SA_EMAIL" >/dev/null 2>&1 ||
@@ -37,9 +41,9 @@ gcloud run deploy "$SERVICE" \
   --allow-unauthenticated \
   --port 8080 \
   --cpu 1 --memory 1Gi \
-  --min-instances 1 --max-instances 10 \
+  --min-instances "$MIN_INSTANCES" --max-instances 10 \
   --concurrency 40 --timeout 120 \
-  --set-env-vars "GOOGLE_GENAI_USE_VERTEXAI=true,GOOGLE_CLOUD_PROJECT=$PROJECT_ID,GOOGLE_CLOUD_LOCATION=global,DATA_BACKEND=firestore,LOG_LEVEL=info"
+  --set-env-vars "^@^GOOGLE_GENAI_USE_VERTEXAI=true@GOOGLE_CLOUD_PROJECT=$PROJECT_ID@GOOGLE_CLOUD_LOCATION=global@DATA_BACKEND=firestore@FIRESTORE_DATABASE=$FIRESTORE_DATABASE@LOG_LEVEL=info"
 
 URL="$(gcloud run services describe "$SERVICE" --region "$REGION" --format='value(status.url)')"
 echo "› Deployed: $URL"

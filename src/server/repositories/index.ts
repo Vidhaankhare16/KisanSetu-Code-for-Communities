@@ -12,7 +12,7 @@ export async function networkRepository(): Promise<NetworkRepository> {
     const e = env();
     if (e.DATA_BACKEND === "firestore") {
       const { FirestoreNetworkRepository } = await import("./firestore");
-      repo = new FirestoreNetworkRepository(e.GOOGLE_CLOUD_PROJECT);
+      repo = new FirestoreNetworkRepository(e.GOOGLE_CLOUD_PROJECT, e.FIRESTORE_DATABASE);
     } else {
       repo = new MemoryNetworkRepository();
     }
