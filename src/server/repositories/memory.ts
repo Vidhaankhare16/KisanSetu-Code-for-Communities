@@ -61,9 +61,7 @@ export function summarise(advisories: readonly AdvisoryRecord[], diagnoses: read
   return {
     advisories: advisories.length,
     diagnoses: diagnoses.length,
-    byState: [...states.entries()]
-      .map(([state, v]) => ({ state, ...v }))
-      .sort((a, b) => b.advisories + b.diagnoses - (a.advisories + a.diagnoses)),
+    byState: [...states.entries()].map(([state, v]) => ({ state, ...v })).sort((a, b) => b.advisories + b.diagnoses - (a.advisories + a.diagnoses)),
     topCrops: [...crops.entries()].map(([cropId, count]) => ({ cropId, count })).sort((a, b) => b.count - a.count),
   };
 }

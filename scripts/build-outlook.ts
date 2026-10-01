@@ -78,9 +78,7 @@ async function main() {
         const [place] = (await searchPlaces(`${district}`, 10)).filter((p) => p.state === state);
         if (!place) throw new Error("not geocoded");
         const water = ASSURED_IRRIGATION_STATES.has(state) ? "assured" : "limited";
-        const rec = await recommendCrops(
-          RecommendRequestSchema.parse({ place: { ...place, district, state }, sowingDate, water, advise: false }),
-        );
+        const rec = await recommendCrops(RecommendRequestSchema.parse({ place: { ...place, district, state }, sowingDate, water, advise: false }));
         results.push({
           district,
           state,
@@ -101,7 +99,12 @@ async function main() {
             regenerativeScore: r.outcome.regenerativeScore,
           })),
         });
-        console.log(`✓ ${district}, ${state}: ${rec.ranking.slice(0, 3).map((r) => r.crop.id).join(", ")}`);
+        console.log(
+          `✓ ${district}, ${state}: ${rec.ranking
+            .slice(0, 3)
+            .map((r) => r.crop.id)
+            .join(", ")}`,
+        );
       } catch (err) {
         console.warn(`✗ ${district}, ${state}: ${err instanceof Error ? err.message : err}`);
       }

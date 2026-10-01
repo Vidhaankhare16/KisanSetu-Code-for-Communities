@@ -4,13 +4,7 @@
  */
 import { z } from "zod";
 import { AdvisoryBriefSchema, DiagnosisSchema, SoilCardExtractionSchema } from "./ai";
-import {
-  FarmerPrioritySchema,
-  FarmProfileSchema,
-  LangSchema,
-  PlaceSchema,
-  SoilTextureSchema,
-} from "./farm";
+import { FarmerPrioritySchema, FarmProfileSchema, LangSchema, PlaceSchema, SoilTextureSchema } from "./farm";
 import { EnsembleSummarySchema, SimCropSchema, SimOutcomeSchema, SimulationResultSchema } from "./simulation";
 
 export const ApiErrorSchema = z.object({
@@ -101,9 +95,7 @@ export type SimulateInput = z.input<typeof SimulateRequestSchema>;
 
 const RegenerativeSchema = z.object({
   score: z.number(),
-  factors: z.array(
-    z.object({ key: z.string(), label: z.string(), points: z.number(), max: z.number(), note: z.string() }),
-  ),
+  factors: z.array(z.object({ key: z.string(), label: z.string(), points: z.number(), max: z.number(), note: z.string() })),
 });
 
 export const SimulationAnalysisSchema = z.object({
@@ -238,9 +230,7 @@ export const ChatMessageSchema = z.object({
 export const ChatRequestSchema = z
   .object({
     messages: z.array(ChatMessageSchema).max(20).default([]),
-    audio: z
-      .object({ base64: z.string().max(4_000_000), mimeType: z.enum(["audio/wav", "audio/mpeg", "audio/ogg", "audio/webm"]) })
-      .optional(),
+    audio: z.object({ base64: z.string().max(4_000_000), mimeType: z.enum(["audio/wav", "audio/mpeg", "audio/ogg", "audio/webm"]) }).optional(),
     place: PlaceSchema.optional(),
     lang: LangSchema.default("en"),
   })

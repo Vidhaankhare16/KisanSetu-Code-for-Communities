@@ -13,7 +13,12 @@ export interface StateInfo {
 }
 
 export const STATES: readonly StateInfo[] = [
-  { code: "AP", name: "Andhra Pradesh", dominantTexture: "sandy_clay_loam", soilNote: "Red loams inland, black soils in the west, deltaic alluvium on the coast" },
+  {
+    code: "AP",
+    name: "Andhra Pradesh",
+    dominantTexture: "sandy_clay_loam",
+    soilNote: "Red loams inland, black soils in the west, deltaic alluvium on the coast",
+  },
   { code: "AR", name: "Arunachal Pradesh", dominantTexture: "loam", soilNote: "Forest and hill soils" },
   { code: "AS", name: "Assam", dominantTexture: "silt_loam", soilNote: "Brahmaputra alluvium" },
   { code: "BR", name: "Bihar", dominantTexture: "silt_loam", soilNote: "Gangetic alluvium" },

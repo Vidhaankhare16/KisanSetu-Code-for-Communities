@@ -19,5 +19,7 @@ export function mockFetch(...responders: Responder[]) {
   return fn;
 }
 
-export const whenHost = (host: string, body: unknown, status = 200): Responder => (url) =>
-  url.hostname === host ? { body, status } : undefined;
+export const whenHost =
+  (host: string, body: unknown, status = 200): Responder =>
+  (url) =>
+    url.hostname === host ? { body, status } : undefined;

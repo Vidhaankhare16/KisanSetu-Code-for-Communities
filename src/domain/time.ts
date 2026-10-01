@@ -47,11 +47,7 @@ export function isLeapYear(year: number): boolean {
  * Signed distance in days from `iso` to a month/day window (0 when inside).
  * Windows may wrap the new year (e.g. 15 Dec → 31 Jan).
  */
-export function distanceToWindow(
-  iso: string,
-  from: { month: number; day: number },
-  to: { month: number; day: number },
-): number {
+export function distanceToWindow(iso: string, from: { month: number; day: number }, to: { month: number; day: number }): number {
   const date = parseIsoDate(iso);
   const year = date.getUTCFullYear();
   let best = Number.POSITIVE_INFINITY;

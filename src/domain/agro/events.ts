@@ -30,10 +30,16 @@ export function buildEvents({ crop, run, weather, water, soilCard }: EventContex
   const push = (day: number, type: SimEvent["type"], severity: Severity, title: string, detail: string, action?: string) =>
     events.push({ day, date: days[day]!.date, type, severity, title, detail, ...(action ? { action } : {}) });
 
-  push(0, "sowing", "info", `Sowing ${crop.name}`, `${crop.stageNotes[0]} Expected harvest around ${formatShortDate(days.at(-1)!.date)}.`,
+  push(
+    0,
+    "sowing",
+    "info",
+    `Sowing ${crop.name}`,
+    `${crop.stageNotes[0]} Expected harvest around ${formatShortDate(days.at(-1)!.date)}.`,
     crop.nitrogenFixing
       ? "Treat seed with Rhizobium and PSB culture; apply the full phosphorus dose at sowing."
-      : "Apply the basal dose (full P and K, one-third of N) at sowing.");
+      : "Apply the basal dose (full P and K, one-third of N) at sowing.",
+  );
 
   for (const stage of run.stages.slice(1)) {
     push(stage.startDay, "stage_change", "info", stage.label, stage.description);
@@ -110,9 +116,7 @@ export function buildEvents({ crop, run, weather, water, soilCard }: EventContex
         peakDay.tMaxC - crop.heatStressC >= 3 ? "critical" : "warning",
         `Heat stress — up to ${Math.round(peakDay.tMaxC)}°C`,
         `Temperatures above ${crop.heatStressC}°C during ${days[start]!.stage === "mid" ? "flowering" : "grain filling"} reduce ${crop.category === "vegetable" ? "fruit set" : "grain weight"}.`,
-        water === "rainfed"
-          ? "Spray 0.5% KNO3 in the evening to reduce heat damage."
-          : "Give a light evening irrigation to cool the canopy.",
+        water === "rainfed" ? "Spray 0.5% KNO3 in the evening to reduce heat damage." : "Give a light evening irrigation to cool the canopy.",
       ),
     (d) => d.tMaxC,
   );

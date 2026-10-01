@@ -52,7 +52,11 @@ const FieldContext = createContext<FieldValue | null>(null);
 
 export function FieldProvider({ children }: { children: ReactNode }) {
   const raw = useSyncExternalStore(subscribe, read, () => null);
-  const ready = useSyncExternalStore(noopSubscribe, () => true, () => false);
+  const ready = useSyncExternalStore(
+    noopSubscribe,
+    () => true,
+    () => false,
+  );
   const place = useMemo<Place | null>(() => {
     if (!raw) return null;
     try {

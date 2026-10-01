@@ -5,13 +5,7 @@
  * the animation and the headline numbers always agree.
  */
 import type { Place } from "@/contracts/farm";
-import type {
-  EnsembleSummary,
-  Percentiles,
-  SimDataSource,
-  SimulationResult,
-  Verdict,
-} from "@/contracts/simulation";
+import type { EnsembleSummary, Percentiles, SimDataSource, SimulationResult, Verdict } from "@/contracts/simulation";
 import type { CropModel } from "@/domain/crops/types";
 import { stableHash } from "@/domain/hash";
 import { computeEconomics, type Economics, kgPerHaToQuintalPerAcre, priceMultipliers } from "./economics";
@@ -78,10 +72,7 @@ function percentiles(values: readonly number[]): Percentiles {
  * year-to-year yield volatility, and how often the season brings damaging dry spells or
  * temperature extremes.
  */
-export function riskScore(
-  members: readonly EnsembleMember[],
-  profitSamples: readonly number[] = members.map((m) => m.netProfitPerAcreInr),
-): number {
+export function riskScore(members: readonly EnsembleMember[], profitSamples: readonly number[] = members.map((m) => m.netProfitPerAcreInr)): number {
   if (members.length === 0) return 100;
   const n = members.length;
   const probLoss = profitSamples.filter((p) => p < 0).length / Math.max(1, profitSamples.length);
@@ -142,9 +133,7 @@ export function runEnsemble(req: EnsembleRequest): EnsembleResult {
 
   // Profit uncertainty = weather years × low / reference / high price scenarios.
   const profitSamples = runs.flatMap(({ run }) =>
-    priceMultipliers(crop).map(
-      (m) => computeEconomics(crop, run.expectedYieldKgHa, run.totals.irrigationGrossMm, field.soilCard, m).netProfitPerAcreInr,
-    ),
+    priceMultipliers(crop).map((m) => computeEconomics(crop, run.expectedYieldKgHa, run.totals.irrigationGrossMm, field.soilCard, m).netProfitPerAcreInr),
   );
   const risk = riskScore(members, profitSamples);
   const regenerative = assessRegenerative(crop, rep.run.totals.irrigationGrossMm, req.previousCropId);

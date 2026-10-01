@@ -38,11 +38,9 @@ Today is ${today}. ${req.place ? `The farmer's field: ${JSON.stringify(req.place
 }
 
 async function transcribe(audio: NonNullable<ChatRequest["audio"]>): Promise<string> {
-  return generateText(
-    "mitra.transcribe",
-    "Transcribe the farmer's speech exactly, in the original language and script. Output only the transcript.",
-    [{ inlineData: { mimeType: audio.mimeType, data: audio.base64 } }],
-  );
+  return generateText("mitra.transcribe", "Transcribe the farmer's speech exactly, in the original language and script. Output only the transcript.", [
+    { inlineData: { mimeType: audio.mimeType, data: audio.base64 } },
+  ]);
 }
 
 export async function chatWithKisanMitra(req: ChatRequest): Promise<ChatResponse> {

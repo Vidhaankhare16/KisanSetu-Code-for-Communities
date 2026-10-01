@@ -1,12 +1,6 @@
 /** Typed application errors, mapped to HTTP responses by `apiHandler`. */
 
-export type ErrorCode =
-  | "bad_request"
-  | "not_found"
-  | "rate_limited"
-  | "upstream_unavailable"
-  | "ai_unavailable"
-  | "internal";
+export type ErrorCode = "bad_request" | "not_found" | "rate_limited" | "upstream_unavailable" | "ai_unavailable" | "internal";
 
 const STATUS: Record<ErrorCode, number> = {
   bad_request: 400,

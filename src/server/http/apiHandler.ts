@@ -111,8 +111,7 @@ function decorate(response: Response, requestId: string) {
 }
 
 export function toErrorResponse(err: unknown, requestId: string): Response {
-  const appError =
-    err instanceof AppError ? err : new AppError("internal", "Something went wrong. Please try again.");
+  const appError = err instanceof AppError ? err : new AppError("internal", "Something went wrong. Please try again.");
   const body = { error: { code: appError.code, message: appError.message, details: appError.details, requestId } };
   const response = Response.json(body, { status: appError.status });
   decorate(response, requestId);

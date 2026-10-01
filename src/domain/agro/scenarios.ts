@@ -78,9 +78,7 @@ export function assembleScenarios(input: ScenarioAssemblyInput): WeatherScenario
       id: `y${year}`,
       year,
       days,
-      ...(input.useHistoricalInitialMoisture && wetness !== undefined
-        ? { initialMoistureFraction: wetnessToAvailableFraction(wetness, input.texture) }
-        : {}),
+      ...(input.useHistoricalInitialMoisture && wetness !== undefined ? { initialMoistureFraction: wetnessToAvailableFraction(wetness, input.texture) } : {}),
     });
   }
   return scenarios;

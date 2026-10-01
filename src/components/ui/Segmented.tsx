@@ -29,19 +29,10 @@ export function Segmented<T extends string>({ label, value, options, onChange, c
             key={o.value}
             className={cn(
               "relative cursor-pointer rounded-control border px-3 py-2 text-sm transition-colors has-[:focus-visible]:outline has-[:focus-visible]:outline-3 has-[:focus-visible]:outline-water",
-              value === o.value
-                ? "border-leaf-deep bg-leaf-soft text-leaf-deep"
-                : "border-line bg-surface text-ink hover:border-line-strong",
+              value === o.value ? "border-leaf-deep bg-leaf-soft text-leaf-deep" : "border-line bg-surface text-ink hover:border-line-strong",
             )}
           >
-            <input
-              type="radio"
-              name={name}
-              value={o.value}
-              checked={value === o.value}
-              onChange={() => onChange(o.value)}
-              className="sr-only"
-            />
+            <input type="radio" name={name} value={o.value} checked={value === o.value} onChange={() => onChange(o.value)} className="sr-only" />
             <span className="font-medium">{o.label}</span>
             {o.hint ? <span className="block text-xs text-ink-soft">{o.hint}</span> : null}
           </label>

@@ -10,12 +10,7 @@ export const metadata: Metadata = {
   description: "Versioned, documented API for crop simulation, recommendation, diagnosis and the shared crop-model registry.",
 };
 
-const PRINCIPLES: MessageKey[] = [
-  "developers.principle.open",
-  "developers.principle.data",
-  "developers.principle.privacy",
-  "developers.principle.federate",
-];
+const PRINCIPLES: MessageKey[] = ["developers.principle.open", "developers.principle.data", "developers.principle.privacy", "developers.principle.federate"];
 
 const EXAMPLE = `curl -X POST https://<your-host>/api/v1/simulate \\
   -H "Content-Type: application/json" \\

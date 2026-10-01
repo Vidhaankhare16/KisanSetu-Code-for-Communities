@@ -105,7 +105,10 @@ function toForecast(res: z.infer<typeof ForecastResponse>): Forecast {
   });
 
   // Soil moisture "now": the first hourly slot at or after the current time.
-  const nowIndex = Math.max(0, res.hourly.time.findIndex((t) => t >= (res.current?.time ?? "")));
+  const nowIndex = Math.max(
+    0,
+    res.hourly.time.findIndex((t) => t >= (res.current?.time ?? "")),
+  );
   const shallow = res.hourly.soil_moisture_9_to_27cm[nowIndex];
   const deep = res.hourly.soil_moisture_27_to_81cm[nowIndex];
   // Thickness-weighted mean of the two layers (18 cm and 54 cm).

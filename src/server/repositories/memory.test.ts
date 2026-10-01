@@ -21,7 +21,16 @@ describe("memory network repository", () => {
     await repo.saveAdvisory(advisory("a", "Uttar Pradesh", ["mustard", "chickpea"]));
     await repo.saveAdvisory(advisory("b", "Uttar Pradesh", ["mustard"]));
     await repo.saveAdvisory(advisory("c", "Rajasthan", ["chickpea"]));
-    await repo.saveDiagnosis({ id: "d", createdAt: "2026-10-02T00:00:00Z", state: "Rajasthan", crop: "Mustard", issue: "Aphid", issueType: "pest", severity: "medium", confidence: 0.8 });
+    await repo.saveDiagnosis({
+      id: "d",
+      createdAt: "2026-10-02T00:00:00Z",
+      state: "Rajasthan",
+      crop: "Mustard",
+      issue: "Aphid",
+      issueType: "pest",
+      severity: "medium",
+      confidence: 0.8,
+    });
 
     const stats = await repo.stats();
     expect(stats.advisories).toBe(3);

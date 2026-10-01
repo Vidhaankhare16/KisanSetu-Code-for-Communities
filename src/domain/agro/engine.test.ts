@@ -1,15 +1,7 @@
 import { describe, expect, it } from "vitest";
 import { syntheticScenario } from "../../../tests/helpers/weather";
 import { requireCrop } from "@/domain/crops/catalog";
-import {
-  cropCoefficient,
-  effectiveRainfall,
-  findDrySpells,
-  grossIrrigation,
-  simulateSeason,
-  thermalTimeToMaturity,
-  type FieldConditions,
-} from "./engine";
+import { cropCoefficient, effectiveRainfall, findDrySpells, grossIrrigation, simulateSeason, thermalTimeToMaturity, type FieldConditions } from "./engine";
 
 const wheat = requireCrop("wheat");
 const field = (overrides: Partial<FieldConditions> = {}): FieldConditions => ({

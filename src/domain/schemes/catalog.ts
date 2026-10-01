@@ -103,10 +103,7 @@ export const SCHEMES: readonly Scheme[] = [
     name: "PMKSY — Per Drop More Crop (drip & sprinkler)",
     ministry: "Ministry of Agriculture & Farmers Welfare",
     benefit: "55% subsidy on drip/sprinkler systems for small & marginal farmers, 45% for others.",
-    details: [
-      "Drip cuts irrigation water by 30-50% and usually raises yield.",
-      "Many states top up the central subsidy.",
-    ],
+    details: ["Drip cuts irrigation water by 30-50% and usually raises yield.", "Many states top up the central subsidy."],
     howToApply: "Apply on your state's micro-irrigation portal with land papers and a supplier quotation.",
     url: "https://pmksy.gov.in",
     regenerative: true,
@@ -152,10 +149,7 @@ export const SCHEMES: readonly Scheme[] = [
     name: "National Mission on Natural Farming",
     ministry: "Ministry of Agriculture & Farmers Welfare",
     benefit: "Training by Krishi Sakhis, bio-input resource centres and incentives for natural farming in clusters.",
-    details: [
-      "Chemical-free farming with on-farm inputs (jeevamrit, beejamrit, mulching).",
-      "Delivered through clusters with community resource persons.",
-    ],
+    details: ["Chemical-free farming with on-farm inputs (jeevamrit, beejamrit, mulching).", "Delivered through clusters with community resource persons."],
     howToApply: "Contact the block agriculture office or KVK to join a natural-farming cluster.",
     url: "https://naturalfarming.dac.gov.in",
     regenerative: true,
@@ -227,7 +221,5 @@ export interface SchemeMatch {
 }
 
 export function evaluateSchemes(profile: EligibilityProfile): SchemeMatch[] {
-  return SCHEMES.map(({ check, ...scheme }) => ({ scheme, result: check(profile) })).sort(
-    (a, b) => Number(b.result.eligible) - Number(a.result.eligible),
-  );
+  return SCHEMES.map(({ check, ...scheme }) => ({ scheme, result: check(profile) })).sort((a, b) => Number(b.result.eligible) - Number(a.result.eligible));
 }

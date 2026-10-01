@@ -59,12 +59,7 @@ export async function prepareRun(profile: FarmProfile): Promise<PreparedRun> {
 
   const currentYear = Number(context.today.slice(0, 4));
   const years = env().ENSEMBLE_YEARS;
-  const history = await getDailyHistory(
-    profile.place.lat,
-    profile.place.lon,
-    currentYear - years - 2,
-    addDays(context.today, -HISTORY_LAG_DAYS),
-  );
+  const history = await getDailyHistory(profile.place.lat, profile.place.lon, currentYear - years - 2, addDays(context.today, -HISTORY_LAG_DAYS));
 
   const scenarios = assembleScenarios({
     sowingDate: profile.sowingDate,

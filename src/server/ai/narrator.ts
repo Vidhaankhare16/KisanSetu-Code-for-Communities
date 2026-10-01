@@ -11,11 +11,7 @@ import { logger } from "@/server/logger";
 import { generateStructured } from "./gemini";
 import { GROUNDING_RULES, languageInstruction, PERSONA } from "./prompts";
 
-export async function narrateSimulation(
-  simulation: SimulationResult,
-  analysis: SimulationAnalysis,
-  lang: Lang,
-): Promise<SimulationResult> {
+export async function narrateSimulation(simulation: SimulationResult, analysis: SimulationAnalysis, lang: Lang): Promise<SimulationResult> {
   const data = {
     crop: `${simulation.crop.name} (${simulation.crop.localName})`,
     place: simulation.location,

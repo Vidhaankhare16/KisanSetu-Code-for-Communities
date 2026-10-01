@@ -125,7 +125,7 @@ export function cropCoefficient(crop: CropModel, progress: number): number {
   if (progress <= fIni + fDev) return ini + ((progress - fIni) / fDev) * (mid - ini);
   if (progress <= fIni + fDev + fMid) return mid;
   const fLate = 1 - fIni - fDev - fMid;
-  return mid + (Math.min(1, (progress - fIni - fDev - fMid) / fLate) * (end - mid));
+  return mid + Math.min(1, (progress - fIni - fDev - fMid) / fLate) * (end - mid);
 }
 
 export function stageAt(crop: CropModel, progress: number): StageKey {
@@ -207,11 +207,7 @@ function irrigationAllowed(water: WaterAccess, stage: StageKey, used: number): b
   return used < LIMITED_IRRIGATIONS && (stage === "development" || stage === "mid");
 }
 
-export function simulateSeason(
-  crop: CropModel,
-  field: FieldConditions,
-  scenario: WeatherScenario,
-): SeasonRun {
+export function simulateSeason(crop: CropModel, field: FieldConditions, scenario: WeatherScenario): SeasonRun {
   const awcPerMetre = availableWaterPerMetre(field.texture);
   const gddRequired = thermalTimeToMaturity(crop);
   const maxDays = Math.min(scenario.days.length, Math.ceil(crop.durationDays * 1.4));
@@ -268,8 +264,7 @@ export function simulateSeason(
     const stage = stageAt(crop, progress);
 
     // Roots deepen through the initial and development stages.
-    const newRootDepth =
-      MIN_ROOT_DEPTH_M + (crop.rootDepthM - MIN_ROOT_DEPTH_M) * Math.min(1, progress / (fIni + fDev));
+    const newRootDepth = MIN_ROOT_DEPTH_M + (crop.rootDepthM - MIN_ROOT_DEPTH_M) * Math.min(1, progress / (fIni + fDev));
     if (newRootDepth > rootDepth) {
       const addedTaw = awcPerMetre * (newRootDepth - rootDepth);
       depletion += addedTaw * (1 - deepSoilFraction);
@@ -286,12 +281,7 @@ export function simulateSeason(
     let irrigationNet = d === 0 ? preSowingNet : 0;
     const nearMaturity = progress > 0.92;
     const rainExpected = w.rain >= 10;
-    if (
-      !nearMaturity &&
-      !rainExpected &&
-      depletion >= raw &&
-      irrigationAllowed(field.water, stage, irrigationCount)
-    ) {
+    if (!nearMaturity && !rainExpected && depletion >= raw && irrigationAllowed(field.water, stage, irrigationCount)) {
       irrigationNet += depletion;
       depletion = 0;
       irrigationCount++;
@@ -320,8 +310,7 @@ export function simulateSeason(
     if (recentKs.length > 7) recentKs.shift();
     const ks7 = recentKs.reduce((a, b) => a + b, 0) / recentKs.length;
 
-    const growth =
-      potentialBiomass * (growthCurve(progress) - growthCurve(progressBefore)) * ks * temperatureResponse(crop, tMean);
+    const growth = potentialBiomass * (growthCurve(progress) - growthCurve(progressBefore)) * ks * temperatureResponse(crop, tMean);
     biomass += Math.max(0, growth);
 
     stageEtc[stage] += etc;
@@ -374,9 +363,7 @@ export function simulateSeason(
     return acc + STAGE_WATER_WEIGHTS[key] * (1 - stageEta[key] / stageEtc[key]);
   }, 0);
   const growingTemps = [stageTempSum.development, stageTempSum.mid].filter((s) => s.n > 0);
-  const growingMean = growingTemps.length
-    ? growingTemps.reduce((a, s) => a + s.sum, 0) / growingTemps.reduce((a, s) => a + s.n, 0)
-    : crop.temperature.optLow;
+  const growingMean = growingTemps.length ? growingTemps.reduce((a, s) => a + s.sum, 0) / growingTemps.reduce((a, s) => a + s.n, 0) : crop.temperature.optLow;
 
   const yieldFactors: YieldFactors = {
     water: clamp01(1 - crop.ky * waterDeficit),

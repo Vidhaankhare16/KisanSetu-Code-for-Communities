@@ -47,10 +47,7 @@ export const DiagnosisSchema = z.object({
   symptomsSeen: z.array(z.string()).max(5),
   whyThisDiagnosis: z.string().describe("How the visible symptoms and recent weather support the diagnosis."),
   organicTreatment: z.array(z.string()).max(4),
-  chemicalTreatment: z
-    .array(z.string())
-    .max(3)
-    .describe("Registered active ingredient with dose per litre; include safety interval."),
+  chemicalTreatment: z.array(z.string()).max(3).describe("Registered active ingredient with dose per litre; include safety interval."),
   prevention: z.array(z.string()).max(4),
   escalate: z.boolean().describe("True when an extension officer / KVK should inspect the field."),
   escalateReason: z.string().optional(),

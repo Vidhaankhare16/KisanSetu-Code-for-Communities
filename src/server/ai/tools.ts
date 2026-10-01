@@ -130,7 +130,10 @@ export const TOOLS = [
         outcome: s.outcome,
         profitRange: s.ensemble?.netProfitPerAcreInr,
         irrigations: analysis.waterBalance.irrigationCount,
-        keyEvents: s.events.filter((e) => e.type !== "stage_change").slice(0, 8).map((e) => `${e.date}: ${e.title}${e.action ? ` — ${e.action}` : ""}`),
+        keyEvents: s.events
+          .filter((e) => e.type !== "stage_change")
+          .slice(0, 8)
+          .map((e) => `${e.date}: ${e.title}${e.action ? ` — ${e.action}` : ""}`),
       };
     },
     summarise: (a) => `Simulated ${getCrop(a.crop_id)?.name ?? a.crop_id} until harvest`,

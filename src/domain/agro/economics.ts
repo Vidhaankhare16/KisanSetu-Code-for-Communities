@@ -46,13 +46,7 @@ export function priceMultipliers(crop: CropModel): [number, number, number] {
   return [Math.max(0.1, 1 - spread), 1, 1 + spread];
 }
 
-export function computeEconomics(
-  crop: CropModel,
-  yieldKgHa: number,
-  irrigationGrossMm: number,
-  soilCard?: SoilCard,
-  priceMultiplier = 1,
-): Economics {
+export function computeEconomics(crop: CropModel, yieldKgHa: number, irrigationGrossMm: number, soilCard?: SoilCard, priceMultiplier = 1): Economics {
   const yieldQuintalPerAcre = kgPerHaToQuintalPerAcre(yieldKgHa);
   const byproduct = crop.byproductPerAcreInr * Math.min(1, yieldKgHa / crop.potentialYieldKgHa);
   const revenue = yieldQuintalPerAcre * crop.price.perQuintalInr * priceMultiplier + byproduct;

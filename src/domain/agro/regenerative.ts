@@ -31,11 +31,7 @@ const RESILIENCE: Record<CropModel["category"], number> = {
   vegetable: 8,
 };
 
-export function assessRegenerative(
-  crop: CropModel,
-  irrigationGrossMm: number,
-  previousCropId?: string,
-): RegenerativeAssessment {
+export function assessRegenerative(crop: CropModel, irrigationGrossMm: number, previousCropId?: string): RegenerativeAssessment {
   const waterPoints = Math.round(30 * Math.max(0, 1 - irrigationGrossMm / WATER_ZERO_POINTS_MM));
   const factors: RegenerativeFactor[] = [
     {

@@ -8,8 +8,7 @@ import type { DailyWeather } from "./weather";
 
 type Window = readonly Pick<DailyWeather, "tMax" | "tMin" | "rain" | "rhMean">[];
 
-const wetDays = (win: Window, rainMm: number) =>
-  win.filter((d) => d.rain >= rainMm || (d.rhMean ?? 0) >= 80).length;
+const wetDays = (win: Window, rainMm: number) => win.filter((d) => d.rain >= rainMm || (d.rhMean ?? 0) >= 80).length;
 const mean = (xs: number[]) => xs.reduce((a, b) => a + b, 0) / Math.max(1, xs.length);
 
 const RULES: Record<RiskRule, { windowDays: number; test: (win: Window) => boolean }> = {
@@ -29,8 +28,7 @@ const RULES: Record<RiskRule, { windowDays: number; test: (win: Window) => boole
   },
   cool_dry: {
     windowDays: 5,
-    test: (win) =>
-      win.every((d) => d.tMax >= 15 && d.tMax <= 26 && d.tMin >= 4 && d.tMin <= 15 && d.rain < 1),
+    test: (win) => win.every((d) => d.tMax >= 15 && d.tMax <= 26 && d.tMin >= 4 && d.tMin <= 15 && d.rain < 1),
   },
   warm_flowering: {
     windowDays: 3,

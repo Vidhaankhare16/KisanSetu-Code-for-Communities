@@ -19,12 +19,7 @@ export function extraterrestrialRadiation(latDeg: number, dayOfYear: number): nu
   const dr = 1 + 0.033 * Math.cos(((2 * Math.PI) / 365) * dayOfYear); // eq. 23
   const delta = 0.409 * Math.sin(((2 * Math.PI) / 365) * dayOfYear - 1.39); // eq. 24
   const ws = Math.acos(Math.max(-1, Math.min(1, -Math.tan(phi) * Math.tan(delta)))); // eq. 25
-  return (
-    ((24 * 60) / Math.PI) *
-    SOLAR_CONSTANT *
-    dr *
-    (ws * Math.sin(phi) * Math.sin(delta) + Math.cos(phi) * Math.cos(delta) * Math.sin(ws))
-  );
+  return ((24 * 60) / Math.PI) * SOLAR_CONSTANT * dr * (ws * Math.sin(phi) * Math.sin(delta) + Math.cos(phi) * Math.cos(delta) * Math.sin(ws));
 }
 
 export interface PenmanMonteithInput {

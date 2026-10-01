@@ -20,8 +20,7 @@
     "test:e2e": "playwright test",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
-    "check": "npm run typecheck && npm run lint && npm run test",
-    "data:fpo": "python scripts/import_fpo_dataset.py",
+    "check": "npm run format:check && npm run typecheck && npm run lint && npm run test",
     "data:outlook": "tsx --conditions=react-server --env-file-if-exists=.env.local scripts/build-outlook.ts",
     "data:samples": "tsx --conditions=react-server --env-file-if-exists=.env.local scripts/build-samples.ts",
     "i18n:translate": "tsx --conditions=react-server --env-file-if-exists=.env.local scripts/translate-messages.ts"

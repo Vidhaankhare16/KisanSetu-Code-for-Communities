@@ -21,9 +21,6 @@ export const Select = forwardRef<HTMLSelectElement, SelectHTMLAttributes<HTMLSel
   return <select ref={ref} className={cn(control, "h-11 pr-8", className)} {...props} />;
 });
 
-export const TextArea = forwardRef<HTMLTextAreaElement, TextareaHTMLAttributes<HTMLTextAreaElement>>(function TextArea(
-  { className, ...props },
-  ref,
-) {
+export const TextArea = forwardRef<HTMLTextAreaElement, TextareaHTMLAttributes<HTMLTextAreaElement>>(function TextArea({ className, ...props }, ref) {
   return <textarea ref={ref} className={cn(control, "min-h-24 py-2.5", className)} {...props} />;
 });

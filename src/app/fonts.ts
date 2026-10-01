@@ -28,6 +28,4 @@ const gujarati = Anek_Gujarati({ subsets: ["gujarati"], axes: ["wdth"], display:
 const gurmukhi = Anek_Gurmukhi({ subsets: ["gurmukhi"], axes: ["wdth"], display: "swap", preload: false, variable: "--font-anek-gurmukhi" });
 const odia = Anek_Odia({ subsets: ["oriya"], axes: ["wdth"], display: "swap", preload: false, variable: "--font-anek-odia" });
 
-export const fontVariables = [latin, devanagari, bangla, tamil, telugu, kannada, malayalam, gujarati, gurmukhi, odia]
-  .map((f) => f.variable)
-  .join(" ");
+export const fontVariables = [latin, devanagari, bangla, tamil, telugu, kannada, malayalam, gujarati, gurmukhi, odia].map((f) => f.variable).join(" ");

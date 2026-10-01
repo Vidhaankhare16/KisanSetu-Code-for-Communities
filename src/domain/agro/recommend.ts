@@ -72,9 +72,7 @@ export function rankCrops(
     return { rank: 0, score: Math.round(score * 100), criteria: roundAll(criteria), result };
   });
 
-  return ranked
-    .sort((a, b) => b.score - a.score)
-    .map((r, i) => ({ ...r, rank: i + 1 }));
+  return ranked.sort((a, b) => b.score - a.score).map((r, i) => ({ ...r, rank: i + 1 }));
 }
 
 /** Min-max normalisation of `values[i]` to 0..1 (1 when all values are equal). */

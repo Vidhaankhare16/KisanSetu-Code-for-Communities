@@ -7,14 +7,14 @@ Gemini never computes these numbers; it explains them.
 
 ## 1. Inputs
 
-| Input | Source |
-|---|---|
-| Daily weather for the season | Open-Meteo 16-day forecast, then NASA POWER daily data for the same calendar days of each of the last 10 complete years (one ensemble member per year) |
+| Input                            | Source                                                                                                                                                                     |
+| -------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Daily weather for the season     | Open-Meteo 16-day forecast, then NASA POWER daily data for the same calendar days of each of the last 10 complete years (one ensemble member per year)                     |
 | Reference evapotranspiration ET0 | Open-Meteo FAO ET0 for forecast days; FAO-56 Penman-Monteith from NASA POWER Tmax, Tmin, RH, wind and CERES radiation for historical days (Hargreaves when any is missing) |
-| Soil texture and hydraulics | Farmer's choice → ISRIC SoilGrids 250 m (sand/clay → USDA class) → state dominant texture; field capacity and wilting point from FAO-56 Table 19 |
-| Soil chemistry | Soil Health Card (pH, EC, OC, N, P, K, S, Zn, B), typed or read from a photo |
-| Soil moisture at sowing | Observed root-zone moisture (Open-Meteo) when sowing falls in the forecast window; otherwise each ensemble year's NASA POWER root-zone wetness on the sowing date |
-| Crop parameters | 21-crop library ([`catalog.ts`](../src/domain/crops/catalog.ts)) from FAO-56, FAO-33, ICAR guides and MSP notifications |
+| Soil texture and hydraulics      | Farmer's choice → ISRIC SoilGrids 250 m (sand/clay → USDA class) → state dominant texture; field capacity and wilting point from FAO-56 Table 19                           |
+| Soil chemistry                   | Soil Health Card (pH, EC, OC, N, P, K, S, Zn, B), typed or read from a photo                                                                                               |
+| Soil moisture at sowing          | Observed root-zone moisture (Open-Meteo) when sowing falls in the forecast window; otherwise each ensemble year's NASA POWER root-zone wetness on the sowing date          |
+| Crop parameters                  | 21-crop library ([`catalog.ts`](../src/domain/crops/catalog.ts)) from FAO-56, FAO-33, ICAR guides and MSP notifications                                                    |
 
 ## 2. Daily loop ([`engine.ts`](../src/domain/agro/engine.ts))
 
@@ -34,11 +34,11 @@ eastern UP). Progress maps onto the four FAO-56 stages via each crop's stage fra
 
 **Irrigation policy** — what the farmer can actually do:
 
-| Water access | Behaviour |
-|---|---|
-| Rainfed | Never irrigated |
-| Limited | Pre-sowing irrigation if the seedbed is dry, then at most 3 irrigations, only in development and mid stages |
-| Assured | Refill to field capacity whenever depletion reaches RAW |
+| Water access | Behaviour                                                                                                   |
+| ------------ | ----------------------------------------------------------------------------------------------------------- |
+| Rainfed      | Never irrigated                                                                                             |
+| Limited      | Pre-sowing irrigation if the seedbed is dry, then at most 3 irrigations, only in development and mid stages |
+| Assured      | Refill to field capacity whenever depletion reaches RAW                                                     |
 
 Irrigation is skipped near maturity and on days with ≥ 10 mm rain. Gross water =
 `max(net / efficiency, minimum application)` with efficiencies 0.60 / 0.75 / 0.90 and minimum depths
@@ -70,9 +70,9 @@ cereals), and cold degree-days below its frost threshold during development and 
   for other MSP crops, 0.45–0.55 for vegetables). Profit percentiles and the probability of loss come
   from these samples.
 - **Risk score (0–100)** = 40 × P(loss) + 30 × min(1, yield CV / 0.4) + 15 × P(dry spell ≥ 14 days)
-  + 15 × P(heat or cold damage) + 40 × P(not maturing).
-- **Verdict.** *Recommended* only if the crop matures, profits in a typical year, breaks even in a bad
-  year (P10 ≥ 0) and has risk < 45. Otherwise *caution*, or *not advised* when it loses money in a
+  - 15 × P(heat or cold damage) + 40 × P(not maturing).
+- **Verdict.** _Recommended_ only if the crop matures, profits in a typical year, breaks even in a bad
+  year (P10 ≥ 0) and has risk < 45. Otherwise _caution_, or _not advised_ when it loses money in a
   typical year, cannot mature, or reaches < 35% of potential.
 - The trace shown to farmers is the median-yield ensemble member, so the animation and the headline
   numbers always agree.

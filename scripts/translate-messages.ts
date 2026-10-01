@@ -16,12 +16,14 @@ import { generateStructured } from "@/server/ai/gemini";
 type Tree = { [key: string]: string | Tree };
 
 function schemaFor(node: Tree): z.ZodType {
-  return z.object(
-    Object.fromEntries(Object.entries(node).map(([k, v]) => [k, typeof v === "string" ? z.string() : schemaFor(v)])),
-  );
+  return z.object(Object.fromEntries(Object.entries(node).map(([k, v]) => [k, typeof v === "string" ? z.string() : schemaFor(v)])));
 }
 
-const placeholders = (s: string) => [...s.matchAll(/\{(\w+)\}/g)].map((m) => m[1]).sort().join(",");
+const placeholders = (s: string) =>
+  [...s.matchAll(/\{(\w+)\}/g)]
+    .map((m) => m[1])
+    .sort()
+    .join(",");
 
 /** Keeps only translated strings whose placeholders match the English source. */
 function validated(source: Tree, translated: Tree): { tree: Tree; dropped: number } {

@@ -51,9 +51,7 @@ describe("structured generation", () => {
   });
 
   it("retries once, showing the model its validation errors", async () => {
-    generateContent
-      .mockResolvedValueOnce(reply('{"headline":"x","score":42}'))
-      .mockResolvedValueOnce(reply('```json\n{"headline":"x","score":4}\n```'));
+    generateContent.mockResolvedValueOnce(reply('{"headline":"x","score":42}')).mockResolvedValueOnce(reply('```json\n{"headline":"x","score":4}\n```'));
     await expect(generateStructured(request)).resolves.toEqual({ headline: "x", score: 4 });
     const retryContents = generateContent.mock.calls[1]![0].contents;
     expect(JSON.stringify(retryContents.at(-1))).toContain("did not match the schema");

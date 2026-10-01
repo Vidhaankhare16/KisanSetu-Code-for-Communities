@@ -26,9 +26,7 @@ describe("live pipeline (real open data)", () => {
   });
 
   it("simulates and narrates a crop in Hindi", async () => {
-    const res = await simulateCrop(
-      SimulateRequestSchema.parse({ place, sowingDate: today, cropId: "mustard", water: "limited", lang: "hi" }),
-    );
+    const res = await simulateCrop(SimulateRequestSchema.parse({ place, sowingDate: today, cropId: "mustard", water: "limited", lang: "hi" }));
     console.log("narrative:", res.simulation.narrative, "first events:", res.simulation.events.slice(0, 3));
     expect(res.simulation.days.length).toBe(res.simulation.durationDays);
     if (isAiConfigured()) expect(res.simulation.narrative?.headline.length).toBeGreaterThan(5);

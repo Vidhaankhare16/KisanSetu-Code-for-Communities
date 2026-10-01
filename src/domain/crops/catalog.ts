@@ -19,13 +19,7 @@ const KMS_2026 = "MSP KMS 2026-27";
 const RMS_2027 = "MSP RMS 2027-28";
 const MANDI = "Indicative mandi modal price";
 
-const w = (
-  season: SowingWindow["season"],
-  fromMonth: number,
-  fromDay: number,
-  toMonth: number,
-  toDay: number,
-): SowingWindow => ({
+const w = (season: SowingWindow["season"], fromMonth: number, fromDay: number, toMonth: number, toDay: number): SowingWindow => ({
   season,
   from: { month: fromMonth, day: fromDay },
   to: { month: toMonth, day: toDay },
@@ -43,24 +37,14 @@ const CEREAL_NOTES: [string, string, string, string] = [
   "Most sensitive stage: water or heat stress now cuts grain number and weight.",
   "Grain dries down; irrigation can stop and the crop is readied for harvest.",
 ];
-const PULSE_STAGES: [string, string, string, string] = [
-  "Germination & nodulation",
-  "Branching & vegetative growth",
-  "Flowering & pod filling",
-  "Pod maturity",
-];
+const PULSE_STAGES: [string, string, string, string] = ["Germination & nodulation", "Branching & vegetative growth", "Flowering & pod filling", "Pod maturity"];
 const PULSE_NOTES: [string, string, string, string] = [
   "Root nodules form and begin fixing nitrogen from the air.",
   "Branches spread; avoid waterlogging, which kills nodules.",
   "Flowers and pods set; one protective irrigation here pays the most.",
   "Pods turn brown and dry; harvest before they shatter.",
 ];
-const OILSEED_STAGES: [string, string, string, string] = [
-  "Germination & rosette",
-  "Branching",
-  "Flowering & seed filling",
-  "Maturity",
-];
+const OILSEED_STAGES: [string, string, string, string] = ["Germination & rosette", "Branching", "Flowering & seed filling", "Maturity"];
 const OILSEED_NOTES: [string, string, string, string] = [
   "Seedlings emerge; thin to the right spacing.",
   "Primary and secondary branches form the crop's yield frame.",
@@ -74,13 +58,13 @@ const VEG_NOTES: [string, string, string, string] = [
   "Produce matures and is harvested; reduce irrigation towards the end.",
 ];
 
-const risk = (
-  name: string,
-  kind: PestRisk["kind"],
-  rule: PestRisk["rule"],
-  stages: PestRisk["stages"],
-  action: string,
-): PestRisk => ({ name, kind, rule, stages, action });
+const risk = (name: string, kind: PestRisk["kind"], rule: PestRisk["rule"], stages: PestRisk["stages"], action: string): PestRisk => ({
+  name,
+  kind,
+  rule,
+  stages,
+  action,
+});
 
 export const CROPS: readonly CropModel[] = [
   {
@@ -118,7 +102,13 @@ export const CROPS: readonly CropModel[] = [
     waterIntensity: "high",
     residueBurningRisk: true,
     risks: [
-      risk("Rice blast", "disease", "warm_humid", ["development", "mid"], "Spray tricyclazole 75 WP @ 0.6 g/L at first spindle-shaped leaf spots; avoid excess nitrogen."),
+      risk(
+        "Rice blast",
+        "disease",
+        "warm_humid",
+        ["development", "mid"],
+        "Spray tricyclazole 75 WP @ 0.6 g/L at first spindle-shaped leaf spots; avoid excess nitrogen.",
+      ),
       risk("Brown plant hopper", "pest", "warm_humid", ["mid"], "Drain water for 3-4 days and check the base of hills; spray only above 10 hoppers per hill."),
     ],
   },
@@ -157,7 +147,13 @@ export const CROPS: readonly CropModel[] = [
     waterIntensity: "medium",
     residueBurningRisk: true,
     risks: [
-      risk("Yellow rust", "disease", "cool_humid", ["development", "mid"], "Scout for yellow stripes on leaves; spray propiconazole 25 EC @ 1 ml/L at first sign."),
+      risk(
+        "Yellow rust",
+        "disease",
+        "cool_humid",
+        ["development", "mid"],
+        "Scout for yellow stripes on leaves; spray propiconazole 25 EC @ 1 ml/L at first sign.",
+      ),
       risk("Wheat aphid", "pest", "cool_dry", ["mid"], "Spray only above 10 aphids per tiller; conserve ladybird beetles."),
     ],
   },
@@ -191,7 +187,13 @@ export const CROPS: readonly CropModel[] = [
     waterIntensity: "medium",
     residueBurningRisk: false,
     risks: [
-      risk("Fall armyworm", "pest", "warm_humid", ["initial", "development"], "Check whorls for fresh frass; apply sand + lime in whorls or spray emamectin benzoate 5 SG @ 0.4 g/L."),
+      risk(
+        "Fall armyworm",
+        "pest",
+        "warm_humid",
+        ["initial", "development"],
+        "Check whorls for fresh frass; apply sand + lime in whorls or spray emamectin benzoate 5 SG @ 0.4 g/L.",
+      ),
       risk("Turcicum leaf blight", "disease", "cool_humid", ["development", "mid"], "Spray mancozeb 75 WP @ 2.5 g/L when long grey lesions appear."),
     ],
   },
@@ -257,9 +259,7 @@ export const CROPS: readonly CropModel[] = [
     nitrogenFixing: false,
     waterIntensity: "low",
     residueBurningRisk: false,
-    risks: [
-      risk("Shoot fly", "pest", "warm_humid", ["initial"], "Sow early and use a higher seed rate; spray only if dead-hearts exceed 10%."),
-    ],
+    risks: [risk("Shoot fly", "pest", "warm_humid", ["initial"], "Sow early and use a higher seed rate; spray only if dead-hearts exceed 10%.")],
   },
   {
     id: "ragi",
@@ -290,9 +290,7 @@ export const CROPS: readonly CropModel[] = [
     nitrogenFixing: false,
     waterIntensity: "low",
     residueBurningRisk: false,
-    risks: [
-      risk("Finger millet blast", "disease", "warm_humid", ["development", "mid"], "Spray carbendazim 50 WP @ 1 g/L at neck and finger infection."),
-    ],
+    risks: [risk("Finger millet blast", "disease", "warm_humid", ["development", "mid"], "Spray carbendazim 50 WP @ 1 g/L at neck and finger infection.")],
   },
   {
     id: "chickpea",
@@ -325,7 +323,13 @@ export const CROPS: readonly CropModel[] = [
     residueBurningRisk: false,
     risks: [
       risk("Gram pod borer", "pest", "warm_flowering", ["mid"], "Install 5 pheromone traps per acre and bird perches; spray NSKE 5% at 1 larva per plant."),
-      risk("Ascochyta blight", "disease", "cool_humid", ["development", "mid"], "Spray mancozeb 75 WP @ 2 g/L on first lesions; avoid irrigation in cloudy weather."),
+      risk(
+        "Ascochyta blight",
+        "disease",
+        "cool_humid",
+        ["development", "mid"],
+        "Spray mancozeb 75 WP @ 2 g/L on first lesions; avoid irrigation in cloudy weather.",
+      ),
     ],
   },
   {
@@ -357,9 +361,7 @@ export const CROPS: readonly CropModel[] = [
     nitrogenFixing: true,
     waterIntensity: "low",
     residueBurningRisk: false,
-    risks: [
-      risk("Lentil rust", "disease", "cool_humid", ["mid"], "Spray mancozeb 75 WP @ 2 g/L at first pustules."),
-    ],
+    risks: [risk("Lentil rust", "disease", "cool_humid", ["mid"], "Spray mancozeb 75 WP @ 2 g/L at first pustules.")],
   },
   {
     id: "pigeonpea",
@@ -391,7 +393,13 @@ export const CROPS: readonly CropModel[] = [
     waterIntensity: "low",
     residueBurningRisk: false,
     risks: [
-      risk("Pod borer complex", "pest", "warm_flowering", ["mid"], "Use pheromone traps and shake plants over a sheet; spray chlorantraniliprole 18.5 SC @ 0.3 ml/L if needed."),
+      risk(
+        "Pod borer complex",
+        "pest",
+        "warm_flowering",
+        ["mid"],
+        "Use pheromone traps and shake plants over a sheet; spray chlorantraniliprole 18.5 SC @ 0.3 ml/L if needed.",
+      ),
     ],
   },
   {
@@ -424,7 +432,13 @@ export const CROPS: readonly CropModel[] = [
     waterIntensity: "low",
     residueBurningRisk: false,
     risks: [
-      risk("Yellow mosaic (whitefly-borne)", "disease", "hot_dry", ["initial", "development"], "Use a YMV-resistant variety, yellow sticky traps, and rogue out infected plants."),
+      risk(
+        "Yellow mosaic (whitefly-borne)",
+        "disease",
+        "hot_dry",
+        ["initial", "development"],
+        "Use a YMV-resistant variety, yellow sticky traps, and rogue out infected plants.",
+      ),
     ],
   },
   {
@@ -457,7 +471,13 @@ export const CROPS: readonly CropModel[] = [
     waterIntensity: "low",
     residueBurningRisk: false,
     risks: [
-      risk("Yellow mosaic (whitefly-borne)", "disease", "hot_dry", ["initial", "development"], "Use a YMV-resistant variety and yellow sticky traps; remove infected plants."),
+      risk(
+        "Yellow mosaic (whitefly-borne)",
+        "disease",
+        "hot_dry",
+        ["initial", "development"],
+        "Use a YMV-resistant variety and yellow sticky traps; remove infected plants.",
+      ),
     ],
   },
   {
@@ -494,9 +514,7 @@ export const CROPS: readonly CropModel[] = [
     nitrogenFixing: true,
     waterIntensity: "medium",
     residueBurningRisk: false,
-    risks: [
-      risk("Tikka leaf spot", "disease", "warm_humid", ["development", "mid"], "Spray carbendazim + mancozeb @ 2 g/L at first spots."),
-    ],
+    risks: [risk("Tikka leaf spot", "disease", "warm_humid", ["development", "mid"], "Spray carbendazim + mancozeb @ 2 g/L at first spots.")],
   },
   {
     id: "soybean",
@@ -528,7 +546,13 @@ export const CROPS: readonly CropModel[] = [
     waterIntensity: "medium",
     residueBurningRisk: false,
     risks: [
-      risk("Girdle beetle & semilooper", "pest", "warm_humid", ["development", "mid"], "Spray chlorantraniliprole 18.5 SC @ 0.3 ml/L when girdles or leaf damage exceed threshold."),
+      risk(
+        "Girdle beetle & semilooper",
+        "pest",
+        "warm_humid",
+        ["development", "mid"],
+        "Spray chlorantraniliprole 18.5 SC @ 0.3 ml/L when girdles or leaf damage exceed threshold.",
+      ),
     ],
   },
   {
@@ -561,7 +585,13 @@ export const CROPS: readonly CropModel[] = [
     waterIntensity: "low",
     residueBurningRisk: false,
     risks: [
-      risk("Mustard aphid", "pest", "cool_dry", ["mid"], "Spray only above 20 aphids per 10 cm of central shoot; imidacloprid 17.8 SL @ 0.25 ml/L, never during bee activity."),
+      risk(
+        "Mustard aphid",
+        "pest",
+        "cool_dry",
+        ["mid"],
+        "Spray only above 20 aphids per 10 cm of central shoot; imidacloprid 17.8 SL @ 0.25 ml/L, never during bee activity.",
+      ),
       risk("Alternaria blight", "disease", "cool_humid", ["mid", "late"], "Spray mancozeb 75 WP @ 2.5 g/L at first dark concentric spots."),
     ],
   },
@@ -594,9 +624,7 @@ export const CROPS: readonly CropModel[] = [
     nitrogenFixing: false,
     waterIntensity: "medium",
     residueBurningRisk: false,
-    risks: [
-      risk("Head borer", "pest", "warm_flowering", ["mid"], "Use pheromone traps; spray NSKE 5% at bud stage."),
-    ],
+    risks: [risk("Head borer", "pest", "warm_flowering", ["mid"], "Use pheromone traps; spray NSKE 5% at bud stage.")],
   },
   {
     id: "sesame",
@@ -627,9 +655,7 @@ export const CROPS: readonly CropModel[] = [
     nitrogenFixing: false,
     waterIntensity: "low",
     residueBurningRisk: false,
-    risks: [
-      risk("Phyllody (leafhopper-borne)", "disease", "hot_dry", ["development", "mid"], "Rogue out affected plants and control leafhoppers early."),
-    ],
+    risks: [risk("Phyllody (leafhopper-borne)", "disease", "hot_dry", ["development", "mid"], "Rogue out affected plants and control leafhoppers early.")],
   },
   {
     id: "cotton",
@@ -666,7 +692,13 @@ export const CROPS: readonly CropModel[] = [
     waterIntensity: "medium",
     residueBurningRisk: false,
     risks: [
-      risk("Pink bollworm", "pest", "warm_flowering", ["mid"], "Install pheromone traps at 5 per acre; destroy rosette flowers; follow the ICAR spray schedule."),
+      risk(
+        "Pink bollworm",
+        "pest",
+        "warm_flowering",
+        ["mid"],
+        "Install pheromone traps at 5 per acre; destroy rosette flowers; follow the ICAR spray schedule.",
+      ),
       risk("Whitefly", "pest", "hot_dry", ["development", "mid"], "Use yellow sticky traps; avoid early synthetic pyrethroids that trigger resurgence."),
     ],
   },
@@ -699,9 +731,7 @@ export const CROPS: readonly CropModel[] = [
     nitrogenFixing: false,
     waterIntensity: "low",
     residueBurningRisk: false,
-    risks: [
-      risk("Stripe rust", "disease", "cool_humid", ["development", "mid"], "Spray propiconazole 25 EC @ 1 ml/L at first stripes."),
-    ],
+    risks: [risk("Stripe rust", "disease", "cool_humid", ["development", "mid"], "Spray propiconazole 25 EC @ 1 ml/L at first stripes.")],
   },
   {
     id: "potato",
@@ -800,7 +830,13 @@ export const CROPS: readonly CropModel[] = [
     waterIntensity: "high",
     residueBurningRisk: false,
     risks: [
-      risk("Leaf curl virus (whitefly-borne)", "disease", "hot_dry", ["initial", "development"], "Raise nursery under insect net; use yellow sticky traps and resistant hybrids."),
+      risk(
+        "Leaf curl virus (whitefly-borne)",
+        "disease",
+        "hot_dry",
+        ["initial", "development"],
+        "Raise nursery under insect net; use yellow sticky traps and resistant hybrids.",
+      ),
       risk("Early blight", "disease", "warm_humid", ["mid", "late"], "Spray mancozeb 75 WP @ 2.5 g/L; remove lower infected leaves."),
     ],
   },

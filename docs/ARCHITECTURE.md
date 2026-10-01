@@ -2,16 +2,16 @@
 
 ## Layers
 
-| Layer | Folder | Rules |
-|---|---|---|
-| Contracts | `src/contracts` | Zod schemas for every API request/response, the simulation, the crop-model format and every AI output. Types are inferred from them; the OpenAPI document is generated from them. |
-| Domain | `src/domain` | Pure functions only: no I/O, no clock, no randomness. Crop engine, ET0, soil, scenario assembly, ensemble statistics, economics, regenerative score, ranking, scheme rules. |
-| Providers | `src/server/providers` | One module per open-data source. Each validates responses with Zod, applies timeouts/retries through `fetchJson`, and caches with request coalescing. |
-| AI | `src/server/ai` | Gemini agents with narrow jobs. `generateStructured` validates every reply against a schema and retries once with the validation errors. |
-| Services | `src/server/services` | Orchestration: gather field context → build the weather ensemble → run the domain → ask Gemini to explain → record anonymised network data. |
-| Repositories | `src/server/repositories` | Storage port with in-memory and Firestore adapters, selected by `DATA_BACKEND`. |
-| HTTP | `src/server/http`, `src/app/api` | `apiHandler` gives every route validation, rate limiting, CORS, request ids, typed error mapping and structured logs. Route files are 3–10 lines. |
-| UI | `src/features`, `src/components`, `src/app` | Server components for static and data pages, client components for interaction. Feature folders own their components. |
+| Layer        | Folder                                      | Rules                                                                                                                                                                             |
+| ------------ | ------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Contracts    | `src/contracts`                             | Zod schemas for every API request/response, the simulation, the crop-model format and every AI output. Types are inferred from them; the OpenAPI document is generated from them. |
+| Domain       | `src/domain`                                | Pure functions only: no I/O, no clock, no randomness. Crop engine, ET0, soil, scenario assembly, ensemble statistics, economics, regenerative score, ranking, scheme rules.       |
+| Providers    | `src/server/providers`                      | One module per open-data source. Each validates responses with Zod, applies timeouts/retries through `fetchJson`, and caches with request coalescing.                             |
+| AI           | `src/server/ai`                             | Gemini agents with narrow jobs. `generateStructured` validates every reply against a schema and retries once with the validation errors.                                          |
+| Services     | `src/server/services`                       | Orchestration: gather field context → build the weather ensemble → run the domain → ask Gemini to explain → record anonymised network data.                                       |
+| Repositories | `src/server/repositories`                   | Storage port with in-memory and Firestore adapters, selected by `DATA_BACKEND`.                                                                                                   |
+| HTTP         | `src/server/http`, `src/app/api`            | `apiHandler` gives every route validation, rate limiting, CORS, request ids, typed error mapping and structured logs. Route files are 3–10 lines.                                 |
+| UI           | `src/features`, `src/components`, `src/app` | Server components for static and data pages, client components for interaction. Feature folders own their components.                                                             |
 
 ## Request flow: `POST /api/v1/recommend`
 

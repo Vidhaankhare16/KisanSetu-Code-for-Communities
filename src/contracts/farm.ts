@@ -76,9 +76,7 @@ export type SoilCard = z.infer<typeof SoilCardSchema>;
 export const FarmerPrioritySchema = z.enum(["balanced", "profit", "low_risk", "save_water", "soil_health"]);
 export type FarmerPriority = z.infer<typeof FarmerPrioritySchema>;
 
-export const IsoDateSchema = z
-  .string()
-  .regex(/^\d{4}-\d{2}-\d{2}$/, "Use ISO date format YYYY-MM-DD");
+export const IsoDateSchema = z.string().regex(/^\d{4}-\d{2}-\d{2}$/, "Use ISO date format YYYY-MM-DD");
 
 /** Everything the crop model needs to know about one field. */
 export const FarmProfileSchema = z.object({

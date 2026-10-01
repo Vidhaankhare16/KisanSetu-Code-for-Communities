@@ -1,0 +1,13 @@
+# Build output and reports
+.next/
+coverage/
+test-results/
+playwright-report/
+next-env.d.ts
+
+# Generated data (written by scripts/build-*.ts)
+data/samples/
+data/outlook/
+
+# Local reference material, not part of the app
+simulator-source/
