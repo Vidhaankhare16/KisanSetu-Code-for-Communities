@@ -9,6 +9,7 @@ import { Notice, Pill } from "@/components/ui/Tone";
 import { useI18n } from "@/i18n/client";
 import type { MessageKey } from "@/i18n/translate";
 import { api, type SchemeDto } from "@/lib/api";
+import { PageHeader } from "@/components/shell/PageHeader";
 
 type Flag = "ownsLand" | "isTenant" | "hasKcc" | "isFpoMember" | "inOilseedCluster" | "hasRiceFallow" | "isIncomeTaxPayer";
 
@@ -52,10 +53,7 @@ export function SchemeChecker() {
 
   return (
     <div className="mx-auto max-w-6xl px-4 py-10 sm:px-6">
-      <header className="max-w-3xl">
-        <h1 className="display text-4xl font-semibold sm:text-5xl">{t("schemes.title")}</h1>
-        <p className="mt-3 text-lg text-ink-soft">{t("schemes.lead")}</p>
-      </header>
+      <PageHeader title={t("schemes.title")} lead={t("schemes.lead")} crops={["soybean", "maize", "sesame", "onion"]} />
 
       <div className="mt-10 grid gap-10 lg:grid-cols-[minmax(0,22rem)_minmax(0,1fr)]">
         <form

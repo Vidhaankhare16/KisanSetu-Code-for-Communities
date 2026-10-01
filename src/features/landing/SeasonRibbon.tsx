@@ -142,7 +142,10 @@ export function SeasonRibbon({ simulation, caption }: { simulation: SimulationRe
         <span className="block text-ink">{caption}</span>
         <span className="mt-2 flex flex-wrap items-center gap-x-5 gap-y-2">
           <Legend swatch="bg-water" label={t("landing.ribbonLegendRain")} />
-          <Legend swatch="bg-[repeating-linear-gradient(45deg,var(--color-water)_0_2px,var(--color-water-soft)_2px_5px)]" label={t("landing.ribbonLegendIrrigation")} />
+          <Legend
+            swatch="bg-[repeating-linear-gradient(45deg,var(--color-water)_0_2px,var(--color-water-soft)_2px_5px)]"
+            label={t("landing.ribbonLegendIrrigation")}
+          />
           <Legend swatch="bg-leaf" label={t("landing.ribbonLegendCanopy")} />
           <Legend swatch="bg-soil-soft ring-1 ring-water" label={t("landing.ribbonLegendMoisture")} />
           <Legend swatch="rounded-full bg-soil" label={t("landing.ribbonLegendRisk")} />

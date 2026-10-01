@@ -11,6 +11,7 @@ import { api, ApiError } from "@/lib/api";
 import { startRecording, type Recorder } from "@/lib/audio";
 import { cn } from "@/lib/cn";
 import { useField } from "@/lib/fieldStore";
+import { PageHeader } from "@/components/shell/PageHeader";
 
 interface Turn {
   role: "user" | "model";
@@ -104,10 +105,7 @@ export function KisanMitra() {
 
   return (
     <div className="mx-auto flex max-w-3xl flex-col px-4 py-10 sm:px-6">
-      <header>
-        <h1 className="display text-4xl font-semibold sm:text-5xl">{t("mitra.title")}</h1>
-        <p className="mt-3 text-lg text-ink-soft">{t("mitra.lead")}</p>
-      </header>
+      <PageHeader title={t("mitra.title")} lead={t("mitra.lead")} crops={["rice", "groundnut", "jowar", "moong"]} />
 
       <div className="mt-8 flex-1 space-y-4" aria-live="polite">
         {turns.length === 0 ? (
@@ -127,12 +125,7 @@ export function KisanMitra() {
 
         {turns.map((turn, i) => (
           <div key={i} className={cn("flex", turn.role === "user" ? "justify-end" : "justify-start")}>
-            <div
-              className={cn(
-                "max-w-[85%] rounded-panel px-4 py-3",
-                turn.role === "user" ? "bg-ink text-white" : "border border-line bg-surface text-ink",
-              )}
-            >
+            <div className={cn("max-w-[85%] rounded-panel px-4 py-3", turn.role === "user" ? "bg-ink text-white" : "border border-line bg-surface text-ink")}>
               <p className="sr-only">{turn.role === "user" ? t("mitra.you") : t("mitra.mitra")}</p>
               <p className="whitespace-pre-wrap">{turn.text}</p>
               {turn.role === "model" ? (

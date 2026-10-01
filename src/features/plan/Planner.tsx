@@ -19,8 +19,10 @@ import { api, ApiError } from "@/lib/api";
 import { useField } from "@/lib/fieldStore";
 import { longDate, todayIso } from "@/lib/format";
 import { AdvisoryPanel } from "./AdvisoryPanel";
+import { DecisionMap } from "./DecisionMap";
 import { RankingList } from "./RankingList";
 import { draftToCard, SoilCardEditor, type SoilCardDraft } from "./SoilCardEditor";
+import { PageHeader } from "@/components/shell/PageHeader";
 
 type Status = "idle" | "loading" | "done" | "error";
 const PROGRESS_STEPS = ["plan.stepContext", "plan.stepSimulate", "plan.stepAdvise"] as const;
@@ -102,10 +104,7 @@ export function Planner({ initial }: { initial?: RecommendResponse }) {
 
   return (
     <div className="mx-auto max-w-7xl px-4 py-10 sm:px-6">
-      <header className="max-w-3xl">
-        <h1 className="display text-4xl font-semibold sm:text-5xl">{t("plan.title")}</h1>
-        <p className="mt-3 text-lg text-ink-soft">{t("plan.lead")}</p>
-      </header>
+      <PageHeader title={t("plan.title")} lead={t("plan.lead")} crops={["mustard", "chickpea", "wheat", "lentil", "sunflower"]} />
 
       <div className="mt-10 grid gap-10 lg:grid-cols-[minmax(0,26rem)_minmax(0,1fr)]">
         <form
@@ -173,7 +172,8 @@ export function Planner({ initial }: { initial?: RecommendResponse }) {
                 <option value="">{t("plan.previousCropNone")}</option>
                 {CROPS.map((c) => (
                   <option key={c.id} value={c.id}>
-                    {cropLabel(t, c.id, c.name)}{lang === "en" ? ` (${c.localName})` : ""}
+                    {cropLabel(t, c.id, c.name)}
+                    {lang === "en" ? ` (${c.localName})` : ""}
                   </option>
                 ))}
               </Select>
@@ -210,11 +210,19 @@ export function Planner({ initial }: { initial?: RecommendResponse }) {
             label={t("plan.priority")}
             value={priority}
             onChange={setPriority}
-            options={(["balanced", "profit", "low_risk", "save_water", "soil_health"] as const).map((v) => ({ value: v, label: t(`plan.priorityOptions.${v}`) }))}
+            options={(["balanced", "profit", "low_risk", "save_water", "soil_health"] as const).map((v) => ({
+              value: v,
+              label: t(`plan.priorityOptions.${v}`),
+            }))}
           />
 
           <label className="flex items-start gap-3 text-sm">
-            <input type="checkbox" checked={includeVegetables} onChange={(e) => setIncludeVegetables(e.target.checked)} className="mt-0.5 size-4 accent-leaf-deep" />
+            <input
+              type="checkbox"
+              checked={includeVegetables}
+              onChange={(e) => setIncludeVegetables(e.target.checked)}
+              className="mt-0.5 size-4 accent-leaf-deep"
+            />
             {t("plan.includeVegetables")}
           </label>
 
@@ -253,6 +261,7 @@ export function Planner({ initial }: { initial?: RecommendResponse }) {
                 </Notice>
               ))}
 
+              <DecisionMap ranking={result.ranking} selectedId={selected} onSelect={setSelected} />
               <RankingList ranking={result.ranking} selectedId={selected} onSelect={setSelected} />
 
               {result.advisory ? (
@@ -280,10 +289,7 @@ function Progress({ step }: { step: number }) {
     <ol className="space-y-3 rounded-panel border border-line bg-surface p-6" aria-live="polite">
       {PROGRESS_STEPS.map((key, i) => (
         <li key={key} className={`flex items-center gap-3 ${i > step ? "text-ink-faint" : ""}`}>
-          <span
-            className={`size-2.5 rounded-full ${i < step ? "bg-leaf" : i === step ? "animate-pulse bg-water" : "bg-line-strong"}`}
-            aria-hidden
-          />
+          <span className={`size-2.5 rounded-full ${i < step ? "bg-leaf" : i === step ? "animate-pulse bg-water" : "bg-line-strong"}`} aria-hidden />
           {t(key)}
         </li>
       ))}

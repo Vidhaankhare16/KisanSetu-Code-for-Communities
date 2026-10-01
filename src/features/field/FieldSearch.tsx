@@ -128,7 +128,11 @@ export function FieldSearch({ onPick, size = "md", autoFocus, className }: Field
       </p>
 
       {open && visibleResults.length > 0 ? (
-        <ul id={listId} role="listbox" className="absolute z-30 mt-[-1.25rem] w-full overflow-hidden rounded-control border border-line bg-surface shadow-lg sm:w-[calc(100%-11rem)]">
+        <ul
+          id={listId}
+          role="listbox"
+          className="absolute z-30 mt-[-1.25rem] w-full overflow-hidden rounded-control border border-line bg-surface shadow-lg sm:w-[calc(100%-11rem)]"
+        >
           {visibleResults.map((p, i) => (
             <li
               key={`${p.lat},${p.lon}`}

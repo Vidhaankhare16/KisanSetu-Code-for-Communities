@@ -21,7 +21,15 @@ const project = (lat: number, lon: number) => ({
  * District headquarters plotted on a latitude/longitude grid, coloured by the crop family
  * of each district's best rabi crop. No boundaries are drawn.
  */
-export function OutlookMap({ districts, categoryOf, nameOf }: { districts: OutlookDistrict[]; categoryOf: Record<string, CropCategory>; nameOf: Record<string, string> }) {
+export function OutlookMap({
+  districts,
+  categoryOf,
+  nameOf,
+}: {
+  districts: OutlookDistrict[];
+  categoryOf: Record<string, CropCategory>;
+  nameOf: Record<string, string>;
+}) {
   const { t } = useI18n();
   const [active, setActive] = useState<OutlookDistrict | null>(null);
 

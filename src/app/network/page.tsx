@@ -4,12 +4,14 @@ import type { CropCategory } from "@/contracts/simulation";
 import { CROPS } from "@/domain/crops/catalog";
 import { modelCards, NATIONAL_MODEL_VERSION } from "@/domain/crops/registry";
 import { cropColor } from "@/features/network/cropColors";
+import { DistrictProfitChart } from "@/features/network/DistrictProfitChart";
 import { OutlookMap } from "@/features/network/OutlookMap";
 import { getLang, getMessages } from "@/i18n/server";
 import { cropLabel } from "@/i18n/crops";
 import { createTranslator } from "@/i18n/translate";
 import { inr, longDate, pct } from "@/lib/format";
 import { getNetworkSummary } from "@/server/services/network";
+import { PageHeader } from "@/components/shell/PageHeader";
 
 export const metadata: Metadata = {
   title: "State dashboard",
@@ -34,10 +36,7 @@ export default async function NetworkPage() {
 
   return (
     <div className="mx-auto max-w-7xl px-4 py-10 sm:px-6">
-      <header className="max-w-3xl">
-        <h1 className="display text-4xl font-semibold sm:text-5xl">{t("network.title")}</h1>
-        <p className="mt-3 text-lg text-ink-soft">{t("network.lead")}</p>
-      </header>
+      <PageHeader title={t("network.title")} lead={t("network.lead")} crops={["wheat", "rice", "mustard", "cotton", "bajra"]} />
 
       <section className="mt-12" aria-labelledby="outlook">
         <h2 id="outlook" className="display text-2xl font-semibold sm:text-3xl">
@@ -82,7 +81,12 @@ export default async function NetworkPage() {
                       </td>
                       <td className="px-4 py-2.5">
                         {nameOf[top.cropId]}
-                        <span className="block text-xs text-ink-faint">{d.top.slice(1).map((c) => nameOf[c.cropId]).join(", ")}</span>
+                        <span className="block text-xs text-ink-faint">
+                          {d.top
+                            .slice(1)
+                            .map((c) => nameOf[c.cropId])
+                            .join(", ")}
+                        </span>
                       </td>
                       <td className="px-4 py-2.5 text-right tabular">{inr(top.profitP50)}</td>
                       <td className="px-4 py-2.5 text-right text-water tabular">{Math.round(top.irrigationMm)} mm</td>
@@ -95,6 +99,16 @@ export default async function NetworkPage() {
           </div>
         </div>
         <p className="mt-3 text-xs text-ink-faint">{outlook.method}.</p>
+      </section>
+
+      <section className="mt-16" aria-labelledby="profit-chart">
+        <h2 id="profit-chart" className="display text-2xl font-semibold">
+          {t("network.profitChartTitle")}
+        </h2>
+        <p className="mt-2 text-ink-soft">{t("network.profitChartLead")}</p>
+        <div className="mt-6 rounded-panel border border-line bg-surface p-4">
+          <DistrictProfitChart districts={districts} categoryOf={categoryOf} nameOf={nameOf} />
+        </div>
       </section>
 
       <section className="mt-16 grid gap-8 lg:grid-cols-2">

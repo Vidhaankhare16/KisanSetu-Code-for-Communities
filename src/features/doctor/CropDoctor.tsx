@@ -10,6 +10,7 @@ import { useI18n } from "@/i18n/client";
 import { api, ApiError } from "@/lib/api";
 import { useField } from "@/lib/fieldStore";
 import { encodeImage, type EncodedImage } from "@/lib/image";
+import { PageHeader } from "@/components/shell/PageHeader";
 
 const SEVERITY_TONE: Record<string, Tone> = { none: "leaf", low: "leaf", medium: "sun", high: "alert" };
 
@@ -55,14 +56,18 @@ export function CropDoctor() {
 
   return (
     <div className="mx-auto max-w-6xl px-4 py-10 sm:px-6">
-      <header className="max-w-3xl">
-        <h1 className="display text-4xl font-semibold sm:text-5xl">{t("doctor.title")}</h1>
-        <p className="mt-3 text-lg text-ink-soft">{t("doctor.lead")}</p>
-      </header>
+      <PageHeader title={t("doctor.title")} lead={t("doctor.lead")} crops={["tomato", "potato", "chickpea", "cotton"]} />
 
       <div className="mt-10 grid gap-10 lg:grid-cols-[minmax(0,24rem)_minmax(0,1fr)]">
         <div className="space-y-5">
-          <input ref={fileRef} type="file" accept="image/*" capture="environment" className="sr-only" onChange={(e) => e.target.files?.[0] && choose(e.target.files[0])} />
+          <input
+            ref={fileRef}
+            type="file"
+            accept="image/*"
+            capture="environment"
+            className="sr-only"
+            onChange={(e) => e.target.files?.[0] && choose(e.target.files[0])}
+          />
           <button
             type="button"
             onClick={() => fileRef.current?.click()}
@@ -77,7 +82,9 @@ export function CropDoctor() {
                 <span className="font-medium text-ink">{t("doctor.upload")}</span>
               </span>
             )}
-            {image ? <span className="absolute right-3 bottom-3 rounded-control bg-surface/90 px-3 py-1.5 text-sm font-medium text-ink">{t("doctor.change")}</span> : null}
+            {image ? (
+              <span className="absolute right-3 bottom-3 rounded-control bg-surface/90 px-3 py-1.5 text-sm font-medium text-ink">{t("doctor.change")}</span>
+            ) : null}
           </button>
 
           <div>

@@ -6,6 +6,7 @@ import { RangeBar } from "@/components/ui/RangeBar";
 import { Pill } from "@/components/ui/Tone";
 import { useI18n } from "@/i18n/client";
 import { cropLabel } from "@/i18n/crops";
+import { CropIcon } from "@/features/crops/art/CropIcon";
 import { cn } from "@/lib/cn";
 import { inr, inrShort, shortDate } from "@/lib/format";
 
@@ -19,15 +20,7 @@ function riskLevel(score: number): "low" | "medium" | "high" {
  * Ranked crops as comparable rows: every profit bar shares one scale, so the spread between
  * a bad and a good year is visible at a glance.
  */
-export function RankingList({
-  ranking,
-  selectedId,
-  onSelect,
-}: {
-  ranking: RankedCropDto[];
-  selectedId?: string;
-  onSelect: (cropId: string) => void;
-}) {
+export function RankingList({ ranking, selectedId, onSelect }: { ranking: RankedCropDto[]; selectedId?: string; onSelect: (cropId: string) => void }) {
   const { t, lang } = useI18n();
   const lows = ranking.map((r) => r.ensemble.netProfitPerAcreInr.p10);
   const highs = ranking.map((r) => r.ensemble.netProfitPerAcreInr.p90);
@@ -61,10 +54,12 @@ export function RankingList({
                 )}
               >
                 <span className="flex items-start gap-3">
-                  <span className="display w-6 pt-0.5 text-lg font-semibold text-ink-faint tabular">{r.rank}</span>
+                  <span className="display w-5 pt-2 text-lg font-semibold text-ink-faint tabular">{r.rank}</span>
+                  <CropIcon cropId={r.crop.id} category={r.crop.category} className="size-11" />
                   <span>
                     <span className="block text-lg font-semibold">
-                      {cropLabel(t, r.crop.id, r.crop.name)} <span className="text-sm font-normal text-ink-soft">{lang === "en" ? r.crop.localName : r.crop.name}</span>
+                      {cropLabel(t, r.crop.id, r.crop.name)}{" "}
+                      <span className="text-sm font-normal text-ink-soft">{lang === "en" ? r.crop.localName : r.crop.name}</span>
                     </span>
                     <span className="mt-1 flex flex-wrap items-center gap-2 text-xs text-ink-soft">
                       <Pill tone={VERDICT_TONE[r.outcome.verdict]}>{t(`plan.verdict.${r.outcome.verdict}`)}</Pill>

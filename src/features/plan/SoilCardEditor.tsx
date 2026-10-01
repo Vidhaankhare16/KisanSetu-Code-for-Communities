@@ -64,7 +64,14 @@ export function SoilCardEditor({ draft, onChange }: { draft: SoilCardDraft; onCh
 
   return (
     <div className="space-y-3">
-      <input ref={fileRef} type="file" accept="image/*" capture="environment" className="sr-only" onChange={(e) => e.target.files?.[0] && scan(e.target.files[0])} />
+      <input
+        ref={fileRef}
+        type="file"
+        accept="image/*"
+        capture="environment"
+        className="sr-only"
+        onChange={(e) => e.target.files?.[0] && scan(e.target.files[0])}
+      />
       <button
         type="button"
         onClick={() => fileRef.current?.click()}
