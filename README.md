@@ -197,4 +197,3 @@ docs/          Architecture, model, DPG alignment, screenshots
 - Vegetable prices are indicative mandi modal prices; live Agmarknet integration is future work.
 - Phone (IVR/SMS) channels are planned integrations; this release covers web, voice-in-browser and API.
 - UI translations other than English and Hindi are machine-generated and need native review.
-
