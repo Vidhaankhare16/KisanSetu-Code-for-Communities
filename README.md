@@ -195,8 +195,3 @@ docs/          Architecture, model, DPG alignment, screenshots
 - Phone (IVR/SMS) channels are planned integrations; this release covers web, voice-in-browser and API.
 - UI translations other than English and Hindi are machine-generated and need native review.
 
-## Credits
-
-KisanSetu builds on the author's earlier projects: KisanSetu (Smart India Hackathon 2025 winner,
-PS SIH25270 — oilseed value chain, MSP-based economics and scheme knowledge) and the KisanSetu advisory
-prototype (Soil Health Card inputs, multi-agent crop planning, FPO/RSK workflow).
