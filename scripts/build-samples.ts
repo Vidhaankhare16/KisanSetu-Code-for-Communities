@@ -1,8 +1,10 @@
 /**
- * Generates sample season simulations used by the landing page and as offline demo data
- * for the visual simulator:  npm run data:samples
+ * Generates sample seasons (simulation + analysis) used by the landing page and as the
+ * simulator's instant demo:  npm run data:samples [sowing-date]
+ *
+ * If Gemini is unavailable, an existing English narrative in the sample file is kept.
  */
-import { mkdirSync, writeFileSync } from "node:fs";
+import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { SimulateRequestSchema } from "@/contracts/api";
 import { simulateCrop } from "@/server/services/simulation";
 
@@ -31,9 +33,15 @@ async function main() {
   const sowingDate = process.argv[2] ?? `${new Date().getFullYear()}-10-25`;
   mkdirSync("data/samples", { recursive: true });
   for (const sample of SAMPLES) {
+    const path = `data/samples/${sample.file}.json`;
+    const previous = existsSync(path) ? (JSON.parse(readFileSync(path, "utf8")) as { simulation?: { narrative?: unknown }; narrative?: unknown }) : null;
     const res = await simulateCrop(SimulateRequestSchema.parse({ ...sample.request, sowingDate, lang: "en", narrate: true }));
-    writeFileSync(`data/samples/${sample.file}.json`, JSON.stringify(res.simulation));
-    console.log(`✓ ${sample.file}: ${res.simulation.durationDays} days, ${res.simulation.outcome.expectedYieldQuintalPerAcre} q/acre`);
+    const narrative = res.simulation.narrative ?? previous?.simulation?.narrative ?? previous?.narrative;
+    const simulation = narrative ? { ...res.simulation, narrative } : res.simulation;
+    writeFileSync(path, JSON.stringify({ simulation, analysis: res.analysis }));
+    console.log(
+      `✓ ${sample.file}: ${simulation.durationDays} days, ${simulation.outcome.expectedYieldQuintalPerAcre} q/acre${res.warnings.length ? ` (${res.warnings.join("; ")})` : ""}`,
+    );
   }
 }
 

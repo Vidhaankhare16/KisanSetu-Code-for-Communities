@@ -23,9 +23,13 @@ for (const vp of VIEWPORTS) {
     const page = await context.newPage();
     for (const path of PAGES) {
       if (lang === "hi" && vp.name === "mobile" && path !== "/") continue;
-      await page.goto(base + path, { waitUntil: "networkidle" });
+      // "load", not "networkidle": a dev server keeps its hot-reload socket open.
+      await page.goto(base + path, { waitUntil: "load" });
+      // A sticky header would be painted mid-page in a full-page capture taken after scrolling.
+      await page.addStyleTag({ content: "header { position: static !important; }" });
+      await page.waitForTimeout(800);
       if (path === "/simulate") {
-        const sample = page.getByRole("button", { name: /Mustard/ });
+        const sample = page.locator("button[aria-pressed]").filter({ hasText: /Mustard|सरसों/ });
         if (await sample.count()) await sample.first().click();
         await page.waitForTimeout(500);
       }

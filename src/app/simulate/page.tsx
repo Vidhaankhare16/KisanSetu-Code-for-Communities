@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { SimulatorPage } from "@/features/simulator/SimulatorPage";
-import { SAMPLE_SEASONS } from "@/server/samples";
+import { SAMPLES } from "@/server/samples";
 
 export const metadata: Metadata = {
   title: "Season simulator",
@@ -8,5 +8,5 @@ export const metadata: Metadata = {
 };
 
 export default function SimulatePage() {
-  return <SimulatorPage samples={Object.values(SAMPLE_SEASONS)} />;
+  return <SimulatorPage samples={SAMPLES} />;
 }

@@ -1,16 +1,4 @@
-import {
-  Bug,
-  CloudLightning,
-  Droplets,
-  Flag,
-  FlaskConical,
-  Microscope,
-  Snowflake,
-  Sprout,
-  Sun,
-  Wheat,
-  type LucideIcon,
-} from "lucide-react";
+import { Bug, CloudLightning, Droplets, Flag, FlaskConical, Microscope, Snowflake, Sprout, Sun, Wheat, type LucideIcon } from "lucide-react";
 import type { EventType, Severity } from "@/contracts/simulation";
 import type { Tone } from "@/components/ui/Tone";
 

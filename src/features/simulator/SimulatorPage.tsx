@@ -2,55 +2,69 @@
 
 import { useState } from "react";
 import { MapPin } from "lucide-react";
+import type { SimulateResponse } from "@/contracts/api";
 import type { IrrigationMethod, Place, WaterAccess } from "@/contracts/farm";
 import type { SimulationResult } from "@/contracts/simulation";
 import { Button } from "@/components/ui/Button";
 import { FieldLabel, Input, Select } from "@/components/ui/Field";
 import { Segmented } from "@/components/ui/Segmented";
 import { CROPS } from "@/domain/crops/catalog";
+import { CropIcon } from "@/features/crops/art/CropIcon";
 import { FieldSearch } from "@/features/field/FieldSearch";
+import { PageHeader } from "@/components/shell/PageHeader";
 import { useI18n } from "@/i18n/client";
 import { cropLabel } from "@/i18n/crops";
+import { cn } from "@/lib/cn";
 import { useField } from "@/lib/fieldStore";
 import { todayIso } from "@/lib/format";
 import { SeasonView } from "./SeasonView";
 import { SimulationLoader } from "./SimulationLoader";
-import { SimulatorVisual } from "./SimulatorVisual";
+
+export interface SampleSeason {
+  simulation: SimulationResult;
+  analysis?: SimulateResponse["analysis"];
+}
 
 interface Run {
   key: number;
   place: Place;
   cropId: string;
+  compareCropId?: string;
   sowingDate: string;
   water: WaterAccess;
   method: IrrigationMethod;
 }
 
-/** Any crop, any field, any sowing date — or an instant pre-computed sample season. */
-export function SimulatorPage({ samples }: { samples: SimulationResult[] }) {
+/** Any crop, any field, any sowing date — with a pre-computed sample season shown instantly. */
+export function SimulatorPage({ samples }: { samples: SampleSeason[] }) {
   const { t, lang } = useI18n();
   const { place, setPlace } = useField();
   const [cropId, setCropId] = useState("mustard");
+  const [compareCropId, setCompareCropId] = useState("");
   const [sowingDate, setSowingDate] = useState(todayIso());
   const [water, setWater] = useState<WaterAccess>("limited");
   const [method, setMethod] = useState<IrrigationMethod>("flood");
   const [run, setRun] = useState<Run | null>(null);
-  const [sample, setSample] = useState<SimulationResult | null>(null);
+  const [sampleIndex, setSampleIndex] = useState(0);
+  const sample = samples[sampleIndex];
+
+  const cropOptions = CROPS.map((c) => (
+    <option key={c.id} value={c.id}>
+      {cropLabel(t, c.id, c.name)}
+      {lang === "en" ? ` (${c.localName})` : ""}
+    </option>
+  ));
 
   return (
     <div className="mx-auto max-w-7xl px-4 py-10 sm:px-6">
-      <header className="max-w-3xl">
-        <h1 className="display text-4xl font-semibold sm:text-5xl">{t("sim.title")}</h1>
-        <p className="mt-3 text-lg text-ink-soft">{t("sim.lead")}</p>
-      </header>
+      <PageHeader title={t("sim.title")} lead={t("sim.lead")} crops={["wheat", "mustard", "chickpea", "cotton", "maize"]} />
 
       <form
-        className="mt-8 grid gap-5 rounded-panel border border-line bg-surface p-5 lg:grid-cols-[1.4fr_1fr_1fr_auto] lg:items-end"
+        className="mt-8 grid gap-5 rounded-panel border border-line bg-surface p-5 lg:grid-cols-[1.3fr_1fr_1fr_1fr_auto] lg:items-end"
         onSubmit={(e) => {
           e.preventDefault();
           if (!place) return;
-          setSample(null);
-          setRun({ key: Date.now(), place, cropId, sowingDate, water, method });
+          setRun({ key: Date.now(), place, cropId, compareCropId: compareCropId || undefined, sowingDate, water, method });
         }}
       >
         <div>
@@ -72,11 +86,14 @@ export function SimulatorPage({ samples }: { samples: SimulationResult[] }) {
         <div>
           <FieldLabel htmlFor="sim-crop">{t("sim.crop")}</FieldLabel>
           <Select id="sim-crop" value={cropId} onChange={(e) => setCropId(e.target.value)}>
-            {CROPS.map((c) => (
-              <option key={c.id} value={c.id}>
-                {cropLabel(t, c.id, c.name)} ({lang === "en" ? c.localName : c.name})
-              </option>
-            ))}
+            {cropOptions}
+          </Select>
+        </div>
+        <div>
+          <FieldLabel htmlFor="sim-compare">{t("sim.compare")}</FieldLabel>
+          <Select id="sim-compare" value={compareCropId} onChange={(e) => setCompareCropId(e.target.value)}>
+            <option value="">{t("sim.compareNone")}</option>
+            {cropOptions}
           </Select>
         </div>
         <div>
@@ -95,7 +112,7 @@ export function SimulatorPage({ samples }: { samples: SimulationResult[] }) {
         />
         {water !== "rainfed" ? (
           <Segmented
-            className="lg:col-span-2"
+            className="lg:col-span-3"
             label={t("plan.method")}
             value={method}
             onChange={setMethod}
@@ -105,28 +122,38 @@ export function SimulatorPage({ samples }: { samples: SimulationResult[] }) {
       </form>
 
       {!run && samples.length ? (
-        <div className="mt-6 flex flex-wrap gap-2">
-          {samples.map((s) => (
-            <Button key={s.id} variant="secondary" size="sm" onClick={() => setSample(s)} aria-pressed={sample?.id === s.id}>
-              {cropLabel(t, s.crop.id, s.crop.name)}, {s.location.name}
-            </Button>
-          ))}
+        <div className="mt-6">
+          <p className="text-sm text-ink-soft">{t("sim.samplesLead")}</p>
+          <div className="mt-2 flex flex-wrap gap-2">
+            {samples.map((s, i) => (
+              <button
+                key={s.simulation.id}
+                type="button"
+                onClick={() => setSampleIndex(i)}
+                aria-pressed={i === sampleIndex}
+                className={cn(
+                  "flex items-center gap-2 rounded-full border py-1 pr-4 pl-1 text-sm",
+                  i === sampleIndex ? "border-leaf-deep bg-leaf-soft text-leaf-deep" : "border-line bg-surface hover:border-line-strong",
+                )}
+              >
+                <CropIcon cropId={s.simulation.crop.id} className="size-8" />
+                {cropLabel(t, s.simulation.crop.id, s.simulation.crop.name)}, {s.simulation.location.name}
+              </button>
+            ))}
+          </div>
         </div>
       ) : null}
 
-      <div className="mt-10">
+      <div className="mt-8">
         {run ? (
           <SimulationLoader
             key={run.key}
             cropId={run.cropId}
+            compareCropId={run.compareCropId}
             profile={{ place: run.place, sowingDate: run.sowingDate, water: run.water, irrigationMethod: run.method }}
           />
         ) : sample ? (
-          <SeasonView
-            key={sample.id}
-            simulation={sample}
-            renderVisual={({ simulation, day }) => <SimulatorVisual simulation={simulation} day={day} />}
-          />
+          <SeasonView key={sample.simulation.id} simulation={sample.simulation} analysis={sample.analysis} />
         ) : null}
       </div>
     </div>

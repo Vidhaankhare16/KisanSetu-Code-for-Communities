@@ -29,15 +29,7 @@ export type EventType = z.infer<typeof EventTypeSchema>;
 export const SeveritySchema = z.enum(["info", "warning", "critical"]);
 export type Severity = z.infer<typeof SeveritySchema>;
 
-export const CropCategorySchema = z.enum([
-  "cereal",
-  "millet",
-  "pulse",
-  "oilseed",
-  "vegetable",
-  "cash",
-  "fodder",
-]);
+export const CropCategorySchema = z.enum(["cereal", "millet", "pulse", "oilseed", "vegetable", "cash", "fodder"]);
 export type CropCategory = z.infer<typeof CropCategorySchema>;
 
 export const SimCropSchema = z.object({
@@ -46,6 +38,7 @@ export const SimCropSchema = z.object({
   localName: z.string(),
   category: CropCategorySchema,
 });
+export type SimCrop = z.infer<typeof SimCropSchema>;
 
 export const SimLocationSchema = z.object({
   name: z.string(),
