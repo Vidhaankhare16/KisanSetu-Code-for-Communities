@@ -13,7 +13,7 @@ photo, reads Soil Health Cards, and answers questions by voice.
 
 |              |                                                                                                             |
 | ------------ | ----------------------------------------------------------------------------------------------------------- |
-| **Live app** | _to be added after the Cloud Run deployment_                                                                |
+| **Live app** | https://kisan-setu-822987556610.us-central1.run.app — Cloud Run, Gemini on Vertex AI, Firestore             |
 | **Open API** | [`/api/v1/openapi.json`](src/server/http/openapi.ts) — OpenAPI 3.1, generated from the code's own contracts |
 | **Licence**  | Apache-2.0                                                                                                  |
 
@@ -120,7 +120,7 @@ limitations: [docs/MODEL.md](docs/MODEL.md).
 | ------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------ |
 | **Gemini 3.8 Flash on Vertex AI** (Gemini API locally) | Advisories, regenerative plans, narration & translation, crop-disease vision, Soil Health Card OCR, speech understanding, function-calling agent |
 | **Gemini TTS**                                         | Spoken answers in Indian languages                                                                                                               |
-| **Cloud Run**                                          | Single container, autoscaling, `asia-south1`                                                                                                     |
+| **Cloud Run**                                          | Single container, autoscaling (live in `us-central1`; `asia-south1` is the default for an Indian rollout)                                        |
 | **Firestore**                                          | Shared, anonymised network data and shareable plans                                                                                              |
 | **Cloud Build / Artifact Registry**                    | Source-to-container builds for Cloud Run                                                                                                         |
 | **Cloud Logging**                                      | Structured JSON logs with request ids                                                                                                            |
@@ -136,7 +136,7 @@ npm run dev                       # http://localhost:3000
 Everything except the Gemini features works with zero configuration (in-memory storage, open data).
 
 ```bash
-npm run check          # type-check + lint + unit tests
+npm run check          # format check + type-check + lint + unit tests
 npm run test:coverage  # unit tests with coverage
 npm run test:e2e       # Playwright end-to-end suite against a running app
 npm run test:live      # live tests against the real data providers and Gemini
@@ -148,9 +148,13 @@ npm run i18n:translate # regenerate UI translations with Gemini
 
 ```bash
 PROJECT_ID=your-project REGION=asia-south1 ./scripts/deploy-cloud-run.sh
+# The live app was deployed with:
+PROJECT_ID=causal-galaxy-415009 REGION=us-central1 SERVICE=kisan-setu FIRESTORE_DATABASE=kisansetu ./scripts/deploy-cloud-run.sh
 ```
 
-The script enables the APIs, creates a Firestore database and a least-privilege service account
+Optional settings: `SERVICE` (Cloud Run service name), `FIRESTORE_DATABASE` (a named database keeps
+KisanSetu apart in a shared project) and `MIN_INSTANCES` (default 0; set 1 to avoid cold starts).
+The script enables the APIs, creates the Firestore database and a least-privilege service account
 (Vertex AI user, Datastore user, log writer) and deploys from source. No API keys are needed in
 production: Gemini is reached through Vertex AI with the service account.
 
