@@ -229,7 +229,7 @@ function FieldNote({ event, labels, onClose }: { event?: SimEvent | null; labels
         <p className="flex flex-wrap items-baseline gap-x-2">
           <span className="font-semibold text-ink">{event.title}</span>
           <span className="text-xs text-ink-soft tabular">
-            {formatDate(event.date)} · {labels.day} {event.day + 1}
+            {formatDate(event.date, labels.months)} · {labels.day} {event.day + 1}
           </span>
         </p>
         <p className="text-sm text-ink-soft">{event.detail}</p>

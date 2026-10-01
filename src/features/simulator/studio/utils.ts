@@ -1,3 +1,4 @@
+import { MONTHS } from "@/lib/months";
 import type { Severity } from "./types";
 
 /** ₹1,23,456 */
@@ -10,14 +11,11 @@ export function formatIndianNumber(num: number): string {
   return new Intl.NumberFormat("en-IN", { maximumFractionDigits: 1 }).format(num);
 }
 
-const MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
-
-/** "20 Oct" or "20 Oct 2026" from an ISO date, without timezone surprises. */
-export function formatDate(isoDate: string, includeYear = false): string {
+/** "20 Oct" from an ISO date, in the language of `months` (the labels' month names). */
+export function formatDate(isoDate: string, months: readonly string[] = MONTHS.en.short): string {
   const [year, month, day] = isoDate.split("-");
   if (!year || !month || !day) return isoDate;
-  const label = `${Number(day)} ${MONTHS[Number(month) - 1] ?? month}`;
-  return includeYear ? `${label} ${year}` : label;
+  return `${Number(day)} ${months[Number(month) - 1] ?? month}`;
 }
 
 /** Severity colours, following the app's rule: only critical items use the alert hue. */

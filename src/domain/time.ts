@@ -1,4 +1,5 @@
 /** Calendar helpers on ISO `YYYY-MM-DD` strings, evaluated in UTC to stay timezone-proof. */
+import { MONTHS } from "@/lib/months";
 
 const DAY_MS = 86_400_000;
 
@@ -64,6 +65,8 @@ export function distanceToWindow(iso: string, from: { month: number; day: number
   return best;
 }
 
+/** "20 Oct", independent of the runtime's ICU data. */
 export function formatShortDate(iso: string): string {
-  return parseIsoDate(iso).toLocaleDateString("en-IN", { day: "numeric", month: "short", timeZone: "UTC" });
+  const d = parseIsoDate(iso);
+  return `${d.getUTCDate()} ${MONTHS.en.short[d.getUTCMonth()]}`;
 }

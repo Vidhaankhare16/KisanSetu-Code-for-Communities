@@ -34,7 +34,7 @@ export function SceneFrame({ crop, cropLabel, location, day, totalDays, stage, l
         stage={stage}
         compact={compact}
         pestPressure={pestPressure}
-        title={labels.closeUpTitle.replace("{crop}", cropLabel ?? crop.name).replace("{date}", formatDate(day.date))}
+        title={labels.closeUpTitle.replace("{crop}", cropLabel ?? crop.name).replace("{date}", formatDate(day.date, labels.months))}
         labels={{ rootZoneWater: labels.rootZoneWater, depthTop: labels.depthTop, depthMid: labels.depthMid }}
       />
 
@@ -60,7 +60,7 @@ export function SceneFrame({ crop, cropLabel, location, day, totalDays, stage, l
           {stage ? <span className={`${chip} font-medium text-leaf-deep`}>{stage.label}</span> : null}
           <span className={`${chip} tabular`}>
             <Calendar className="size-3.5 text-leaf" aria-hidden />
-            {formatDate(day.date)} · {labels.day} {day.day + 1}/{totalDays}
+            {formatDate(day.date, labels.months)} · {labels.day} {day.day + 1}/{totalDays}
           </span>
         </div>
       </div>

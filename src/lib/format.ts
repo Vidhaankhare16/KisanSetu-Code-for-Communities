@@ -1,5 +1,6 @@
 /** Display formatting in Indian conventions (lakh grouping, en-IN dates), per UI language. */
 import type { Lang } from "@/contracts/farm";
+import { MONTHS } from "./months";
 
 const inrFormatter = new Intl.NumberFormat("en-IN", { maximumFractionDigits: 0 });
 
@@ -26,24 +27,25 @@ export function pct(fraction: number): string {
   return `${Math.round(fraction * 100)}%`;
 }
 
-/** "20 Oct" in the UI language (digits stay Latin, as on Indian government documents). */
-export function shortDate(iso: string, lang: Lang = "en"): string {
-  return new Date(`${iso}T00:00:00Z`).toLocaleDateString(`${lang}-IN`, {
-    day: "numeric",
-    month: "short",
-    timeZone: "UTC",
-    numberingSystem: "latn",
-  });
+/**
+ * Dates are composed as "day month [year]" from a fixed month table, so the server and every
+ * browser render identical text (their ICU data differs in order and spelling, which would
+ * break hydration). Digits stay Latin, as on Indian government documents.
+ */
+function datePart(iso: string, lang: Lang, month: "short" | "long", withYear: boolean): string {
+  const [year, m, day] = iso.split("-").map(Number) as [number, number, number];
+  const name = (MONTHS[lang] ?? MONTHS.en)[month][m - 1];
+  return withYear ? `${day} ${name} ${year}` : `${day} ${name}`;
 }
 
+/** "20 Oct" in the UI language. */
+export function shortDate(iso: string, lang: Lang = "en"): string {
+  return datePart(iso, lang, "short", false);
+}
+
+/** "20 October 2026" in the UI language. */
 export function longDate(iso: string, lang: Lang = "en"): string {
-  return new Date(`${iso}T00:00:00Z`).toLocaleDateString(`${lang}-IN`, {
-    day: "numeric",
-    month: "long",
-    year: "numeric",
-    timeZone: "UTC",
-    numberingSystem: "latn",
-  });
+  return datePart(iso, lang, "long", true);
 }
 
 export function todayIso(): string {

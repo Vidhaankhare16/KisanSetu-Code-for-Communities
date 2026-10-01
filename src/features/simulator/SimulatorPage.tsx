@@ -153,7 +153,12 @@ export function SimulatorPage({ samples }: { samples: SampleSeason[] }) {
             profile={{ place: run.place, sowingDate: run.sowingDate, water: run.water, irrigationMethod: run.method }}
           />
         ) : sample ? (
-          <SeasonView key={sample.simulation.id} simulation={sample.simulation} analysis={sample.analysis} />
+          <SeasonView
+            key={sample.simulation.id}
+            // Samples are narrated once, in English; other languages see the model's numbers without it.
+            simulation={lang === "en" ? sample.simulation : { ...sample.simulation, narrative: undefined }}
+            analysis={sample.analysis}
+          />
         ) : null}
       </div>
     </div>

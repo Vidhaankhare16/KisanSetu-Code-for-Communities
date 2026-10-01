@@ -36,7 +36,7 @@ export const ChartsPanel: React.FC<ChartsPanelProps> = ({ days, stages, currentD
   const chartData = days.map((d) => ({
     day: d.day,
     displayDay: d.day + 1,
-    date: formatDate(d.date),
+    date: formatDate(d.date, labels.months),
     rainMm: d.rainMm,
     irrigationMm: d.irrigationMm,
     soilMoisturePct: d.soilMoisturePct,

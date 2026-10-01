@@ -43,7 +43,9 @@ export function CloseUp({ crop, cropLabel, day, stage, labels, onClose }: CloseU
       className="m-auto w-[min(92vw,34rem)] rounded-panel border border-line bg-surface p-0 text-ink shadow-xl backdrop:bg-ink/40"
     >
       <div className="flex items-center justify-between border-b border-line px-5 py-3">
-        <h3 className="font-semibold">{labels.closeUpTitle.replace("{crop}", cropLabel ?? crop.name).replace("{date}", formatDate(day.date))}</h3>
+        <h3 className="font-semibold">
+          {labels.closeUpTitle.replace("{crop}", cropLabel ?? crop.name).replace("{date}", formatDate(day.date, labels.months))}
+        </h3>
         <button type="button" onClick={onClose} className="rounded-full p-1.5 text-ink-soft hover:bg-ink/5" aria-label={labels.dismissEvent}>
           <X className="size-4" />
         </button>
