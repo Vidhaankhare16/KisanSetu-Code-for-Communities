@@ -24,6 +24,11 @@ export interface PlantProps {
   showUnderground?: boolean;
   /** Fewer leaves for distant rows and small icons. */
   detail?: "full" | "low";
+  /**
+   * Sway gently in the breeze. Off by default: every animated SVG plant is repainted each frame,
+   * so only a few prominent plants (the front row, the close-up) should move.
+   */
+  sway?: boolean;
 }
 
 const range = (n: number) => Array.from({ length: Math.max(0, Math.round(n)) }, (_, i) => i);
@@ -43,7 +48,7 @@ function phase(stage: StageKey, stageProgress: number): Phase {
 }
 
 export function Plant(props: PlantProps) {
-  const { art, showUnderground } = props;
+  const { art, showUnderground, sway = false } = props;
   const above = (() => {
     switch (art.form) {
       case "grass":
@@ -68,7 +73,7 @@ export function Plant(props: PlantProps) {
   })();
   return (
     <>
-      <g className="plant-sway">{above}</g>
+      <g className={sway ? "plant-sway" : undefined}>{above}</g>
       {showUnderground ? <Underground {...props} /> : null}
     </>
   );

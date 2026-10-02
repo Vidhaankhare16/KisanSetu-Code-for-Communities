@@ -60,6 +60,7 @@ export function FieldStrip({ crops, className }: { crops: string[]; className?: 
               stageProgress={s.sp}
               tint={plantTint(92, 0, s.stage, s.sp * 0.5)}
               seed={i * 13 + 5}
+              sway
             />
           </g>
         );

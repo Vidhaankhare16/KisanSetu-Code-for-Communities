@@ -96,6 +96,11 @@ g:nth-child(3n) > .plant-sway {
 g:nth-child(3n + 1) > .plant-sway {
   animation-delay: -2.5s;
 }
+@media (prefers-reduced-motion: reduce) {
+  .plant-sway {
+    animation: none;
+  }
+}
 @keyframes plant-sway {
   0%,
   100% {

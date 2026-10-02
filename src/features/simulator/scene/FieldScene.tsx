@@ -193,6 +193,7 @@ const Row = memo(function Row({ art, y, scale, count, offset, h, cover, stageKey
             seed={i * 31 + Math.round(offset * 100)}
             detail={detail}
             showUnderground={underground}
+            sway={underground}
           />
         </g>
       ))}

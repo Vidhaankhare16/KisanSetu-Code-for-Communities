@@ -54,7 +54,7 @@ export function CloseUp({ crop, cropLabel, day, stage, labels, onClose }: CloseU
         <rect x="-110" y="0" width="220" height="50" fill="#9b6b42" />
         <rect x="-110" y="0" width="220" height="50" fill="#3f2a18" opacity={(day.soilMoisturePct / 100) * 0.35} />
         <g transform={`scale(${scale})`}>
-          <Plant art={art} h={h} cover={day.canopyCover} stage={day.stage} stageProgress={stageProgress} tint={tint} seed={11} showUnderground />
+          <Plant art={art} h={h} cover={day.canopyCover} stage={day.stage} stageProgress={stageProgress} tint={tint} seed={11} showUnderground sway />
         </g>
       </svg>
       <dl className="grid grid-cols-3 gap-3 px-5 py-4 text-sm">
