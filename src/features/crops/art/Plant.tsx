@@ -25,8 +25,8 @@ export interface PlantProps {
   /** Fewer leaves for distant rows and small icons. */
   detail?: "full" | "low";
   /**
-   * Sway gently in the breeze. Off by default: every animated SVG plant is repainted each frame,
-   * so only a few prominent plants (the front row, the close-up) should move.
+   * Sway gently in the breeze. Off by default: any motion inside a large SVG repaints the whole
+   * drawing every frame, so only small drawings (the close-up, header strips) should move.
    */
   sway?: boolean;
 }
