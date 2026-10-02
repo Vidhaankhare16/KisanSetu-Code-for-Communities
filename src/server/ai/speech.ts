@@ -8,7 +8,7 @@ import { stableHash } from "@/domain/hash";
 import { TtlCache } from "@/server/cache";
 import { env } from "@/server/config/env";
 import { AppError } from "@/server/http/errors";
-import { getGenAI } from "./gemini";
+import { getGenAI, withRetry } from "./gemini";
 
 const VOICE = "Kore";
 const cache = new TtlCache<Buffer>(24 * 60 * 60 * 1000, 200);
@@ -16,14 +16,16 @@ const cache = new TtlCache<Buffer>(24 * 60 * 60 * 1000, 200);
 /** Returns a playable WAV file for `text`. */
 export async function synthesizeSpeech(text: string): Promise<Buffer> {
   return cache.getOrLoad(stableHash(text), async () => {
-    const res = await getGenAI().models.generateContent({
-      model: env().GEMINI_TTS_MODEL,
-      contents: [{ role: "user", parts: [{ text }] }],
-      config: {
-        responseModalities: [Modality.AUDIO],
-        speechConfig: { voiceConfig: { prebuiltVoiceConfig: { voiceName: VOICE } } },
-      },
-    });
+    const res = await withRetry("speech.synthesize", () =>
+      getGenAI().models.generateContent({
+        model: env().GEMINI_TTS_MODEL,
+        contents: [{ role: "user", parts: [{ text }] }],
+        config: {
+          responseModalities: [Modality.AUDIO],
+          speechConfig: { voiceConfig: { prebuiltVoiceConfig: { voiceName: VOICE } } },
+        },
+      }),
+    );
     const audio = res.candidates?.[0]?.content?.parts?.find((p) => p.inlineData?.data)?.inlineData;
     if (!audio?.data) throw new AppError("ai_unavailable", "Speech synthesis returned no audio");
     const bytes = Buffer.from(audio.data, "base64");

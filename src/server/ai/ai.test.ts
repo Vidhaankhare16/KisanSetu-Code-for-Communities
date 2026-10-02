@@ -16,7 +16,7 @@ vi.mock("@google/genai", async (importOriginal) => {
   return { ...actual, GoogleGenAI: FakeGenAI };
 });
 
-const { generateStructured, toGeminiSchema } = await import("./gemini");
+const { generateStructured, isTransientAiError, toGeminiSchema, withRetry } = await import("./gemini");
 const { chatWithKisanMitra } = await import("./kisanMitra");
 const { narrateSimulation } = await import("./narrator");
 const { pcmToWav } = await import("./speech");
@@ -60,6 +60,41 @@ describe("structured generation", () => {
   it("refuses to pass on output that stays invalid", async () => {
     generateContent.mockResolvedValue(reply("not json"));
     await expect(generateStructured(request)).rejects.toMatchObject({ code: "ai_unavailable" });
+  });
+});
+
+describe("transient Gemini errors", () => {
+  const noWait = { sleep: async () => {} };
+  const rateLimited = Object.assign(new Error("Resource exhausted"), { status: 429 });
+
+  it("treats rate limits and outages as transient, but not bad requests", () => {
+    expect(isTransientAiError(rateLimited)).toBe(true);
+    expect(isTransientAiError(Object.assign(new Error("x"), { status: 503 }))).toBe(true);
+    expect(isTransientAiError(new Error('{"status":"RESOURCE_EXHAUSTED"}'))).toBe(true);
+    expect(isTransientAiError(Object.assign(new Error("bad"), { status: 400 }))).toBe(false);
+  });
+
+  it("retries a rate-limited call until it succeeds", async () => {
+    const call = vi.fn().mockRejectedValueOnce(rateLimited).mockRejectedValueOnce(rateLimited).mockResolvedValueOnce("ok");
+    await expect(withRetry("test", call, noWait)).resolves.toBe("ok");
+    expect(call).toHaveBeenCalledTimes(3);
+  });
+
+  it("gives up after the last attempt and does not retry permanent errors", async () => {
+    const always = vi.fn().mockRejectedValue(rateLimited);
+    await expect(withRetry("test", always, { ...noWait, attempts: 3 })).rejects.toBe(rateLimited);
+    expect(always).toHaveBeenCalledTimes(3);
+
+    const badRequest = Object.assign(new Error("bad"), { status: 400 });
+    const once = vi.fn().mockRejectedValue(badRequest);
+    await expect(withRetry("test", once, noWait)).rejects.toBe(badRequest);
+    expect(once).toHaveBeenCalledTimes(1);
+  });
+
+  it("structured generation survives a rate limit", async () => {
+    generateContent.mockRejectedValueOnce(rateLimited).mockResolvedValueOnce(reply('{"ok":true}'));
+    const result = await generateStructured({ task: "t", schema: z.object({ ok: z.boolean() }), system: "s", input: "i" });
+    expect(result).toEqual({ ok: true });
   });
 });
 

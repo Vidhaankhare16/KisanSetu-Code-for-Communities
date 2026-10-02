@@ -5,6 +5,7 @@
  *   set (Cloud Run), otherwise the Gemini Developer API key.
  * - `generateStructured` asks Gemini for JSON matching a Zod schema, validates the reply,
  *   and retries once with the validation errors so malformed output never reaches users.
+ * - Every call retries transient errors (rate limits, temporary outages) with backoff.
  */
 import "server-only";
 import { GoogleGenAI, ThinkingLevel as SdkThinkingLevel, type Content, type Part } from "@google/genai";
@@ -27,6 +28,37 @@ export function getGenAI(): GoogleGenAI {
         : new GoogleGenAI({ apiKey: e.GEMINI_API_KEY });
   }
   return client;
+}
+
+/** Rate limits and temporary server errors: worth another try after a short wait. */
+const TRANSIENT_STATUS = new Set([408, 429, 500, 502, 503, 504]);
+
+export function isTransientAiError(err: unknown): boolean {
+  const status = (err as { status?: unknown } | null)?.status;
+  if (typeof status === "number") return TRANSIENT_STATUS.has(status);
+  return /RESOURCE_EXHAUSTED|UNAVAILABLE|DEADLINE_EXCEEDED|fetch failed|ECONNRESET/i.test(String((err as Error | null)?.message ?? err));
+}
+
+/**
+ * Retries a Gemini call on transient errors with exponential backoff and jitter
+ * (about 0.8 s, 1.6 s, 3.2 s). Shared model capacity can briefly refuse requests under load;
+ * a farmer should not see an error for that.
+ */
+export async function withRetry<T>(
+  task: string,
+  call: () => Promise<T>,
+  { attempts = 4, baseMs = 800, sleep = (ms: number) => new Promise<void>((r) => setTimeout(r, ms)) } = {},
+): Promise<T> {
+  for (let attempt = 1; ; attempt++) {
+    try {
+      return await call();
+    } catch (err) {
+      if (attempt >= attempts || !isTransientAiError(err)) throw err;
+      const delayMs = Math.round(baseMs * 2 ** (attempt - 1) * (0.75 + Math.random() * 0.5));
+      logger.warn("gemini retry", { task, attempt, delayMs, error: String(err).slice(0, 200) });
+      await sleep(delayMs);
+    }
+  }
 }
 
 /** Reasoning depth. ("minimal" is omitted: not all current Flash models accept it.) */
@@ -63,17 +95,19 @@ export async function generateStructured<T>(req: StructuredRequest<T>): Promise<
 
   for (let attempt = 0; attempt < 2; attempt++) {
     const started = Date.now();
-    const res = await ai.models.generateContent({
-      model,
-      contents,
-      config: {
-        systemInstruction: req.system,
-        responseMimeType: "application/json",
-        responseJsonSchema: toGeminiSchema(req.schema),
-        temperature: req.temperature ?? 0.4,
-        thinkingConfig: { thinkingLevel: THINKING[req.thinking ?? "low"] },
-      },
-    });
+    const res = await withRetry(req.task, () =>
+      ai.models.generateContent({
+        model,
+        contents,
+        config: {
+          systemInstruction: req.system,
+          responseMimeType: "application/json",
+          responseJsonSchema: toGeminiSchema(req.schema),
+          temperature: req.temperature ?? 0.4,
+          thinkingConfig: { thinkingLevel: THINKING[req.thinking ?? "low"] },
+        },
+      }),
+    );
     const text = res.text ?? "";
     const parsed = safeJson(text);
     const result = req.schema.safeParse(parsed);
@@ -95,11 +129,13 @@ export async function generateStructured<T>(req: StructuredRequest<T>): Promise<
 export async function generateText(task: string, system: string, input: string | Part[], thinking: ThinkingLevel = "low"): Promise<string> {
   const ai = getGenAI();
   const started = Date.now();
-  const res = await ai.models.generateContent({
-    model: env().GEMINI_MODEL,
-    contents: [{ role: "user", parts: typeof input === "string" ? [{ text: input }] : input }],
-    config: { systemInstruction: system, thinkingConfig: { thinkingLevel: THINKING[thinking] } },
-  });
+  const res = await withRetry(task, () =>
+    ai.models.generateContent({
+      model: env().GEMINI_MODEL,
+      contents: [{ role: "user", parts: typeof input === "string" ? [{ text: input }] : input }],
+      config: { systemInstruction: system, thinkingConfig: { thinkingLevel: THINKING[thinking] } },
+    }),
+  );
   logger.info("gemini call", { task, ms: Date.now() - started });
   return res.text?.trim() ?? "";
 }

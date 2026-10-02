@@ -11,7 +11,7 @@ import { LANG_NAMES } from "@/contracts/farm";
 import { toIsoDate } from "@/domain/time";
 import { env } from "@/server/config/env";
 import { logger } from "@/server/logger";
-import { generateText, getGenAI, toGeminiSchema } from "./gemini";
+import { generateText, getGenAI, toGeminiSchema, withRetry } from "./gemini";
 import { findTool, TOOLS, type ToolContext } from "./tools";
 
 const MAX_TOOL_ROUNDS = 4;
@@ -55,15 +55,17 @@ export async function chatWithKisanMitra(req: ChatRequest): Promise<ChatResponse
   const ai = getGenAI();
 
   for (let round = 0; round <= MAX_TOOL_ROUNDS; round++) {
-    const res = await ai.models.generateContent({
-      model: env().GEMINI_MODEL,
-      contents,
-      config: {
-        systemInstruction: systemPrompt(req, today),
-        tools: round < MAX_TOOL_ROUNDS ? [{ functionDeclarations: DECLARATIONS }] : undefined,
-        temperature: 0.4,
-      },
-    });
+    const res = await withRetry("kisanMitra.chat", () =>
+      ai.models.generateContent({
+        model: env().GEMINI_MODEL,
+        contents,
+        config: {
+          systemInstruction: systemPrompt(req, today),
+          tools: round < MAX_TOOL_ROUNDS ? [{ functionDeclarations: DECLARATIONS }] : undefined,
+          temperature: 0.4,
+        },
+      }),
+    );
 
     const calls = res.functionCalls ?? [];
     if (calls.length === 0) {
