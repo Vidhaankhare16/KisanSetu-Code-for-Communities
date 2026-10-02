@@ -55,6 +55,7 @@ export async function chatWithKisanMitra(req: ChatRequest): Promise<ChatResponse
   const ai = getGenAI();
 
   for (let round = 0; round <= MAX_TOOL_ROUNDS; round++) {
+    const started = Date.now();
     const res = await withRetry("kisanMitra.chat", () =>
       ai.models.generateContent({
         model: env().GEMINI_MODEL,
@@ -68,6 +69,7 @@ export async function chatWithKisanMitra(req: ChatRequest): Promise<ChatResponse
     );
 
     const calls = res.functionCalls ?? [];
+    logger.info("gemini call", { task: "kisanMitra.chat", round, ms: Date.now() - started, toolCalls: calls.length });
     if (calls.length === 0) {
       return { reply: res.text?.trim() || "…", transcript, toolCalls };
     }

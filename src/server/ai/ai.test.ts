@@ -71,6 +71,7 @@ describe("transient Gemini errors", () => {
     expect(isTransientAiError(rateLimited)).toBe(true);
     expect(isTransientAiError(Object.assign(new Error("x"), { status: 503 }))).toBe(true);
     expect(isTransientAiError(new Error('{"status":"RESOURCE_EXHAUSTED"}'))).toBe(true);
+    expect(isTransientAiError(new Error("Request timed out. This is a client-side timeout."))).toBe(true);
     expect(isTransientAiError(Object.assign(new Error("bad"), { status: 400 }))).toBe(false);
   });
 

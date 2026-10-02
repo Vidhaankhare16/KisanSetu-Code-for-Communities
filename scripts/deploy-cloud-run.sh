@@ -42,7 +42,7 @@ gcloud run deploy "$SERVICE" \
   --port 8080 \
   --cpu 1 --memory 1Gi \
   --min-instances "$MIN_INSTANCES" --max-instances 10 \
-  --concurrency 40 --timeout 120 \
+  --concurrency 40 --timeout 300 \
   --set-env-vars "^@^GOOGLE_GENAI_USE_VERTEXAI=true@GOOGLE_CLOUD_PROJECT=$PROJECT_ID@GOOGLE_CLOUD_LOCATION=global@DATA_BACKEND=firestore@FIRESTORE_DATABASE=$FIRESTORE_DATABASE@LOG_LEVEL=info"
 
 URL="$(gcloud run services describe "$SERVICE" --region "$REGION" --format='value(status.url)')"

@@ -16,16 +16,21 @@ import { logger } from "@/server/logger";
 
 let client: GoogleGenAI | undefined;
 
+/** Longest a single Gemini request may take before it is abandoned and retried. */
+const CALL_TIMEOUT_MS = 45_000;
+
 export function getGenAI(): GoogleGenAI {
   if (!isAiConfigured()) {
     throw new AppError("ai_unavailable", "Gemini is not configured. Set GEMINI_API_KEY or enable Vertex AI.");
   }
   if (!client) {
     const e = env();
+    // A per-attempt timeout turns a stuck request into a retryable error instead of a hung page.
+    const httpOptions = { timeout: CALL_TIMEOUT_MS };
     client =
       e.GOOGLE_GENAI_USE_VERTEXAI && e.GOOGLE_CLOUD_PROJECT
-        ? new GoogleGenAI({ vertexai: true, project: e.GOOGLE_CLOUD_PROJECT, location: e.GOOGLE_CLOUD_LOCATION })
-        : new GoogleGenAI({ apiKey: e.GEMINI_API_KEY });
+        ? new GoogleGenAI({ vertexai: true, project: e.GOOGLE_CLOUD_PROJECT, location: e.GOOGLE_CLOUD_LOCATION, httpOptions })
+        : new GoogleGenAI({ apiKey: e.GEMINI_API_KEY, httpOptions });
   }
   return client;
 }
@@ -36,7 +41,7 @@ const TRANSIENT_STATUS = new Set([408, 429, 500, 502, 503, 504]);
 export function isTransientAiError(err: unknown): boolean {
   const status = (err as { status?: unknown } | null)?.status;
   if (typeof status === "number") return TRANSIENT_STATUS.has(status);
-  return /RESOURCE_EXHAUSTED|UNAVAILABLE|DEADLINE_EXCEEDED|fetch failed|ECONNRESET/i.test(String((err as Error | null)?.message ?? err));
+  return /RESOURCE_EXHAUSTED|UNAVAILABLE|DEADLINE_EXCEEDED|fetch failed|ECONNRESET|timed out|aborted/i.test(String((err as Error | null)?.message ?? err));
 }
 
 /**
