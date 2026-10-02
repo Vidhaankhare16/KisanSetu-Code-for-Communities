@@ -5,7 +5,7 @@
  */
 import "server-only";
 import { z } from "zod";
-import type { Content, FunctionDeclaration, Part } from "@google/genai";
+import { ThinkingLevel, type Content, type FunctionDeclaration, type Part } from "@google/genai";
 import type { ChatRequest, ChatResponse } from "@/contracts/api";
 import { LANG_NAMES } from "@/contracts/farm";
 import { toIsoDate } from "@/domain/time";
@@ -64,6 +64,8 @@ export async function chatWithKisanMitra(req: ChatRequest): Promise<ChatResponse
           systemInstruction: systemPrompt(req, today),
           tools: round < MAX_TOOL_ROUNDS ? [{ functionDeclarations: DECLARATIONS }] : undefined,
           temperature: 0.4,
+          // The numbers come from the tools; a chat reply needs speed more than deep reasoning.
+          thinkingConfig: { thinkingLevel: ThinkingLevel.LOW },
         },
       }),
     );
